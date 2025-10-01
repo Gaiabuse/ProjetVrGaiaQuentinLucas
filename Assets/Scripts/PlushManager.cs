@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.XR;
+using System.Collections;
 
 public class PlushManager : MonoBehaviour
 {
     public float distanceBeforeBreak = 5f;
 
+    [SerializeField] private float timeBeforeRespawn = 5f;
     [SerializeField] private GameObject[] members;
     [SerializeField] private GameObject[] cubesRight;
     [SerializeField] private GameObject[] cubesLeft;
@@ -21,33 +23,54 @@ public class PlushManager : MonoBehaviour
 
     public void ChangeScale(int memberId, float distance, bool isRight)
     {
-        if (isRight)
+        if (members[memberId].activeSelf)
         {
-            _rightHandGrab = true;
+            if (isRight)
+            {
+                _rightHandGrab = true;
+            }
+            else
+            {
+                _leftHandGrab = true;
+            }
+            memberId = Mathf.Clamp(memberId, 0, members.Length);
+            members[memberId].transform.localScale = new Vector3( 1,1 + distance * stretchMultiplier ,1);
         }
-        else
-        {
-            _leftHandGrab = true;
-        }
-        memberId = Mathf.Clamp(memberId, 0, members.Length);
-        members[memberId].transform.localScale = new Vector3( 1,1 + distance * stretchMultiplier ,1);
     }
 
     public void Rotation(int memberId, Transform cubeTransform) // ça sert a rien a faire après
     {
         memberId = Mathf.Clamp(memberId, 0, members.Length);
     }
+
+	public void DestroyMember(int memberId)
+	{
+        memberId = Mathf.Clamp(memberId, 0, members.Length);
+        members[memberId].SetActive(false);
+        StartCoroutine(RespawnMember(memberId));
+    }
+
+    IEnumerator RespawnMember(int memberId)
+    {
+        yield return new WaitForSeconds(timeBeforeRespawn);
+        members[memberId].SetActive(true);
+    }
+
+
     public void Reset(int memberId, bool isRight)
     {
-        memberId = Mathf.Clamp(memberId, 0, members.Length);
-        members[memberId].transform.localScale = Vector3.one;
-        if (isRight)
+        if (members[memberId].activeSelf)
         {
-            _rightHandGrab = false;
-        }
-        else
-        {
-            _leftHandGrab = false;
+            memberId = Mathf.Clamp(memberId, 0, members.Length);
+            members[memberId].transform.localScale = Vector3.one;
+            if (isRight)
+            {
+                _rightHandGrab = false;
+            }
+            else
+            {
+                _leftHandGrab = false;
+            }
         }
     }
     private void Update()

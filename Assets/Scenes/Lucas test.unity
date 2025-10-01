@@ -5230,9 +5230,25 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6370085079684087283, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4706228988682842286, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3090848061168836670, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
       propertyPath: m_Name
       value: Y Bot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1082271958561512970, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2559285840627121667, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5261,6 +5277,10 @@ PrefabInstance:
     - target: {fileID: 2559285840627121667, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 159.259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948933247560734027, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6515712193588681746, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5317,6 +5337,10 @@ PrefabInstance:
     - target: {fileID: 8169382868667117632, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -157.811
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817898888258712963, guid: 63effe667f7f8cf4b8fd1553d0d9cb31, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5619,7 +5643,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1717209007007425347, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_RootOrder
@@ -5675,7 +5699,7 @@ PrefabInstance:
       objectReference: {fileID: 409368282}
     - target: {fileID: 3910408762165081306, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6468442521412095314, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LeftHand
@@ -7482,6 +7506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlushManager
   distanceBeforeBreak: 0.5
+  timeBeforeRespawn: 5
   members:
   - {fileID: 766791218}
   - {fileID: 841645301}

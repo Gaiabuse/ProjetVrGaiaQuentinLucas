@@ -36,11 +36,10 @@ public class MemberScript : MonoBehaviour
         while (cube.isSelected)
         {
             float actualDistance = Vector3.Distance(transform.position, _initialPosition);
-            Debug.Log(actualDistance + " distance actuelle");
             if ( actualDistance > _maxDistance)
             {
                 plushManagerReference.Reset(memberId, isRight);
-                Debug.Log("caca");
+				plushManagerReference.DestroyMember(memberId);
                 break;
             }
             plushManagerReference.ChangeScale(memberId, actualDistance,isRight);

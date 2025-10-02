@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 274374df1a0527f4f84892a8fd2d8280, type: 3}
-  m_Name: D
+  m_Name: DialogueData_New 2
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   serializationData:
     SerializedFormat: 2

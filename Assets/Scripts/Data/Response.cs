@@ -30,24 +30,7 @@ public class Response
     [ShowIf("IsGotoDialogue")]
     [InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
     [AssetsOnly]
-    public DialogueData NextDialogue;
-
-    [ShowIf("IsGotoDialogue")]
-    [Button("Create new dialogue")]
-    private void CreateNewDialogue()
-    {
-#if UNITY_EDITOR
-        var newDialogue = ScriptableObject.CreateInstance<DialogueData>();
-        newDialogue.ID ="d_" + Guid.NewGuid().ToString("N").Substring(0, 6);
-        newDialogue.Text ="Nouveau dialogue ...";
-        
-        string path = "Assets/Data/Scenario/Dialogues/Dialogue_" + newDialogue.ID + ".asset";
-        AssetDatabase.CreateAsset(newDialogue, path);
-        AssetDatabase.SaveAssets();
-        
-        NextDialogue = newDialogue;
-#endif
-    }
+    public DialogueNode NextDialogue;
 
     [ShowIf("IsSetFight")] 
     public string FightId;

@@ -1,41 +1,105 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using XNode;
 
 public class DialogueRunner : MonoBehaviour
 {
-    [SerializeField] private DialogueGraph graphAsset;
-    [SerializeField] DialogueNode startNode;
-
-    private DialogueNode currentNode;
-
+    [SerializeField] private DialogueGraph graph;
+    [SerializeField] private TMP_Text speaker;
+    [SerializeField] private TMP_Text dialogue;
+    [SerializeField] private Transform choicesParent;
+    [SerializeField] private ChoiceButton choicePrefab;
+    Coroutine dialogueRunner;
+    private Coroutine choicesCoroutine;
+    private bool switchNode;
     private void Start()
     {
-        currentNode = startNode;
-        PlayCurrent();
+        switchNode = false;
+        foreach (BaseNode node in graph.nodes)
+        {
+            if (node.GetString() == "Start")
+            {
+                graph.current = node;
+                break;
+            }
+        }
+        dialogueRunner = StartCoroutine(Runner());
     }
 
-    public void PlayCurrent( )
+
+    private IEnumerator Runner()
     {
-        if(currentNode == null) return;
-        Debug.Log(">>> " + currentNode.Text);
-        for (int i = 0; i < currentNode.Responses.Length; i++)
+        BaseNode currentNode = graph.current;
+        string data = currentNode.GetString();
+        string[] dataParts = data.Split('/');
+        if (dataParts[0] == "Start")
         {
-            Debug.Log($"[{i}] {currentNode.Responses[i]}");
+            NextNode("Exit");
+        }
+        if (dataParts[0] == "DialogueNode")
+        {
+            speaker.text = dataParts[1];
+            dialogue.text = dataParts[2];
+            choicesCoroutine = StartCoroutine(InstantiateChoices(currentNode as DialogueNode));
+            yield return new WaitUntil(() => switchNode );
         }
     }
-
-    public void ChooseResponse( int responsesIndex)
+    
+    private IEnumerator InstantiateChoices(DialogueNode node)
     {
-        if(currentNode == null) return;
-       DialogueNode next = currentNode.GetNextNode(responsesIndex);
-       if (next != null)
-       {
-           currentNode = next;
-           PlayCurrent();
-       }
-       else
-       {
-           Debug.Log("End !");
-       }
+        if (node.Choices.Length == 1)
+        {
+            yield return new WaitForSeconds(2.5f);
+            NextNode("Choices " +0);
+        }
+        else
+        {
+            for(int i  = 0; i < node.Choices.Length; i++)
+            {
+                ChoiceButton choice =  Instantiate(choicePrefab, choicesParent);
+                var i1 = i;
+                choice.Init(node.Choices[i], () => NextNode("Choices "+i1));
+            }
+        }
     }
+    
+    private void NextNode(string fieldName)
+    {
+        switchNode = true;
+        switchNode = false;
+        if (dialogueRunner != null)
+        {
+            StopCoroutine(dialogueRunner);
+            dialogueRunner = null;
+        }
+
+        if (choicesCoroutine != null)
+        {
+            StopCoroutine(choicesCoroutine);
+            choicesCoroutine = null;
+        }
+        foreach (NodePort port in graph.current.Ports)
+        {
+            if (port.fieldName == fieldName)
+            {
+                if (port.IsConnected)
+                {
+                    Debug.Log(port.Connection.node.name);
+                    graph.current = port.Connection.node as BaseNode;
+                    break;
+                }
+            }
+        }
+
+        foreach (Transform children in choicesParent)
+        {
+            Destroy(children.gameObject);
+        }
+        
+        dialogueRunner = StartCoroutine(Runner());
+    }
+  
 }

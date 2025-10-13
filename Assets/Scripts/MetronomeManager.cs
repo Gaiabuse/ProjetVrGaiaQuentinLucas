@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class MetronomeManager : MonoBehaviour // faire bpm et un moyen de caler les notes sur le bpm (on mettra un générateur de note ensuite)
+public class MetronomeManager : MonoBehaviour 
 {
     [SerializeField] private AudioSource audioSourceMetronome;
     [SerializeField] private AudioSource audioSource;

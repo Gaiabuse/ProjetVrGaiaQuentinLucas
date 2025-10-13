@@ -4,22 +4,46 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class NoteScript : MonoBehaviour
 {
-    private bool _canHit = false;
+    public bool _canHit = false;
+
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private float speedx = 0f;
+    [SerializeField] private float speedy = 0f;
+    [SerializeField] private float speedz = 0f;
+    
+    
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("CanHitWall"))
+        {
+            _canHit = true;
+        }
         if (other.CompareTag("Player"))
         {
-            if (_canHit)
+            if (!_canHit)
             {
-                // ajouter un systeme de perfect 
-                
+                FightManager.INSTANCE.AddAnxiety();
+                Debug.Log("bad");
             }
             else
             {
-                // faire monter anxieté
+                Debug.Log("good");
             }
             Destroy(gameObject);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CanHitWall"))
+        {
+            _canHit = false;
+        }
+    }
+
+    private void Awake()
+    {
+        rb.linearVelocity = new Vector3(speedx, speedy, speedz);
     }
 }

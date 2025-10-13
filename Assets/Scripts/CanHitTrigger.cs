@@ -7,14 +7,14 @@ public class CanHitTrigger : MonoBehaviour
     {
         if (other.CompareTag("Note"))
         {
-            // met le canhit a true
+            other.GetComponent<NoteScript>()._canHit = true; // changer ça c'est pas propre mais c'est pour test
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Note"))
         {
-            // met le canhit a false
+            other.GetComponent<NoteScript>()._canHit = false; // pareil qu'au dessus
         }
     }
 }

@@ -16,10 +16,19 @@ public class LevelEditorTool : EditorWindow
     private float fadeStartDuration = 0f;
     private float fadeEndDuration = 0f;
     private bool loopPreview = false;
+    
+    private int numberOfMeasure = 0;
+    private int measure = 0;
+    private int beat = 0;
+    private int division = 0;
+
+    private bool[,,] sheetMusic; 
 
     private Texture2D waveformTexture;
     private const int waveformWidth = 500;
     private const int waveformHeight = 100;
+    
+    
 
     [MenuItem("Tools/Level Editor")]
     public static void ShowWindow()
@@ -58,6 +67,41 @@ public class LevelEditorTool : EditorWindow
                 waveformTexture = DrawWaveform(audioClip, waveformWidth, waveformHeight, new Color(1, 0.5f, 0),
                     startTrim, endTrim, fadeStartDuration, fadeEndDuration);
             }
+                
+            numberOfMeasure = EditorGUILayout.IntField("Nombre de mesure : ", numberOfMeasure);
+            
+            measure = EditorGUILayout.IntField("Mesure actuelle : ", measure);
+            
+            beat = EditorGUILayout.IntField("Nombre de temps : ", beat);
+            
+            division = EditorGUILayout.IntField("Division par temps : ", division);
+
+            if (sheetMusic == null || sheetMusic.GetLength(0) != numberOfMeasure ||
+                    sheetMusic.GetLength(1) != beat || sheetMusic.GetLength(2) != division)
+            {
+                sheetMusic = ResizeSheetMusic(sheetMusic,numberOfMeasure, beat, division);
+            }
+            
+            for (int i = 0; i < beat; i++)
+            {
+                GUILayout.BeginHorizontal();
+                for (int j = 0; j < division; j++)
+                {
+                    if (sheetMusic[measure, i,j])
+                    {
+                        GUI.backgroundColor = Color.cyan;
+                    }
+                    sheetMusic[measure, i,j] = EditorGUILayout.Toggle(sheetMusic[measure, i,j]);
+                    GUI.backgroundColor = Color.white;
+                }
+                GUILayout.EndHorizontal();
+            }
+            // quand on se met a la mesure maximale il y a un out of range
+            // rajouter les petits batons des mesures en bas 
+            // rajouter un son de preview (des petits clac a chaque rythme qu'on a placé)
+            // permettre d'enregister et de load un niveau (enregistrer le tableau dans un scriptable peut être)
+            // permettre de mettre les rythmes differents (et changer la couleur de la box en fonction du rythme (peut être changer le tableau de bool en tableau d'int))
+            // rajouter une option ou on met le bpm et ça nous sors le nombre de mesure
             
             if (waveformTexture != null)
             {
@@ -114,6 +158,26 @@ public class LevelEditorTool : EditorWindow
             Repaint();
         }
     }
+    
+    bool[,,] ResizeSheetMusic(bool[,,] oldSheet, int newMeasures, int newBeats, int newDivisions)
+    {
+        bool[,,] newSheet = new bool[newMeasures, newBeats, newDivisions];
+
+        if (oldSheet == null)
+            return newSheet;
+
+        int minMeasures = Mathf.Min(oldSheet.GetLength(0), newMeasures);
+        int minBeats = Mathf.Min(oldSheet.GetLength(1), newBeats);
+        int minDivisions = Mathf.Min(oldSheet.GetLength(2), newDivisions);
+
+        for (int m = 0; m < minMeasures; m++)
+        for (int b = 0; b < minBeats; b++)
+        for (int d = 0; d < minDivisions; d++)
+            newSheet[m, b, d] = oldSheet[m, b, d];
+
+        return newSheet;
+    }
+
 
     private void PlayPreview()
     {

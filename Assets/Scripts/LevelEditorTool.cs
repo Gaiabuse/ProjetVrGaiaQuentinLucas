@@ -10,17 +10,23 @@ public class LevelEditorTool : EditorWindow
 
     private AudioClip audioClip;
     private bool loopPreview = false;
+    
+    private Rect clickArea ;
 
     private int numberOfMeasure = 20;
     private int measure = 0;
     private int beat = 4;
     private int division = 4;
-
+    
     private bool[,,] sheetMusic;
+    private Vector2[,,] spawnPositions;
 
     private Texture2D waveformTexture;
     private const int waveformWidth = 500;
     private const int waveformHeight = 100;
+    private const int maxMeasure = 1000;
+    private const int maxTimePerMeasure = 12;
+    private const int maxDivision = 8;
 
     [MenuItem("Tools/Level Editor")]
     public static void ShowWindow()
@@ -30,8 +36,12 @@ public class LevelEditorTool : EditorWindow
 
     private void OnEnable()
     {
+        LevelEditorTool window = GetWindow<LevelEditorTool>();
+        window.minSize = new Vector2(700, 850);
+        window.maxSize = new Vector2(1920, 1080);
         if (previewAudioSource == null)
         {
+            clickArea = new Rect(30, 400, 640, 360);
             GameObject audioPreviewer = new GameObject("AudioPreviewer");
             previewAudioSource = audioPreviewer.AddComponent<AudioSource>();
             previewAudioSource.hideFlags = HideFlags.HideAndDontSave;
@@ -52,20 +62,30 @@ public class LevelEditorTool : EditorWindow
 
         if (audioClip != null)
         {
+            EditorGUI.DrawRect(clickArea , Color.black);
+            
             if (waveformTexture == null || GUILayout.Button("Generate Waveform"))
             {
                 waveformTexture = DrawWaveform(audioClip, waveformWidth, waveformHeight, new Color(1, 0.5f, 0), numberOfMeasure);
             }
 
             numberOfMeasure = EditorGUILayout.IntField("Nombre de mesure : ", numberOfMeasure);
+            numberOfMeasure = Mathf.Clamp(numberOfMeasure, 1,maxMeasure);
+            
             measure = EditorGUILayout.IntField("Mesure actuelle : ", measure);
+            measure = Mathf.Clamp(measure, 0, numberOfMeasure - 1);
+            
             beat = EditorGUILayout.IntField("Nombre de temps : ", beat);
+            beat = Mathf.Clamp(beat, 1, maxTimePerMeasure);
+            
             division = EditorGUILayout.IntField("Division par temps : ", division);
+            division = Mathf.Clamp(division, 1, maxDivision);
 
             if (sheetMusic == null || sheetMusic.GetLength(0) != numberOfMeasure ||
                 sheetMusic.GetLength(1) != beat || sheetMusic.GetLength(2) != division)
             {
                 sheetMusic = ResizeSheetMusic(sheetMusic, numberOfMeasure, beat, division);
+                spawnPositions = ResizeSheetMusic(spawnPositions, numberOfMeasure, beat, division);
             }
 
             for (int i = 0; i < beat; i++)
@@ -76,9 +96,19 @@ public class LevelEditorTool : EditorWindow
                     if (sheetMusic[measure, i, j])
                     {
                         GUI.backgroundColor = Color.cyan;
+                        EditorGUI.DrawRect(new Rect(clickArea.position.x + spawnPositions[measure,i,j].x , clickArea.position.y + clickArea.height - spawnPositions[measure,i,j].y - 20, 20, 20),Color.cyan);
                     }
+                    float oldWidth = EditorGUIUtility.labelWidth;
+                    EditorGUIUtility.labelWidth = 20f;
+                    GUILayout.Space(50);
                     sheetMusic[measure, i, j] = EditorGUILayout.Toggle(sheetMusic[measure, i, j]);
+                    spawnPositions[measure, i, j].x =
+                        EditorGUILayout.FloatField("x :", spawnPositions[measure, i, j].x, GUILayout.Width(50));
+                    spawnPositions[measure, i, j].y =
+                        EditorGUILayout.FloatField("y :", spawnPositions[measure, i, j].y, GUILayout.Width(50));
+                    EditorGUIUtility.labelWidth = oldWidth;
                     GUI.backgroundColor = Color.white;
+                    GUILayout.Space(2);
                 }
                 GUILayout.EndHorizontal();
             }
@@ -118,8 +148,18 @@ public class LevelEditorTool : EditorWindow
             {
                 StopPreview();
             }
-
             GUILayout.EndHorizontal();
+            
+            
+            
+            Event actualEvent = Event.current;
+            if (actualEvent.type == EventType.MouseDown&& clickArea.Contains(actualEvent.mousePosition))
+            {
+                Vector2 localPos = actualEvent.mousePosition - new Vector2(clickArea.x, clickArea.y);
+                localPos.y = clickArea.height - localPos.y;
+            }
+            
+            
         }
         else
         {
@@ -146,6 +186,23 @@ public class LevelEditorTool : EditorWindow
             for (int b = 0; b < minBeats; b++)
                 for (int d = 0; d < minDivisions; d++)
                     newSheet[m, b, d] = oldSheet[m, b, d];
+
+        return newSheet;
+    }
+    Vector2[,,] ResizeSheetMusic(Vector2[,,] oldSheet, int newMeasures, int newBeats, int newDivisions)
+    {
+        Vector2[,,] newSheet = new Vector2[newMeasures, newBeats, newDivisions];
+        if (oldSheet == null)
+            return newSheet;
+
+        int minMeasures = Mathf.Min(oldSheet.GetLength(0), newMeasures);
+        int minBeats = Mathf.Min(oldSheet.GetLength(1), newBeats);
+        int minDivisions = Mathf.Min(oldSheet.GetLength(2), newDivisions);
+
+        for (int m = 0; m < minMeasures; m++)
+        for (int b = 0; b < minBeats; b++)
+        for (int d = 0; d < minDivisions; d++)
+            newSheet[m, b, d] = oldSheet[m, b, d];
 
         return newSheet;
     }
@@ -212,14 +269,31 @@ public class LevelEditorTool : EditorWindow
 
         if (measures > 1)
         {
+            Color actualColor = Color.black;
             for (int m = 0; m <= measures; m++)
             {
                 int x = Mathf.FloorToInt((float)m / measures * usedWidth);
                 if (x >= usedWidth) continue;
+                if (measure == m)
+                {
+                    actualColor = Color.white;
+                }
+                else
+                {
+                    actualColor = Color.black;
+                }
                 for (int y = 0; y < height; y++)
                 {
                     int index = y * width + x;
-                    colors[index] = Color.black;
+                    if (measures == y)
+                    {
+                        colors[index] = actualColor;
+                    }
+                    else
+                    {
+                        colors[index] = actualColor;
+                    }
+                    
                 }
             }
         }

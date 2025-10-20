@@ -1,4 +1,5 @@
 using System;
+using System.Reflection.Emit;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,27 +7,36 @@ public class LevelEditorTool : EditorWindow
 {
     private AudioSource previewAudioSource;
     private bool isPlaying = false;
-    private bool isAudioAdded = false;
-
     private AudioClip audioClip;
+    public AudioClip noteSound;
     private bool loopPreview = false;
-    
-    private Rect clickArea ;
+    private Rect clickArea;
 
+    private int bpm = 90;
     private int numberOfMeasure = 20;
     private int measure = 0;
     private int beat = 4;
     private int division = 4;
-    
+
     private bool[,,] sheetMusic;
     private Vector2[,,] spawnPositions;
 
     private Texture2D waveformTexture;
+
     private const int waveformWidth = 500;
     private const int waveformHeight = 100;
-    private const int maxMeasure = 1000;
+    private const int maxBpm = 250;
     private const int maxTimePerMeasure = 12;
     private const int maxDivision = 8;
+
+    private int lastPlayedMeasure = -1;
+    private int lastPlayedBeat = -1;
+    private int lastPlayedDivision = -1;
+
+    private LevelData levelData;
+    private LevelData lastLoadedLevelData;
+
+    private Vector2 actualPos;
 
     [MenuItem("Tools/Level Editor")]
     public static void ShowWindow()
@@ -41,7 +51,7 @@ public class LevelEditorTool : EditorWindow
         window.maxSize = new Vector2(1920, 1080);
         if (previewAudioSource == null)
         {
-            clickArea = new Rect(30, 400, 640, 360);
+            clickArea = new Rect(30, 440, 640, 360);
             GameObject audioPreviewer = new GameObject("AudioPreviewer");
             previewAudioSource = audioPreviewer.AddComponent<AudioSource>();
             previewAudioSource.hideFlags = HideFlags.HideAndDontSave;
@@ -59,30 +69,90 @@ public class LevelEditorTool : EditorWindow
     private void OnGUI()
     {
         audioClip = (AudioClip)EditorGUILayout.ObjectField("Audio Clip", audioClip, typeof(AudioClip), false);
+        noteSound = (AudioClip)EditorGUILayout.ObjectField("Note Sound", noteSound, typeof(AudioClip), false);
+
+        LevelData newLevelData = (LevelData)EditorGUILayout.ObjectField("Level Data", levelData, typeof(LevelData), false);
+
+        if (newLevelData != levelData)
+        {
+            levelData = newLevelData;
+            if (levelData != null)
+            {
+                audioClip = levelData.audioClip;
+                noteSound = levelData.noteSound;
+                sheetMusic = levelData.sheetMusic;
+                spawnPositions = levelData.spawnPositions;
+                bpm = levelData.bpm;
+                beat = levelData.beat;
+                division = levelData.division;
+                numberOfMeasure = (sheetMusic != null) ? sheetMusic.GetLength(0) : 0;
+            }
+        }
 
         if (audioClip != null)
         {
-            EditorGUI.DrawRect(clickArea , Color.black);
             
+
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Save New Level"))
+            {
+                string path = EditorUtility.SaveFilePanelInProject("Save Level Data", "NewLevelData", "asset", "Choose a file name and location");
+                if (!string.IsNullOrEmpty(path))
+                {
+                    LevelData newLevel = ScriptableObject.CreateInstance<LevelData>();
+                    newLevel.audioClip = audioClip;
+                    newLevel.noteSound = noteSound;
+                    newLevel.sheetMusic = sheetMusic;
+                    newLevel.spawnPositions = spawnPositions;
+                    newLevel.bpm = bpm;
+                    newLevel.beat = beat;
+                    newLevel.division = division;
+                    AssetDatabase.CreateAsset(newLevel, path);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                    levelData = newLevel;
+                }
+            }
+
+            if (levelData != null && GUILayout.Button("Update Level"))
+            {
+                levelData.audioClip = audioClip;
+                levelData.noteSound = noteSound;
+                levelData.sheetMusic = sheetMusic;
+                levelData.spawnPositions = spawnPositions;
+                levelData.bpm = bpm;
+                levelData.beat = beat;
+                levelData.division = division;
+                EditorUtility.SetDirty(levelData);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
+            GUILayout.EndHorizontal();
+
+            EditorGUI.DrawRect(clickArea, Color.black);
+
+            float secondsPerBeat = 60f / bpm;
+            float secondsPerMeasure = secondsPerBeat * beat;
+            numberOfMeasure = Mathf.CeilToInt(audioClip.length / secondsPerMeasure);
+
             if (waveformTexture == null || GUILayout.Button("Generate Waveform"))
             {
                 waveformTexture = DrawWaveform(audioClip, waveformWidth, waveformHeight, new Color(1, 0.5f, 0), numberOfMeasure);
             }
 
-            numberOfMeasure = EditorGUILayout.IntField("Nombre de mesure : ", numberOfMeasure);
-            numberOfMeasure = Mathf.Clamp(numberOfMeasure, 1,maxMeasure);
-            
+            bpm = EditorGUILayout.IntField("Battement par minute : ", bpm);
+            bpm = Mathf.Clamp(bpm, 1, maxBpm);
+
             measure = EditorGUILayout.IntField("Mesure actuelle : ", measure);
-            measure = Mathf.Clamp(measure, 0, numberOfMeasure - 1);
-            
+            measure = Mathf.Clamp(measure, 0, Mathf.Max(0, numberOfMeasure - 1));
+
             beat = EditorGUILayout.IntField("Nombre de temps : ", beat);
             beat = Mathf.Clamp(beat, 1, maxTimePerMeasure);
-            
+
             division = EditorGUILayout.IntField("Division par temps : ", division);
             division = Mathf.Clamp(division, 1, maxDivision);
 
-            if (sheetMusic == null || sheetMusic.GetLength(0) != numberOfMeasure ||
-                sheetMusic.GetLength(1) != beat || sheetMusic.GetLength(2) != division)
+            if (sheetMusic == null || sheetMusic.GetLength(0) != numberOfMeasure || sheetMusic.GetLength(1) != beat || sheetMusic.GetLength(2) != division)
             {
                 sheetMusic = ResizeSheetMusic(sheetMusic, numberOfMeasure, beat, division);
                 spawnPositions = ResizeSheetMusic(spawnPositions, numberOfMeasure, beat, division);
@@ -93,19 +163,20 @@ public class LevelEditorTool : EditorWindow
                 GUILayout.BeginHorizontal();
                 for (int j = 0; j < division; j++)
                 {
+                    spawnPositions[measure, i, j].x = Mathf.Clamp(spawnPositions[measure, i, j].x, 0, clickArea.width - 20);
+                    spawnPositions[measure, i, j].y = Mathf.Clamp(spawnPositions[measure, i, j].y, 0, clickArea.height - 20);
                     if (sheetMusic[measure, i, j])
                     {
-                        GUI.backgroundColor = Color.cyan;
-                        EditorGUI.DrawRect(new Rect(clickArea.position.x + spawnPositions[measure,i,j].x , clickArea.position.y + clickArea.height - spawnPositions[measure,i,j].y - 20, 20, 20),Color.cyan);
+                        EditorGUI.DrawRect(new Rect(clickArea.x + spawnPositions[measure, i, j].x, clickArea.y + clickArea.height - spawnPositions[measure, i, j].y - 20, 20, 20), Color.cyan);
+                        GUI.backgroundColor = Color.cyan; 
+                        // changer par la couleur de l'int dans le futur tableau d'int 
                     }
                     float oldWidth = EditorGUIUtility.labelWidth;
                     EditorGUIUtility.labelWidth = 20f;
                     GUILayout.Space(50);
                     sheetMusic[measure, i, j] = EditorGUILayout.Toggle(sheetMusic[measure, i, j]);
-                    spawnPositions[measure, i, j].x =
-                        EditorGUILayout.FloatField("x :", spawnPositions[measure, i, j].x, GUILayout.Width(50));
-                    spawnPositions[measure, i, j].y =
-                        EditorGUILayout.FloatField("y :", spawnPositions[measure, i, j].y, GUILayout.Width(50));
+                    spawnPositions[measure, i, j].x = EditorGUILayout.FloatField("x :", spawnPositions[measure, i, j].x, GUILayout.Width(50));
+                    spawnPositions[measure, i, j].y = EditorGUILayout.FloatField("y :", spawnPositions[measure, i, j].y, GUILayout.Width(50));
                     EditorGUIUtility.labelWidth = oldWidth;
                     GUI.backgroundColor = Color.white;
                     GUILayout.Space(2);
@@ -121,9 +192,7 @@ public class LevelEditorTool : EditorWindow
                 if (isPlaying)
                 {
                     Rect waveformRect = GUILayoutUtility.GetLastRect();
-                    float playheadPosition = Mathf.Min(
-                        (previewAudioSource.time / previewAudioSource.clip.length) * waveformRect.width,
-                        waveformRect.width);
+                    float playheadPosition = Mathf.Min((previewAudioSource.time / previewAudioSource.clip.length) * waveformRect.width, waveformRect.width);
                     Rect playheadRect = new Rect(playheadPosition, waveformRect.y, 2, waveformHeight);
                     EditorGUI.DrawRect(playheadRect, Color.red);
                 }
@@ -136,41 +205,35 @@ public class LevelEditorTool : EditorWindow
                 waveformTexture = DrawWaveform(audioClip, waveformWidth, waveformHeight, new Color(1, 0.5f, 0), numberOfMeasure);
             }
 
-            GUILayout.Space(10);
             GUILayout.BeginHorizontal();
-
             if (GUILayout.Button("Play"))
             {
                 PlayPreview();
             }
-
             if (GUILayout.Button("Stop"))
             {
                 StopPreview();
             }
             GUILayout.EndHorizontal();
-            
-            
-            
-            Event actualEvent = Event.current;
-            if (actualEvent.type == EventType.MouseDown&& clickArea.Contains(actualEvent.mousePosition))
-            {
-                Vector2 localPos = actualEvent.mousePosition - new Vector2(clickArea.x, clickArea.y);
-                localPos.y = clickArea.height - localPos.y;
-            }
-            
-            
-        }
-        else
-        {
-            isAudioAdded = false;
-        }
 
-        if (isPlaying)
-        {
-            Repaint();
+            Event actualEvent = Event.current;
+            if (actualEvent.type == EventType.MouseDown && clickArea.Contains(actualEvent.mousePosition))
+            {
+                actualPos = actualEvent.mousePosition - new Vector2(clickArea.x, clickArea.y);
+                actualPos.y = clickArea.height - actualPos.y;
+                
+            }
+            GUILayout.Space(375);
+            GUILayout.Label("Click position -> x : " + actualPos.x + " / y : "+ actualPos.y);
+            
+            if (isPlaying)
+            {
+                PlaySheetMusicNotes();
+                Repaint();
+            }
         }
     }
+
 
     bool[,,] ResizeSheetMusic(bool[,,] oldSheet, int newMeasures, int newBeats, int newDivisions)
     {
@@ -189,6 +252,7 @@ public class LevelEditorTool : EditorWindow
 
         return newSheet;
     }
+
     Vector2[,,] ResizeSheetMusic(Vector2[,,] oldSheet, int newMeasures, int newBeats, int newDivisions)
     {
         Vector2[,,] newSheet = new Vector2[newMeasures, newBeats, newDivisions];
@@ -200,9 +264,9 @@ public class LevelEditorTool : EditorWindow
         int minDivisions = Mathf.Min(oldSheet.GetLength(2), newDivisions);
 
         for (int m = 0; m < minMeasures; m++)
-        for (int b = 0; b < minBeats; b++)
-        for (int d = 0; d < minDivisions; d++)
-            newSheet[m, b, d] = oldSheet[m, b, d];
+            for (int b = 0; b < minBeats; b++)
+                for (int d = 0; d < minDivisions; d++)
+                    newSheet[m, b, d] = oldSheet[m, b, d];
 
         return newSheet;
     }
@@ -213,15 +277,16 @@ public class LevelEditorTool : EditorWindow
             return;
 
         if (isPlaying)
-        {
             StopPreview();
-        }
 
         previewAudioSource.loop = loopPreview;
         previewAudioSource.clip = audioClip;
         previewAudioSource.Play();
 
         isPlaying = true;
+        lastPlayedMeasure = -1;
+        lastPlayedBeat = -1;
+        lastPlayedDivision = -1;
     }
 
     private void StopPreview()
@@ -233,6 +298,43 @@ public class LevelEditorTool : EditorWindow
         isPlaying = false;
     }
 
+    private void PlaySheetMusicNotes()
+    {
+        if (!isPlaying || audioClip == null || noteSound == null) return;
+
+        float totalTime = previewAudioSource.time;
+        float secondsPerBeat = 60f / bpm;
+        float secondsPerMeasure = secondsPerBeat * beat;
+        float secondsPerDivision = secondsPerBeat / division;
+
+        for (int m = 0; m < numberOfMeasure; m++)
+        {
+            for (int b = 0; b < beat; b++)
+            {
+                for (int d = 0; d < division; d++)
+                {
+                    float divisionStartTime = m * secondsPerMeasure + b * secondsPerBeat + d * secondsPerDivision;
+
+                    bool alreadyPlayed = false;
+                    if (m < lastPlayedMeasure) alreadyPlayed = true;
+                    else if (m == lastPlayedMeasure && b < lastPlayedBeat) alreadyPlayed = true;
+                    else if (m == lastPlayedMeasure && b == lastPlayedBeat && d <= lastPlayedDivision) alreadyPlayed = true;
+
+                    if (!alreadyPlayed && sheetMusic[m, b, d] && divisionStartTime <= totalTime)
+                    {
+                        previewAudioSource.PlayOneShot(noteSound);
+                        lastPlayedMeasure = m;
+                        lastPlayedBeat = b;
+                        lastPlayedDivision = d;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
     private Texture2D DrawWaveform(AudioClip clip, int width, int height, Color waveformColor, int measures)
     {
         Texture2D texture = new Texture2D(width, height);
@@ -243,10 +345,8 @@ public class LevelEditorTool : EditorWindow
         for (int i = 0; i < colors.Length; i++)
             colors[i] = new Color(0.2f, 0.2f, 0.2f);
 
-        int usedWidth = Mathf.Min(width, Mathf.CeilToInt((float)clip.samples / (clip.frequency * clip.length) * width));
-
         int packSize = Mathf.Max(1, samples.Length / width);
-        for (int i = 0; i < usedWidth; i++)
+        for (int i = 0; i < width; i++)
         {
             float max = 0;
             for (int j = 0; j < packSize; j++)
@@ -269,31 +369,14 @@ public class LevelEditorTool : EditorWindow
 
         if (measures > 1)
         {
-            Color actualColor = Color.black;
             for (int m = 0; m <= measures; m++)
             {
-                int x = Mathf.FloorToInt((float)m / measures * usedWidth);
-                if (x >= usedWidth) continue;
-                if (measure == m)
-                {
-                    actualColor = Color.white;
-                }
-                else
-                {
-                    actualColor = Color.black;
-                }
+                int x = Mathf.FloorToInt((float)m / measures * width);
+                if (x >= width) continue;
+                Color actualColor = (m == measure) ? Color.white : Color.black;
                 for (int y = 0; y < height; y++)
                 {
-                    int index = y * width + x;
-                    if (measures == y)
-                    {
-                        colors[index] = actualColor;
-                    }
-                    else
-                    {
-                        colors[index] = actualColor;
-                    }
-                    
+                    colors[y * width + x] = actualColor;
                 }
             }
         }
@@ -303,4 +386,6 @@ public class LevelEditorTool : EditorWindow
 
         return texture;
     }
+
+
 }

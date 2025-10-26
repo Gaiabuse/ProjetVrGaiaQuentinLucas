@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce3d1caa1740d4940ac2543382f05da7, type: 3}
-  m_Name: Test
+  m_Name: Exemple
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   audioClip: {fileID: 8300000, guid: e161e3edec5255e44b3233cc5965cbc5, type: 3}
   noteSound: {fileID: 8300000, guid: 16fba6d30ed741d4a9fdd6e79ee2f3ac, type: 3}

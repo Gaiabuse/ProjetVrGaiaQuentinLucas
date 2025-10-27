@@ -12,6 +12,7 @@ public class LevelData : ScriptableObject, ISerializationCallbackReceiver
     public int division;
 
     #region 3d Array serialization
+    
     [SerializeField] private Vector3Int sheetMusicSize;
     [SerializeField] private Vector3Int spawnPositionSize;
     [SerializeField] private int[] sheetMusicData;

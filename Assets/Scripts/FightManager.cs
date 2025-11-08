@@ -1,48 +1,50 @@
 using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class FightManager : MonoBehaviour
+public class FightManager : MonoBehaviour // faire bpm et un moyen de caler les notes sur le bpm (on mettra un générateur de note ensuite)
 {
-    public static FightManager INSTANCE;
-    public float damages = 5f;
+    [SerializeField] private AudioSource audioSourceMetronome;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip firstMetronome; 
+    [SerializeField] private AudioClip otherMetronome;
+    [SerializeField] private float initialBpm = 120;
+    [SerializeField] private int timeSignature = 4;
     
-    [SerializeField] private float maxAnxiety = 100f;
+    private int cpt = 0;
+    private float actualTimeBetweenBeat;
+    private float lastBeatTime;
 
-    private float _anxiety = 0f;
     
-    private void Awake()
-    {
-        if (INSTANCE == null)
-        {
-            INSTANCE = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
-    public void AddAnxiety()
+    private void Update()
     {
-        _anxiety += damages;
-        Debug.Log(("anxiety +"));
-        CheckLoose();
-    }
-
-    void CheckLoose()
-    {
-        if (_anxiety >= maxAnxiety)
+        if (!audioSource.isPlaying)
         {
-            Debug.Log("You loose"); // changer la plupart des trucs ici c'est uniquement pour le rendu du 13 a 16h c'est pas definitif
-            EndFight();
+            return;
+        }
+        initialBpm = Mathf.Clamp(initialBpm, 40, 260);
+        float secondsPerBeat = 60f / initialBpm;
+        int currentBeat = Mathf.FloorToInt(audioSource.time / secondsPerBeat) % timeSignature + 1;
+        if (currentBeat != cpt)
+        {
+            cpt = currentBeat;
+
+            if (cpt == 1)
+            {
+                audioSourceMetronome.PlayOneShot(firstMetronome);
+            }
+            else
+            {
+                audioSourceMetronome.PlayOneShot(otherMetronome);
+            }
+            lastBeatTime = audioSource.time;
         }
     }
 
-    void EndFight()
+    private void ChangeBpm()
     {
-        _anxiety = 0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // changer ça aussi a terme
+        // faire changer le bpm
     }
 }
+

@@ -63,7 +63,7 @@ public class LevelEditorTool : EditorWindow
         window.maxSize = new Vector2(1920, 1080);
         if (previewAudioSource == null)
         {
-            clickArea = new Rect(30, 460, 640, 360);
+            clickArea = new Rect(30, 450, 640, 360);
             GameObject audioPreviewer = new GameObject("AudioPreviewer");
             previewAudioSource = audioPreviewer.AddComponent<AudioSource>();
             previewAudioSource.hideFlags = HideFlags.HideAndDontSave;
@@ -146,11 +146,6 @@ public class LevelEditorTool : EditorWindow
             float secondsPerBeat = 60f / bpm;
             float secondsPerMeasure = secondsPerBeat * beat;
             numberOfMeasure = Mathf.CeilToInt(audioClip.length / secondsPerMeasure);
-
-            if (waveformTexture == null || GUILayout.Button("Generate Waveform"))
-            {
-                waveformTexture = DrawWaveform(audioClip, waveformWidth, waveformHeight, new Color(1, 0.5f, 0), numberOfMeasure);
-            }
             
             actualRythm = EditorGUILayout.IntField("Index rythme actuel : ", actualRythm);
             actualRythm = Mathf.Clamp(actualRythm, 1, colors.Length);
@@ -212,7 +207,7 @@ public class LevelEditorTool : EditorWindow
 
             if (waveformTexture != null)
             {
-                GUILayout.Label("Waveform Preview");
+                GUILayout.Label("Waveform");
                 GUILayout.Box(waveformTexture);
 
                 if (isPlaying)
@@ -224,7 +219,7 @@ public class LevelEditorTool : EditorWindow
                 }
             }
 
-            loopPreview = GUILayout.Toggle(loopPreview, "Loop Preview");
+            loopPreview = GUILayout.Toggle(loopPreview, "Loop");
 
             if (GUI.changed)
             {
@@ -255,7 +250,7 @@ public class LevelEditorTool : EditorWindow
 
 
             }
-            GUILayout.Space(375);
+            GUILayout.Space(385);
             GUILayout.Label("Click position -> x : " + actualPos.x + " / y : "+ actualPos.y);
             
             if (isPlaying)

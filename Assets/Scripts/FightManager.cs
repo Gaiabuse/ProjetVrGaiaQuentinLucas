@@ -1,50 +1,100 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class FightManager : MonoBehaviour // faire bpm et un moyen de caler les notes sur le bpm (on mettra un générateur de note ensuite)
+public class FightManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSourceMetronome;
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip firstMetronome; 
-    [SerializeField] private AudioClip otherMetronome;
-    [SerializeField] private float initialBpm = 120;
-    [SerializeField] private int timeSignature = 4;
+    public static FightManager INSTANCE;
+    public float damages = 5f;
     
-    private int cpt = 0;
-    private float actualTimeBetweenBeat;
-    private float lastBeatTime;
+    [SerializeField] private float maxAnxiety = 100f;
+    [SerializeField] private MetronomeManager metronome;
+    [SerializeField] private GameObject[] notesPrefabs;
+    [SerializeField] private LevelData level;
+    [SerializeField] private float spawnPosDivider = 100f;
+    [SerializeField] private float zAxisPosition = 0f;
 
+    private Vector2[,,] spawnPositions;
+    private int[,,] sheetMusic;
+
+    private float _anxiety = 0f;
     
-
-    private void Update()
+    private void Awake()
     {
-        if (!audioSource.isPlaying)
+        if (INSTANCE == null)
+        {
+            INSTANCE = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        StartFight(level); // à effacer, uniquement pour tests
+    }
+
+    #region Start / End
+    
+    public void StartFight(LevelData newLevel)
+    {
+        //SceneManager.LoadScene();    // Load la scene de combat (quand on aura toutes les scenes)
+        StartCoroutine(WaitForStartMusic());
+        level = newLevel;
+        spawnPositions = level.spawnPositions;
+        sheetMusic = level.sheetMusic;
+        metronome.ChangeValues(level.audioClip, level.bpm, level.beat, level.division);
+    }
+
+    IEnumerator WaitForStartMusic()
+    {
+        yield return new WaitForSeconds(3f);
+        metronome.audioSource.Play();
+    }
+
+    void EndFight()
+    {
+        _anxiety = 0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // changer ça aussi a terme
+    }
+    
+    #endregion
+    
+    
+    public void AddAnxiety()
+    {
+        _anxiety += damages;
+        Debug.Log(("anxiety + "));
+        CheckLoose();
+    }
+    // loose aussi anxiety
+    
+    void CheckLoose()
+    {
+        if (_anxiety >= maxAnxiety)
+        {
+            Debug.Log("You loose"); // changer la plupart des trucs ici c'est uniquement pour le rendu du 13 a 16h c'est pas definitif
+            EndFight();
+        }
+    }
+
+
+    public void NoteSpawn(int actualMeasure, int actualBeat, int actualDivision)
+    {
+        int actualNote = sheetMusic[actualMeasure, actualBeat, actualDivision];
+        
+        if (actualNote > notesPrefabs.Length)
         {
             return;
         }
-        initialBpm = Mathf.Clamp(initialBpm, 40, 260);
-        float secondsPerBeat = 60f / initialBpm;
-        int currentBeat = Mathf.FloorToInt(audioSource.time / secondsPerBeat) % timeSignature + 1;
-        if (currentBeat != cpt)
+        
+        Vector2 actualPos = spawnPositions[actualMeasure, actualBeat, actualDivision];
+        
+        if (actualNote != 0)
         {
-            cpt = currentBeat;
-
-            if (cpt == 1)
-            {
-                audioSourceMetronome.PlayOneShot(firstMetronome);
-            }
-            else
-            {
-                audioSourceMetronome.PlayOneShot(otherMetronome);
-            }
-            lastBeatTime = audioSource.time;
+            GameObject actualGO = Instantiate(notesPrefabs[actualNote - 1]);
+            actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition);
         }
     }
-
-    private void ChangeBpm()
-    {
-        // faire changer le bpm
-    }
+    
 }
-

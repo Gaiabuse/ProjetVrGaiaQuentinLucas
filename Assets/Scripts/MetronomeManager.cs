@@ -65,6 +65,7 @@ public class MetronomeManager : MonoBehaviour
             audioSourceMetronome.PlayOneShot(otherMetronome);
             actualDivision++;
             FightManager.INSTANCE.NoteSpawn(actualMeasure, actualBeat, actualDivision - 1);
+            FightManager.INSTANCE.NotePrevisualisation(actualMeasure, actualBeat, actualDivision - 1);
         }
     }
 

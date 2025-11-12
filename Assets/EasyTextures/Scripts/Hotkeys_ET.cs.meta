@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 7983b0898ce04a2459eb39ffa4a22ab9
+timeCreated: 1541445981
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134736
+  packageName: Easy Texture Assign Tool
+  packageVersion: 1.0
+  assetPath: Assets/EasyTextures/Scripts/Hotkeys_ET.cs
+  uploadId: 305600

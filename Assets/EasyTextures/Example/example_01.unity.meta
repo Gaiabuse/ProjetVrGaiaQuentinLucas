@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7f143297aca524a4eacbd924b39f5d5d
+timeCreated: 1554759226
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134736
+  packageName: Easy Texture Assign Tool
+  packageVersion: 1.0
+  assetPath: Assets/EasyTextures/Example/example_01.unity
+  uploadId: 305600

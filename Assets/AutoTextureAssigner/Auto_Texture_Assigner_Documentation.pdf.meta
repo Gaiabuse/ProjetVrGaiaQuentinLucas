@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1d3ba7dc44d2cce4b83419b4e8beae07
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314010
+  packageName: Auto Texture To Material Assigner
+  packageVersion: 1.0
+  assetPath: Assets/AutoTextureAssigner/Auto_Texture_Assigner_Documentation.pdf
+  uploadId: 741038

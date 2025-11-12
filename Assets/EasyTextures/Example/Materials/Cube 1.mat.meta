@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 56eec9aeddd98cd45ba1c97e0b6aa35d
+timeCreated: 1554785929
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134736
+  packageName: Easy Texture Assign Tool
+  packageVersion: 1.0
+  assetPath: Assets/EasyTextures/Example/Materials/Cube 1.mat
+  uploadId: 305600

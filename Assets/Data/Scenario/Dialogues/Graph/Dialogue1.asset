@@ -102,8 +102,8 @@ MonoBehaviour:
   Choices: []
   SpeakerName: 
   DialogueLine: 'Oh vraiment... n''oublie pas que tu peux me parler si tu as besoin,
-    je suis ta maman tu sais.Jean arrive bientot par contre, je commence a faire
-    a manger, fais ce que tu veux en attendant. '
+    /je suis ta maman tu sais./Jean arrive bientot par contre, /je commence a faire
+    a manger, /fais ce que tu veux en attendant. '
 --- !u!114 &-392063099871728984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,8 +161,8 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: 
-  DialogueLine: "C'\xE9tait super, je me suis fais pleins d'amis trop cool ! On a
-    jouer au ballon et j'ai gagner, c'etait trop bien !"
+  DialogueLine: "C'\xE9tait super, je me suis fais pleins d'amis trop cool ! /On
+    a jouer au ballon et j'ai gagner, c'etait trop bien !"
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   - {fileID: -5753868258849531326}
   - {fileID: 6126399267849386394}
   - {fileID: -1564224275831707701}
-  current: {fileID: 0}
+  current: {fileID: 6822697032485595931}
 --- !u!114 &6126399267849386394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,8 +226,8 @@ MonoBehaviour:
   Entry: 
   Choices: []
   SpeakerName: 
-  DialogueLine: 'Tant mieux mon poussin. Jean arrive bientot, je commence a faire
-    a manger, fais ce que tu veux en attendant. '
+  DialogueLine: 'Tant mieux mon poussin./ Jean arrive bientot, je commence a faire
+    a manger,/ fais ce que tu veux en attendant. '
 --- !u!114 &6822697032485595931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +299,7 @@ MonoBehaviour:
   - "Exag\xE9rer"
   - 'Positiver '
   SpeakerName: Maman
-  DialogueLine: "Coucou mon ch\xE9rie, ta journ\xE9e c'est bien pass\xE9? tu t'es
+  DialogueLine: "Coucou mon ch\xE9rie, ta journ\xE9e c'est bien pass\xE9?/ tu t'es
     fais des copains?"
 --- !u!114 &8119512945047746816
 MonoBehaviour:

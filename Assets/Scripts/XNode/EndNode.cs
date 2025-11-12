@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using XNode;
 
-public class FinishNode : BaseNode 
+public class EndNode : BaseNode 
 {
 	[Input] public string Entry;
 
 	public override string GetString()
 	{
-		return "Finish";
+		return "End";
 	}
 }

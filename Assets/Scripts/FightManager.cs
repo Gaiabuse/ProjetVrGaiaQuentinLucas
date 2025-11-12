@@ -32,7 +32,7 @@ public class FightManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        StartFight(level); // à effacer, uniquement pour tests
+        //StartFight(level); // à effacer, uniquement pour tests
     }
 
     #region Start / End

@@ -5,7 +5,7 @@ public class FightNode : BaseNode
     [Input] public string Entry;
     [Output(dynamicPortList = true)] public string Choices;
 
-    public string SpeakerName;
+    public LevelData level;
 
     public override string GetString()
     {

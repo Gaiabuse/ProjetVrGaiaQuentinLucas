@@ -8,6 +8,7 @@ using XNode;
 
 public class DialogueRunner : MonoBehaviour
 {
+    [SerializeField] private GameObject Ui;
     [SerializeField] private DialogueGraph graph;
     [SerializeField] private TMP_Text speaker;
     [SerializeField] private TMP_Text dialogue;
@@ -39,16 +40,26 @@ public class DialogueRunner : MonoBehaviour
         string data = currentNode.GetString();
         string[] dataParts = data.Split('/');
         string[] dialogueSplit;
-        if (dataParts[0] == "Start")
+        switch (dataParts[0])
         {
-            NextNode("Exit");
-        }
-        if (dataParts[0] == "DialogueNode")
-        {
-            speaker.text = $"- {dataParts[1]} -";
-            dialogueSplit = dataParts[2].Split('|');
-            StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode as DialogueNode));
-            yield return new WaitUntil(() => switchNode );
+            case "Start":
+                Ui.SetActive(true);
+                NextNode("Exit");
+                break;
+            case "Dialogue":
+                speaker.text = $"- {dataParts[1]} -";
+                dialogueSplit = dataParts[2].Split('|');
+                StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode as DialogueNode));
+                yield return new WaitUntil(() => switchNode );
+                break;
+            case "Fight":
+                FightNode node = currentNode as FightNode;
+                if (node != null) FightManager.INSTANCE.StartFight(node.level);
+                break;
+            case "End":
+                Ui.SetActive(false);
+                break;
+            default: break;
         }
         
         

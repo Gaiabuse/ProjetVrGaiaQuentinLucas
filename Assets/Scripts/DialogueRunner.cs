@@ -13,7 +13,8 @@ public class DialogueRunner : MonoBehaviour
     [SerializeField] private TMP_Text dialogue;
     [SerializeField] private Transform choicesParent;
     [SerializeField] private ChoiceButton choicePrefab;
-    [SerializeField] private char splitter;
+    [SerializeField] private float dialogueDurationByChar = 0.1f;
+    [SerializeField] private Animator animatorManager;
     private Coroutine dialogueRunner;
     private Coroutine choicesCoroutine;
     private bool switchNode;
@@ -37,23 +38,33 @@ public class DialogueRunner : MonoBehaviour
         BaseNode currentNode = graph.current;
         string data = currentNode.GetString();
         string[] dataParts = data.Split('/');
-        List<string> dialogueSplit = new List<string>(dataParts);
+        string[] dialogueSplit;
         if (dataParts[0] == "Start")
         {
             NextNode("Exit");
         }
         if (dataParts[0] == "DialogueNode")
         {
-            speaker.text = dataParts[1];
-            dialogueSplit.AddRange(dataParts[2].Split('/'));
+            speaker.text = $"- {dataParts[1]} -";
+            dialogueSplit = dataParts[2].Split('|');
+            StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode as DialogueNode));
+            yield return new WaitUntil(() => switchNode );
         }
+        
+        
+    }
 
+    private IEnumerator InstantiateDialogues(string[] dialogueSplit, DialogueNode dialogueNode)
+    {
         foreach (var t in dialogueSplit)
         {
             Debug.Log(t);
+            dialogue.text = t;
+            yield return new WaitForSeconds(dialogueDurationByChar*t.Length);
+            Debug.Log(dialogueDurationByChar*t.Length);
         }
-        //choicesCoroutine = StartCoroutine(InstantiateChoices(currentNode as DialogueNode));
-        yield return new WaitUntil(() => switchNode );
+        Debug.Log("choices");
+        choicesCoroutine = StartCoroutine(InstantiateChoices(dialogueNode));
     }
     
     private IEnumerator InstantiateChoices(DialogueNode node)
@@ -69,7 +80,11 @@ public class DialogueRunner : MonoBehaviour
             {
                 ChoiceButton choice =  Instantiate(choicePrefab, choicesParent);
                 var i1 = i;
-                choice.Init(node.Choices[i], () => NextNode("Choices "+i1));
+                choice.Init(node.Choices[i], () =>
+                {
+                    NextNode("Choices " + i1);
+                    animatorManager.SetTrigger("Choices"+i1);
+                });
             }
         }
     }
@@ -95,7 +110,6 @@ public class DialogueRunner : MonoBehaviour
             {
                 if (port.IsConnected)
                 {
-                    Debug.Log(port.Connection.node.name);
                     graph.current = port.Connection.node as BaseNode;
                     break;
                 }

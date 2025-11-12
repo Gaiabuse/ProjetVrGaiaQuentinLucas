@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
+  - Note
+  - CanHitWall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Hands
   - Water
   - UI
   - 

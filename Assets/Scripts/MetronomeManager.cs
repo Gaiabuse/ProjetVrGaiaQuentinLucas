@@ -76,5 +76,11 @@ public class MetronomeManager : MonoBehaviour
         timeSignature = newTimeSignature;
         division = newDivision;
     }
+
+    public void EndFight()
+    {
+        audioSource.Stop();
+        audioSourceMetronome.Stop();
+    }
 }
 

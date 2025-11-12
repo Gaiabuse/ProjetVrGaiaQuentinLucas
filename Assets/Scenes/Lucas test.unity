@@ -628,12 +628,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289455085}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02588, y: 1.52137, z: 0.36216}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.24080999, y: 1.52137, z: -8.22885}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1322379278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &313008698 stripped
 GameObject:
@@ -1951,7 +1951,9 @@ Transform:
   m_LocalPosition: {x: 0.21493, y: 0, z: 8.59101}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1847522182}
+  - {fileID: 289455087}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1322379279
@@ -1984,7 +1986,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5355742241b58e3428ce292109073f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FightManager
-  damages: 5
   maxAnxiety: 100
   metronome: {fileID: 1322379279}
   notesPrefabs:
@@ -1994,6 +1995,8 @@ MonoBehaviour:
   level: {fileID: 11400000, guid: b9349305cb2774446a7ba8c90abdc778, type: 2}
   spawnPosDivider: 500
   zAxisPosition: 0.2
+  zAxisPreviewOffset: 10
+  slider: {fileID: 1987639446}
 --- !u!1001 &1487402973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2704,12 +2707,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1847522180}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0017, y: 1.47115, z: 0.36216}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.21663, y: 1.47115, z: -8.22885}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1322379278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1854391591
 GameObject:
@@ -2939,7 +2942,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -2952,10 +2955,8 @@ SceneRoots:
   - {fileID: 1663663246}
   - {fileID: 1717430021}
   - {fileID: 1322379278}
-  - {fileID: 1847522182}
   - {fileID: 409368283}
   - {fileID: 1174060964}
-  - {fileID: 289455087}
   - {fileID: 1936034839}
   - {fileID: 130764332}
   - {fileID: 1018404727}

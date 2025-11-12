@@ -11,6 +11,7 @@ public class FightManager : MonoBehaviour
     [SerializeField] private float maxAnxiety = 100f;
     [SerializeField] private MetronomeManager metronome;
     [SerializeField] private GameObject[] notesPrefabs;
+    [SerializeField] private GameObject[] previewNotesPrefabs;
     [SerializeField] private LevelData level;
     [SerializeField] private float spawnPosDivider = 100f;
     [SerializeField] private float zAxisPosition = 0f;
@@ -48,7 +49,8 @@ public class FightManager : MonoBehaviour
 
     IEnumerator WaitForStartMusic()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
+        Debug.Log("startmusic");
         metronome.audioSource.Play();
     }
 
@@ -93,6 +95,25 @@ public class FightManager : MonoBehaviour
         if (actualNote != 0)
         {
             GameObject actualGO = Instantiate(notesPrefabs[actualNote - 1]);
+            actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition);
+        }
+    }
+    
+    public void NotePrevisualisation(int actualMeasure, int actualBeat, int actualDivision)
+    {
+        actualMeasure += 1;
+        int actualPreviewNote = sheetMusic[actualMeasure, actualBeat, actualDivision];
+        
+        if (actualPreviewNote > previewNotesPrefabs.Length)
+        {
+            return;
+        }
+        
+        Vector2 actualPos = spawnPositions[actualMeasure, actualBeat, actualDivision];
+        
+        if (actualPreviewNote != 0)
+        {
+            GameObject actualGO = Instantiate(previewNotesPrefabs[actualPreviewNote - 1]);
             actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition);
         }
     }

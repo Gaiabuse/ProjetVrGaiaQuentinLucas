@@ -82,5 +82,6 @@ public class MetronomeManager : MonoBehaviour
         audioSource.Stop();
         audioSourceMetronome.Stop();
     }
+    
 }
 

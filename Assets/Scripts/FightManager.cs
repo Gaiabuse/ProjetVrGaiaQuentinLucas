@@ -98,11 +98,15 @@ public class FightManager : MonoBehaviour
         }
         
         Vector2 actualPos = spawnPositions[actualMeasure, actualBeat, actualDivision];
-        
+
         if (actualNote != 0)
         {
             GameObject actualGO = Instantiate(notesPrefabs[actualNote - 1]);
             actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition);
+            if (actualNote == 2)
+            {
+                actualGO.GetComponent<LinkedNotes>().ChangeSheetMusicPosition(new Vector3Int(actualMeasure, actualBeat, actualDivision)); // désolé Jacques j'ai honte
+            }
         }
     }
     
@@ -123,6 +127,15 @@ public class FightManager : MonoBehaviour
             GameObject actualGO = Instantiate(previewNotesPrefabs[actualPreviewNote - 1]);
             actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition + zAxisPreviewOffset);
         }
+    }
+
+    public int GetNote(int measure, int beat, int division)
+    {
+        return level.sheetMusic[measure, beat, division];
+    }
+    public Vector3 GetPos(int measure, int beat, int division)
+    {
+        return level.spawnPositions[measure, beat, division];
     }
     
 }

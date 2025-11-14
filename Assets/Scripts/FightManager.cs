@@ -105,7 +105,8 @@ public class FightManager : MonoBehaviour
             actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition);
             if (actualNote == 2)
             {
-                actualGO.GetComponent<LinkedNotes>().ChangeSheetMusicPosition(new Vector3Int(actualMeasure, actualBeat, actualDivision)); // désolé Jacques j'ai honte
+                LinkedNotes linked = actualGO.GetComponent<LinkedNotes>(); // désolé Jacques j'ai honte mais pas le temps
+                linked.ChangeSheetMusicPosition(new Vector3Int(actualMeasure, actualBeat, actualDivision));
             }
         }
     }
@@ -135,7 +136,7 @@ public class FightManager : MonoBehaviour
     }
     public Vector3 GetPos(int measure, int beat, int division)
     {
-        return level.spawnPositions[measure, beat, division];
+        return new Vector3(level.spawnPositions[measure, beat, division].x / spawnPosDivider,level.spawnPositions[measure, beat, division].y / spawnPosDivider, zAxisPosition );
     }
     
 }

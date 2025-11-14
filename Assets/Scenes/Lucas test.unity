@@ -1990,7 +1990,9 @@ MonoBehaviour:
   metronome: {fileID: 1322379279}
   notesPrefabs:
   - {fileID: 6836044605418195367, guid: 4cc568539f4b2564f8e67f6683486ce7, type: 3}
+  - {fileID: 6836044605418195367, guid: 826eb5d87d0a8f7408ea2baa88d8217d, type: 3}
   previewNotesPrefabs:
+  - {fileID: 6836044605418195367, guid: 3f852652adfe6fb46bb013847b1ba869, type: 3}
   - {fileID: 6836044605418195367, guid: 3f852652adfe6fb46bb013847b1ba869, type: 3}
   level: {fileID: 11400000, guid: b9349305cb2774446a7ba8c90abdc778, type: 2}
   spawnPosDivider: 500

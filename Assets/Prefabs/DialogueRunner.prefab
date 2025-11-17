@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd447590c4b6da4d9bd20a929e1a7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueRunner
-  Ui: {fileID: 0}
+  Ui: {fileID: 342685831355333175}
   graph: {fileID: 11400000, guid: 98d6cc38130b99047a2a486c0543399c, type: 2}
   speaker: {fileID: 4416158849851162641}
   dialogue: {fileID: 596972998995618533}

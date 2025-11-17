@@ -16,6 +16,7 @@ public class DialogueRunner : MonoBehaviour
     [SerializeField] private ChoiceButton choicePrefab;
     [SerializeField] private float dialogueDurationByChar = 0.1f;
     [SerializeField] private Animator animatorManager;
+    [SerializeField] private GameObject[] objectsForMove;
     private Coroutine dialogueRunner;
     private Coroutine choicesCoroutine;
     private bool switchNode;
@@ -30,10 +31,28 @@ public class DialogueRunner : MonoBehaviour
                 break;
             }
         }
-        dialogueRunner = StartCoroutine(Runner());
+        StartDialogue();
     }
 
 
+    private void StartDialogue()
+    {
+        Ui.SetActive(true);
+        foreach (GameObject obj in objectsForMove)
+        {
+            obj.SetActive(false);
+        }
+        dialogueRunner = StartCoroutine(Runner());
+    }
+
+    private void EndDialogue()
+    {
+        Ui.SetActive(false);
+        foreach (GameObject obj in objectsForMove)
+        {
+            obj.SetActive(true);
+        }
+    }
     private IEnumerator Runner()
     {
         BaseNode currentNode = graph.current;
@@ -43,7 +62,6 @@ public class DialogueRunner : MonoBehaviour
         switch (dataParts[0])
         {
             case "Start":
-                Ui.SetActive(true);
                 NextNode("Exit");
                 break;
             case "Dialogue":
@@ -57,12 +75,10 @@ public class DialogueRunner : MonoBehaviour
                 if (node != null) FightManager.INSTANCE.StartFight(node.level);
                 break;
             case "End":
-                Ui.SetActive(false);
+                EndDialogue();
                 break;
             default: break;
         }
-        
-        
     }
 
     private IEnumerator InstantiateDialogues(string[] dialogueSplit, DialogueNode dialogueNode)

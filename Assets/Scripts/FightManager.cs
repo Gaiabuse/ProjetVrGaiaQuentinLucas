@@ -8,7 +8,6 @@ public class FightManager : MonoBehaviour
 {
     public static FightManager INSTANCE;
     
-    
     [SerializeField] private float maxAnxiety = 100f;
     [SerializeField] private MetronomeManager metronome;
     [SerializeField] private GameObject[] notesPrefabs;
@@ -18,11 +17,14 @@ public class FightManager : MonoBehaviour
     [SerializeField] private float zAxisPosition = 0.2f;
     [SerializeField] private float zAxisPreviewOffset = 10f;
     [SerializeField] private Slider slider;
+    [SerializeField] private int maxLinkedTime = 6;
 
     private Vector2[,,] spawnPositions;
     private int[,,] sheetMusic;
 
     private float _anxiety = 0f;
+    private bool _canLink = false;
+    private bool _isFirstLinkedNote = true;
     
     private void Awake()
     {
@@ -105,8 +107,10 @@ public class FightManager : MonoBehaviour
             actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition);
             if (actualNote == 2)
             {
+                
                 LinkedNotes linked = actualGO.GetComponent<LinkedNotes>(); // désolé Jacques j'ai honte mais pas le temps
                 linked.ChangeSheetMusicPosition(new Vector3Int(actualMeasure, actualBeat, actualDivision));
+                
             }
         }
     }
@@ -125,6 +129,16 @@ public class FightManager : MonoBehaviour
         
         if (actualPreviewNote != 0)
         {
+            if (actualPreviewNote == 2 )
+            {
+                if (_canLink)
+                {
+                    return;
+                }
+
+                CanLink();
+
+            }
             GameObject actualGO = Instantiate(previewNotesPrefabs[actualPreviewNote - 1]);
             actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition + zAxisPreviewOffset);
         }
@@ -137,6 +151,15 @@ public class FightManager : MonoBehaviour
     public Vector3 GetPos(int measure, int beat, int division)
     {
         return new Vector3(level.spawnPositions[measure, beat, division].x / spawnPosDivider,level.spawnPositions[measure, beat, division].y / spawnPosDivider, zAxisPosition );
+    }
+
+    public void CanLink()
+    {
+        _canLink = true;
+    }
+    public void CantLink()
+    {
+        _canLink = false;
     }
     
 }

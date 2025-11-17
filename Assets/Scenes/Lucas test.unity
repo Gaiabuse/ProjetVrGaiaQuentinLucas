@@ -1329,11 +1329,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.778
+      value: -0.81
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.826
+      value: -0.643
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1988,7 +1988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5355742241b58e3428ce292109073f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FightManager
-  maxAnxiety: 100
+  maxAnxiety: 2000
   metronome: {fileID: 1322379279}
   notesPrefabs:
   - {fileID: 6836044605418195367, guid: 4cc568539f4b2564f8e67f6683486ce7, type: 3}
@@ -2001,6 +2001,7 @@ MonoBehaviour:
   zAxisPosition: 0.2
   zAxisPreviewOffset: 10
   slider: {fileID: 1987639446}
+  maxLinkedTime: 6
 --- !u!1001 &1487402973
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class DialogueRunner : MonoBehaviour
     private Vector3 positionStartFight;
     private Coroutine dialogueRunner;
     private Coroutine choicesCoroutine;
+    private Coroutine fightCoroutine;
     private bool switchNode;
     private bool asWin;
     private bool fightEnded;
@@ -41,16 +42,17 @@ public class DialogueRunner : MonoBehaviour
 
     private void OnEnable()
     {
-        FightManager.INSTANCE.FightEnded += b =>
+        FightManager.FightEnded += b =>
         {
             asWin = b;
+            Debug.Log("end fight");
             fightEnded = true;
         };
     }
 
     private void OnDisable()
     {
-        FightManager.INSTANCE.FightEnded -= b =>
+        FightManager.FightEnded -= b =>
         {
             asWin = b;
             fightEnded = true;
@@ -93,8 +95,9 @@ public class DialogueRunner : MonoBehaviour
                 yield return new WaitUntil(() => switchNode );
                 break;
             case "Fight":
+                Debug.Log("Fight");
                 FightNode node = currentNode as FightNode;
-                StartCoroutine(StartFightNode(node));
+                fightCoroutine = StartCoroutine(StartFightNode(node));
                 yield return new WaitUntil(() => switchNode );
                 break;
             case "End":
@@ -108,13 +111,27 @@ public class DialogueRunner : MonoBehaviour
     {
         fightEnded = false;
         positionStartFight = player.position;
-        player.position = positionStartFight;
+        player.position = positionForFight;
         Ui.SetActive(false);
         if (node != null) FightManager.INSTANCE.StartFight(node.level);
         yield return new WaitUntil(()=>fightEnded);
+        Debug.Log("end : " + positionStartFight);
         player.position = positionStartFight;
         Ui.SetActive(true);
-        NextNode(asWin ? node.AsWin : node.AsLose);
+        Debug.Log(asWin);
+        if (asWin)
+        {
+            
+            NextNode("AsWin");
+        }
+        else
+        {
+            Debug.Log("nion");
+            NextNode("AsLoose");
+        }
+        
+             
+        
     }
 
     private IEnumerator InstantiateDialogues(string[] dialogueSplit, DialogueNode dialogueNode)
@@ -163,6 +180,12 @@ public class DialogueRunner : MonoBehaviour
         {
             StopCoroutine(choicesCoroutine);
             choicesCoroutine = null;
+        }
+
+        if (fightCoroutine != null)
+        {
+            StopCoroutine(fightCoroutine);
+            fightCoroutine = null;
         }
         foreach (NodePort port in graph.current.Ports)
         {

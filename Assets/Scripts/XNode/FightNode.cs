@@ -4,7 +4,7 @@ public class FightNode : BaseNode
 {
     [Input] public string Entry;
     [Output] public string AsWin;
-    [Output] public string AsLose;
+    [Output] public string AsLoose;
 
     public LevelData level;
 

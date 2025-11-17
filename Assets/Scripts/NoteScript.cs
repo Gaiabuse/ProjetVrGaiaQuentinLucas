@@ -7,6 +7,7 @@ public class NoteScript : MonoBehaviour
     [SerializeField] private float damages = 2f;
     [SerializeField] private float hitSpeed = 1f;
     [SerializeField] private int maxHit = 5;
+    private bool canHit = true;
     private Coroutine _damagesCoroutine;
 
     private void Awake()
@@ -14,7 +15,7 @@ public class NoteScript : MonoBehaviour
         _damagesCoroutine = StartCoroutine(WaitForDamages());
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -26,13 +27,15 @@ public class NoteScript : MonoBehaviour
 
     IEnumerator WaitForDamages()
     {
-        for (int i = 0; i < maxHit; i++)
+        if (canHit)
         {
-            yield return new WaitForSeconds(hitSpeed);
-            FightManager.INSTANCE.AddAnxiety(damages);
-            Debug.Log("bad");
+            for (int i = 0; i < maxHit; i++)
+            {
+                yield return new WaitForSeconds(hitSpeed);
+                FightManager.INSTANCE.AddAnxiety(damages);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 
     private void OnDestroy()

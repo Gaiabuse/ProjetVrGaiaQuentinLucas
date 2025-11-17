@@ -38,6 +38,7 @@ public class MetronomeManager : MonoBehaviour
         int currentDivision = Mathf.FloorToInt(audioSource.time / secondsPerDivision) % timeSignature + 1;
         if (currentBeat != beatCpt)
         {
+            FightManager.INSTANCE.CheckWin(actualMeasure,actualBeat, actualDivision);
             beatCpt = currentBeat;
             if (beatCpt == 1)
             {

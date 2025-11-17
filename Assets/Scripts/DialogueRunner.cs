@@ -8,6 +8,7 @@ using XNode;
 
 public class DialogueRunner : MonoBehaviour
 {
+    [SerializeField] private Transform player;
     [SerializeField] private GameObject Ui;
     [SerializeField] private DialogueGraph graph;
     [SerializeField] private TMP_Text speaker;
@@ -17,9 +18,13 @@ public class DialogueRunner : MonoBehaviour
     [SerializeField] private float dialogueDurationByChar = 0.1f;
     [SerializeField] private Animator animatorManager;
     [SerializeField] private GameObject[] objectsForMove;
+    [SerializeField] private Vector3 positionForFight;
+    private Vector3 positionStartFight;
     private Coroutine dialogueRunner;
     private Coroutine choicesCoroutine;
     private bool switchNode;
+    private bool asWin;
+    private bool fightEnded;
     private void Start()
     {
         switchNode = false;
@@ -34,6 +39,23 @@ public class DialogueRunner : MonoBehaviour
         StartDialogue();
     }
 
+    private void OnEnable()
+    {
+        FightManager.INSTANCE.FightEnded += b =>
+        {
+            asWin = b;
+            fightEnded = true;
+        };
+    }
+
+    private void OnDisable()
+    {
+        FightManager.INSTANCE.FightEnded -= b =>
+        {
+            asWin = b;
+            fightEnded = true;
+        };
+    }
 
     private void StartDialogue()
     {
@@ -72,7 +94,8 @@ public class DialogueRunner : MonoBehaviour
                 break;
             case "Fight":
                 FightNode node = currentNode as FightNode;
-                if (node != null) FightManager.INSTANCE.StartFight(node.level);
+                StartCoroutine(StartFightNode(node));
+                yield return new WaitUntil(() => switchNode );
                 break;
             case "End":
                 EndDialogue();
@@ -81,16 +104,26 @@ public class DialogueRunner : MonoBehaviour
         }
     }
 
+    private IEnumerator StartFightNode(FightNode node)
+    {
+        fightEnded = false;
+        positionStartFight = player.position;
+        player.position = positionStartFight;
+        Ui.SetActive(false);
+        if (node != null) FightManager.INSTANCE.StartFight(node.level);
+        yield return new WaitUntil(()=>fightEnded);
+        player.position = positionStartFight;
+        Ui.SetActive(true);
+        NextNode(asWin ? node.AsWin : node.AsLose);
+    }
+
     private IEnumerator InstantiateDialogues(string[] dialogueSplit, DialogueNode dialogueNode)
     {
         foreach (var t in dialogueSplit)
         {
-            Debug.Log(t);
             dialogue.text = t;
             yield return new WaitForSeconds(dialogueDurationByChar*t.Length);
-            Debug.Log(dialogueDurationByChar*t.Length);
         }
-        Debug.Log("choices");
         choicesCoroutine = StartCoroutine(InstantiateChoices(dialogueNode));
     }
     

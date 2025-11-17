@@ -3,7 +3,8 @@ using UnityEngine;
 public class FightNode : BaseNode
 {
     [Input] public string Entry;
-    [Output(dynamicPortList = true)] public string Choices;
+    [Output] public string AsWin;
+    [Output] public string AsLose;
 
     public LevelData level;
 

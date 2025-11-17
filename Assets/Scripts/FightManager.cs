@@ -18,10 +18,9 @@ public class FightManager : MonoBehaviour
     [SerializeField] private float zAxisPreviewOffset = 10f;
     [SerializeField] private Slider slider;
     [SerializeField] private int maxLinkedTime = 6;
-
     private Vector2[,,] spawnPositions;
     private int[,,] sheetMusic;
-
+    public Action<bool> FightEnded;
     private float _anxiety = 0f;
     private bool _canLink = false;
     private bool _isFirstLinkedNote = true;
@@ -44,7 +43,6 @@ public class FightManager : MonoBehaviour
     
     public void StartFight(LevelData newLevel)
     {
-        //SceneManager.LoadScene();    // Load la scene de combat (quand on aura toutes les scenes)
         StartCoroutine(WaitForStartMusic());
         level = newLevel;
         spawnPositions = level.spawnPositions;
@@ -58,8 +56,9 @@ public class FightManager : MonoBehaviour
         metronome.audioSource.Play();
     }
 
-    void EndFight()
+    void EndFight(bool win)
     {
+        FightEnded?.Invoke(win);
         _anxiety = 0f;
         metronome.EndFight();
     }
@@ -85,7 +84,14 @@ public class FightManager : MonoBehaviour
         if (_anxiety >= maxAnxiety)
         {
             Debug.Log("You loose"); // changer la plupart des trucs ici c'est uniquement pour le rendu du 13 a 16h c'est pas definitif
-            EndFight();
+            EndFight(false);
+        }
+    }
+    public void CheckWin(int measure, int beat, int division)
+    {
+        if (measure == sheetMusic.Length && beat == level.beat && division == level.division)
+        {
+            EndFight(true);
         }
     }
 

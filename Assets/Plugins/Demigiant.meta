@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Plugins/Demigiant.meta
 guid: 275a05b4d4a775443a116427323f9576
+========
+guid: eb735dea2a8d25948a84313230a004b6
+>>>>>>>> origin/Quentin:Assets/Animations.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

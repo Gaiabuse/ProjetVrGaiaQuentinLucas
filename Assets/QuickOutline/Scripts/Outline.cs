@@ -310,41 +310,5 @@ public class Outline : MonoBehaviour {
   }
   private bool isVisible = false;
 
-  void OnBecameVisible()
-  {
-    isVisible = true;
-    EnableOutline(true);
-  }
-
-  void OnBecameInvisible()
-  {
-    isVisible = false;
-    EnableOutline(false);
-  }
-
-  private void EnableOutline(bool state)
-  {
-    foreach (var renderer in renderers)
-    {
-      var materials = renderer.sharedMaterials.ToList();
-
-      bool hasMask = materials.Contains(outlineMaskMaterial);
-      bool hasFill = materials.Contains(outlineFillMaterial);
-
-      if (state)
-      {
-        if (!hasMask) materials.Add(outlineMaskMaterial);
-        if (!hasFill) materials.Add(outlineFillMaterial);
-      }
-      else
-      {
-        if (hasMask) materials.Remove(outlineMaskMaterial);
-        if (hasFill) materials.Remove(outlineFillMaterial);
-      }
-
-      renderer.materials = materials.ToArray();
-    }
-  }
-
 }
 

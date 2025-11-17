@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,8 @@ public class DialogueRunner : MonoBehaviour
     [SerializeField] private TMP_Text dialogue;
     [SerializeField] private Transform choicesParent;
     [SerializeField] private ChoiceButton choicePrefab;
-    Coroutine dialogueRunner;
+    [SerializeField] private char splitter;
+    private Coroutine dialogueRunner;
     private Coroutine choicesCoroutine;
     private bool switchNode;
     private void Start()
@@ -35,6 +37,7 @@ public class DialogueRunner : MonoBehaviour
         BaseNode currentNode = graph.current;
         string data = currentNode.GetString();
         string[] dataParts = data.Split('/');
+        List<string> dialogueSplit = new List<string>(dataParts);
         if (dataParts[0] == "Start")
         {
             NextNode("Exit");
@@ -42,10 +45,15 @@ public class DialogueRunner : MonoBehaviour
         if (dataParts[0] == "DialogueNode")
         {
             speaker.text = dataParts[1];
-            dialogue.text = dataParts[2];
-            choicesCoroutine = StartCoroutine(InstantiateChoices(currentNode as DialogueNode));
-            yield return new WaitUntil(() => switchNode );
+            dialogueSplit.AddRange(dataParts[2].Split('/'));
         }
+
+        foreach (var t in dialogueSplit)
+        {
+            Debug.Log(t);
+        }
+        //choicesCoroutine = StartCoroutine(InstantiateChoices(currentNode as DialogueNode));
+        yield return new WaitUntil(() => switchNode );
     }
     
     private IEnumerator InstantiateChoices(DialogueNode node)

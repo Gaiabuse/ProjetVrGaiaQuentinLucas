@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b145c3807358c9344853991358abd1a8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314010
+  packageName: Auto Texture To Material Assigner
+  packageVersion: 1.0
+  assetPath: Assets/AutoTextureAssigner/Editor/AutoTextureAssigner.cs
+  uploadId: 741038

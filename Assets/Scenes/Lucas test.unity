@@ -1552,7 +1552,9 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 707463414564568815, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+    - {fileID: 1691571359758317101, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 657184242161839408, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       insertIndex: -1
@@ -1965,7 +1967,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1322379276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4b4283c835b9184eba88872cf62e989, type: 3}
+  m_Script: {fileID: 11500000, guid: 670bb2c8594be12468e71c34845a4e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FightManager
   audioSource: {fileID: 289455086}
@@ -1973,7 +1975,7 @@ MonoBehaviour:
   firstMetronome: {fileID: 8300000, guid: 6b6c3c0430944cc469c49224a6a9a862, type: 3}
   otherMetronome: {fileID: 8300000, guid: 6ed05486e37d6ae4d94d9ef798618ec4, type: 3}
   timeSignature: 4
-  initialBpm: 90
+  initialBpm: 120
 --- !u!114 &1322379280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1993,7 +1995,7 @@ MonoBehaviour:
   - {fileID: 6836044605418195367, guid: 826eb5d87d0a8f7408ea2baa88d8217d, type: 3}
   previewNotesPrefabs:
   - {fileID: 6836044605418195367, guid: 3f852652adfe6fb46bb013847b1ba869, type: 3}
-  - {fileID: 6836044605418195367, guid: 3f852652adfe6fb46bb013847b1ba869, type: 3}
+  - {fileID: 6836044605418195367, guid: bbf861ac70dc4354f9b5512d44d3658b, type: 3}
   level: {fileID: 11400000, guid: b9349305cb2774446a7ba8c90abdc778, type: 2}
   spawnPosDivider: 500
   zAxisPosition: 0.2

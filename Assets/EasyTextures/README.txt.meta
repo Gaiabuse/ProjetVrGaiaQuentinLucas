@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 04d609372f217a3429a118a6fa93536a
+timeCreated: 1544035471
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134736
+  packageName: Easy Texture Assign Tool
+  packageVersion: 1.0
+  assetPath: Assets/EasyTextures/README.txt
+  uploadId: 305600

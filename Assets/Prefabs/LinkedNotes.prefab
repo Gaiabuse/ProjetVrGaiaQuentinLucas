@@ -157,8 +157,9 @@ MonoBehaviour:
   hitSpeed: 1
   maxHit: 5
   nextNoteMaxDistance: 6
-  allowedDistance: 0.15
-  drawSpeed: 4
+  counterDamages: -2
+  meshRenderer: {fileID: 9094182284337160102}
+  particles: {fileID: 5370647803569730640}
 --- !u!1001 &7668999451213274229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -231,5 +232,10 @@ PrefabInstance:
 --- !u!4 &2175887674215266317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8385575039536981112, guid: e933721896c142944a2a6f2bb1190161, type: 3}
+  m_PrefabInstance: {fileID: 7668999451213274229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5370647803569730640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2370474392627636261, guid: e933721896c142944a2a6f2bb1190161, type: 3}
   m_PrefabInstance: {fileID: 7668999451213274229}
   m_PrefabAsset: {fileID: 0}

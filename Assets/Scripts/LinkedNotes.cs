@@ -131,11 +131,12 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
         DOTween.To(() => 0f, t => _line.SetPosition(1, 
             Vector3.Lerp(transform.position, _nextNotePos, t)), 1f, duration).SetEase(Ease.Linear);
     }
-    
-    private void OnTriggerEnter(Collider other)
+
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            
             FightManager.INSTANCE.AddAnxiety(counterDamages);
             Destroy(meshRenderer);
             Destroy(particles);
@@ -145,7 +146,7 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
 
     IEnumerator WaitForDestroy()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         Destroy(gameObject);
         
     }

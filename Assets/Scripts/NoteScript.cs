@@ -15,7 +15,7 @@ public class NoteScript : MonoBehaviour
         _damagesCoroutine = StartCoroutine(WaitForDamages());
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {

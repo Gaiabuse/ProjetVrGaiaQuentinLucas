@@ -11,7 +11,8 @@ public class MetronomeManager : MonoBehaviour
     [SerializeField] private AudioClip otherMetronome;
     [SerializeField] private int timeSignature = 4;
     [SerializeField] private float initialBpm = 120;
-
+   
+    
     private int division = 1;
     private int beatCpt = 0;
     private int divisionCpt = 0;
@@ -31,6 +32,8 @@ public class MetronomeManager : MonoBehaviour
         {
             return;
         }
+
+       
         initialBpm = Mathf.Clamp(initialBpm, 40, 260);
         float secondsPerBeat = 60f / initialBpm;
         float secondsPerDivision = (60f / initialBpm)/division;
@@ -38,6 +41,7 @@ public class MetronomeManager : MonoBehaviour
         int currentDivision = Mathf.FloorToInt(audioSource.time / secondsPerDivision) % timeSignature + 1;
         if (currentBeat != beatCpt)
         {
+            
             beatCpt = currentBeat;
             if (beatCpt == 1)
             {
@@ -66,6 +70,7 @@ public class MetronomeManager : MonoBehaviour
             actualDivision++;
             FightManager.INSTANCE.NoteSpawn(actualMeasure, actualBeat, actualDivision - 1);
             FightManager.INSTANCE.NotePrevisualisation(actualMeasure, actualBeat, actualDivision - 1);
+            FightManager.INSTANCE.CheckWin(actualMeasure);
         }
     }
 

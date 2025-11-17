@@ -130,4 +130,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ec9989250ee784ca1481de3c5bdc5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PreviewNoteScript
-  targetZ: 0.3
+  targetZ: -995.9

@@ -8,15 +8,24 @@ using XNode;
 
 public class DialogueRunner : MonoBehaviour
 {
+    [SerializeField] private Transform player;
+    [SerializeField] private GameObject Ui;
     [SerializeField] private DialogueGraph graph;
     [SerializeField] private TMP_Text speaker;
     [SerializeField] private TMP_Text dialogue;
     [SerializeField] private Transform choicesParent;
     [SerializeField] private ChoiceButton choicePrefab;
-    [SerializeField] private char splitter;
+    [SerializeField] private float dialogueDurationByChar = 0.1f;
+    [SerializeField] private Animator animatorManager;
+    [SerializeField] private GameObject[] objectsForMove;
+    [SerializeField] private Vector3 positionForFight;
+    private Vector3 positionStartFight;
     private Coroutine dialogueRunner;
     private Coroutine choicesCoroutine;
+    private Coroutine fightCoroutine;
     private bool switchNode;
+    private bool asWin;
+    private bool fightEnded;
     private void Start()
     {
         switchNode = false;
@@ -28,32 +37,111 @@ public class DialogueRunner : MonoBehaviour
                 break;
             }
         }
+        StartDialogue();
+    }
+
+    private void OnEnable()
+    {
+        FightManager.FightEnded += b =>
+        {
+            asWin = b;
+            Debug.Log("end fight");
+            fightEnded = true;
+        };
+    }
+
+    private void OnDisable()
+    {
+        FightManager.FightEnded -= b =>
+        {
+            asWin = b;
+            fightEnded = true;
+        };
+    }
+
+    private void StartDialogue()
+    {
+        Ui.SetActive(true);
+        foreach (GameObject obj in objectsForMove)
+        {
+            obj.SetActive(false);
+        }
         dialogueRunner = StartCoroutine(Runner());
     }
 
-
+    private void EndDialogue()
+    {
+        Ui.SetActive(false);
+        foreach (GameObject obj in objectsForMove)
+        {
+            obj.SetActive(true);
+        }
+    }
     private IEnumerator Runner()
     {
         BaseNode currentNode = graph.current;
         string data = currentNode.GetString();
         string[] dataParts = data.Split('/');
-        List<string> dialogueSplit = new List<string>(dataParts);
-        if (dataParts[0] == "Start")
+        string[] dialogueSplit;
+        switch (dataParts[0])
         {
-            NextNode("Exit");
+            case "Start":
+                NextNode("Exit");
+                break;
+            case "Dialogue":
+                speaker.text = $"- {dataParts[1]} -";
+                dialogueSplit = dataParts[2].Split('|');
+                StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode as DialogueNode));
+                yield return new WaitUntil(() => switchNode );
+                break;
+            case "Fight":
+                Debug.Log("Fight");
+                FightNode node = currentNode as FightNode;
+                fightCoroutine = StartCoroutine(StartFightNode(node));
+                yield return new WaitUntil(() => switchNode );
+                break;
+            case "End":
+                EndDialogue();
+                break;
+            default: break;
         }
-        if (dataParts[0] == "DialogueNode")
-        {
-            speaker.text = dataParts[1];
-            dialogueSplit.AddRange(dataParts[2].Split('/'));
-        }
+    }
 
+    private IEnumerator StartFightNode(FightNode node)
+    {
+        fightEnded = false;
+        positionStartFight = player.position;
+        player.position = positionForFight;
+        Ui.SetActive(false);
+        if (node != null) FightManager.INSTANCE.StartFight(node.level);
+        yield return new WaitUntil(()=>fightEnded);
+        Debug.Log("end : " + positionStartFight);
+        player.position = positionStartFight;
+        Ui.SetActive(true);
+        Debug.Log(asWin);
+        if (asWin)
+        {
+            
+            NextNode("AsWin");
+        }
+        else
+        {
+            Debug.Log("nion");
+            NextNode("AsLoose");
+        }
+        
+             
+        
+    }
+
+    private IEnumerator InstantiateDialogues(string[] dialogueSplit, DialogueNode dialogueNode)
+    {
         foreach (var t in dialogueSplit)
         {
-            Debug.Log(t);
+            dialogue.text = t;
+            yield return new WaitForSeconds(dialogueDurationByChar*t.Length);
         }
-        //choicesCoroutine = StartCoroutine(InstantiateChoices(currentNode as DialogueNode));
-        yield return new WaitUntil(() => switchNode );
+        choicesCoroutine = StartCoroutine(InstantiateChoices(dialogueNode));
     }
     
     private IEnumerator InstantiateChoices(DialogueNode node)
@@ -69,7 +157,11 @@ public class DialogueRunner : MonoBehaviour
             {
                 ChoiceButton choice =  Instantiate(choicePrefab, choicesParent);
                 var i1 = i;
-                choice.Init(node.Choices[i], () => NextNode("Choices "+i1));
+                choice.Init(node.Choices[i], () =>
+                {
+                    NextNode("Choices " + i1);
+                    animatorManager.SetTrigger("Choices"+i1);
+                });
             }
         }
     }
@@ -89,13 +181,18 @@ public class DialogueRunner : MonoBehaviour
             StopCoroutine(choicesCoroutine);
             choicesCoroutine = null;
         }
+
+        if (fightCoroutine != null)
+        {
+            StopCoroutine(fightCoroutine);
+            fightCoroutine = null;
+        }
         foreach (NodePort port in graph.current.Ports)
         {
             if (port.fieldName == fieldName)
             {
                 if (port.IsConnected)
                 {
-                    Debug.Log(port.Connection.node.name);
                     graph.current = port.Connection.node as BaseNode;
                     break;
                 }

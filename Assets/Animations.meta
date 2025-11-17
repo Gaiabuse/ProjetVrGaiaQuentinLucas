@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Animations.meta
 guid: eb735dea2a8d25948a84313230a004b6
 folderAsset: yes
 DefaultImporter:
+========
+guid: 3f852652adfe6fb46bb013847b1ba869
+PrefabImporter:
+>>>>>>>> 36aa2449fcc775ed686582f8bd3b24741ec3e69f:Assets/Prefabs/Preview.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

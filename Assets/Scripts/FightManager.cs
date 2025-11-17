@@ -2,18 +2,22 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FightManager : MonoBehaviour
 {
     public static FightManager INSTANCE;
-    public float damages = 5f;
+    
     
     [SerializeField] private float maxAnxiety = 100f;
     [SerializeField] private MetronomeManager metronome;
     [SerializeField] private GameObject[] notesPrefabs;
+    [SerializeField] private GameObject[] previewNotesPrefabs;
     [SerializeField] private LevelData level;
     [SerializeField] private float spawnPosDivider = 100f;
-    [SerializeField] private float zAxisPosition = 0f;
+    [SerializeField] private float zAxisPosition = 0.2f;
+    [SerializeField] private float zAxisPreviewOffset = 10f;
+    [SerializeField] private Slider slider;
 
     private Vector2[,,] spawnPositions;
     private int[,,] sheetMusic;
@@ -31,7 +35,7 @@ public class FightManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        StartFight(level); // à effacer, uniquement pour tests
+        //StartFight(level); // à effacer, uniquement pour tests
     }
 
     #region Start / End
@@ -48,27 +52,32 @@ public class FightManager : MonoBehaviour
 
     IEnumerator WaitForStartMusic()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
         metronome.audioSource.Play();
     }
 
     void EndFight()
     {
         _anxiety = 0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // changer ça aussi a terme
+        metronome.EndFight();
     }
     
     #endregion
     
     
-    public void AddAnxiety()
+    public void AddAnxiety(float value)
     {
-        _anxiety += damages;
-        Debug.Log(("anxiety + "));
+        _anxiety += value;
+        slider.value = _anxiety;
         CheckLoose();
     }
-    // loose aussi anxiety
-    
+
+	public LevelData GetLevel()
+	{
+		return level;
+	}
+
+
     void CheckLoose()
     {
         if (_anxiety >= maxAnxiety)
@@ -94,6 +103,25 @@ public class FightManager : MonoBehaviour
         {
             GameObject actualGO = Instantiate(notesPrefabs[actualNote - 1]);
             actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition);
+        }
+    }
+    
+    public void NotePrevisualisation(int actualMeasure, int actualBeat, int actualDivision)
+    {
+        actualMeasure += 1;
+        int actualPreviewNote = sheetMusic[actualMeasure, actualBeat, actualDivision];
+        
+        if (actualPreviewNote > previewNotesPrefabs.Length)
+        {
+            return;
+        }
+        
+        Vector2 actualPos = spawnPositions[actualMeasure, actualBeat, actualDivision];
+        
+        if (actualPreviewNote != 0)
+        {
+            GameObject actualGO = Instantiate(previewNotesPrefabs[actualPreviewNote - 1]);
+            actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition + zAxisPreviewOffset);
         }
     }
     

@@ -14,6 +14,6 @@ public class DialogueNode : BaseNode
 
     public override string GetString()
     {
-        return "DialogueNode/" + SpeakerName + "/" + DialogueLine;
+        return "Dialogue/" + SpeakerName + "/" + DialogueLine;
     }
 }

@@ -173,7 +173,7 @@ public class FightManager : MonoBehaviour
         return new Vector3(level.spawnPositions[measure, beat, division].x / spawnPosDivider,level.spawnPositions[measure, beat, division].y / spawnPosDivider, zAxisPosition );
     }
 
-    public void CanLink()
+    public void CanLink() 
     {
         _canLink = true;
     }
@@ -181,5 +181,7 @@ public class FightManager : MonoBehaviour
     {
         _canLink = false;
     }
+
+    
     
 }

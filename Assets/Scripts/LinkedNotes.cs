@@ -9,6 +9,7 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
     [SerializeField] private float counterDamages = -2f;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private GameObject particles;
+    [SerializeField] private float maxLineTime = 1.5f;
     private Vector3 _nextNotePos;
     private Vector3Int _sheetMusicPosition;
     private LineRenderer _line;
@@ -25,12 +26,12 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
         Debug.Log(divisionToNextNote);
         if (divisionToNextNote <= nextNoteMaxDistance)
         {
-            FightManager.INSTANCE.CanLink();
+            FightManager.INSTANCE.CanLinkState(true);
             CheckNextNote();
         }
         else
         {
-            FightManager.INSTANCE.CantLink();
+            FightManager.INSTANCE.CanLinkState(false);
         }
     }
 
@@ -146,7 +147,7 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
 
     IEnumerator WaitForDestroy()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(maxLineTime);
         Destroy(gameObject);
         
     }

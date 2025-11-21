@@ -156,7 +156,7 @@ public class FightManager : MonoBehaviour
                     return;
                 }
 
-                CanLink();
+                CanLinkState(true);
 
             }
             GameObject actualGO = Instantiate(previewNotesPrefabs[actualPreviewNote - 1]);
@@ -173,15 +173,9 @@ public class FightManager : MonoBehaviour
         return new Vector3(level.spawnPositions[measure, beat, division].x / spawnPosDivider,level.spawnPositions[measure, beat, division].y / spawnPosDivider, zAxisPosition );
     }
 
-    public void CanLink() 
+    public void CanLinkState(bool newState) 
     {
-        _canLink = true;
+        _canLink = newState;
     }
-    public void CantLink()
-    {
-        _canLink = false;
-    }
-
-    
-    
+   
 }

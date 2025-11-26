@@ -480,7 +480,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceButton
   button: {fileID: 6576631341288613241}
   titleOfChoice: {fileID: 2441314427992192182}
-  allKeysForChoice: 00000000
+  keysForChoices:
+  - m_UseReference: 0
+    m_Action:
+      m_Name: Element 0
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e3a4d2c7-90c5-4b14-87b6-0a1d773cdd5c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 6c0a6195-2180-4f60-ac0e-89434db32781
+        m_Path: <OculusTouchController>{RightHand}/primaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 0
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  - m_UseReference: 0
+    m_Action:
+      m_Name: Element 1
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ec1b06cf-2f91-4e6a-85aa-6d0cae77e26e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: ab14c422-6ea9-404e-a559-c58be289c550
+        m_Path: <OculusTouchController>{RightHand}/secondaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  - m_UseReference: 0
+    m_Action:
+      m_Name: Element 2
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 22cb98b2-ff82-4f29-93fd-447d623e24b0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 189564e1-9a76-436d-b9b1-20c0f06a3d69
+        m_Path: <OculusTouchController>{RightHand}/gripPressed
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 2
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   visualKeysSprites:
   - {fileID: 21300000, guid: 35f8af7fafc05784285a6e1db6d1c891, type: 3}
   - {fileID: 21300000, guid: 628cbf1393ecb9a47ba2ef843de2cf94, type: 3}

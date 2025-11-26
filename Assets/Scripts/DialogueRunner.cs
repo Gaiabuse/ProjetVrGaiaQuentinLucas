@@ -161,7 +161,7 @@ public class DialogueRunner : MonoBehaviour
                 {
                     NextNode("Choices " + i1);
                     animatorManager.SetTrigger("Choices"+i1);
-                });
+                },i1);
             }
         }
     }

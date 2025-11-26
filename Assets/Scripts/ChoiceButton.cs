@@ -2,31 +2,43 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class ChoiceButton : MonoBehaviour
 {
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text titleOfChoice;
-    [SerializeField] private XRController[] allKeysForChoice;
+
+    [SerializeField] private InputActionProperty[] keysForChoices;
     [SerializeField] private Sprite[] visualKeysSprites;
+    [SerializeField] private Image visualKey;
+
     private UnityEvent choiceButtonPressed;
-    private XRController keyForChoice;
-    [SerializeField]private Image visualKey;
+    private InputAction action;
+
+    private void Awake()
+    {
+        choiceButtonPressed = null;
+    }
+
     public void Init(string title, UnityAction onClickEvent, int index)
     {
         button.onClick.AddListener(onClickEvent);
         titleOfChoice.text = title;
-        keyForChoice = allKeysForChoice[index];
+        Debug.Log(index);
+        Debug.Log(keysForChoices[index].action.name);
+        action = keysForChoices[index].action;
+        action.Enable();
+        
         visualKey.sprite = visualKeysSprites[index];
+        
         choiceButtonPressed = new UnityEvent();
         choiceButtonPressed.AddListener(onClickEvent);
     }
 
-    public void Update()
+    private void Update()
     {
-        if (keyForChoice.IsPressed() && choiceButtonPressed != null)
+        if (action != null && action.IsPressed() && choiceButtonPressed != null)
         {
             Debug.Log("Pressed");
             choiceButtonPressed.Invoke();

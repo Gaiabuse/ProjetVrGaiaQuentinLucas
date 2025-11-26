@@ -37,7 +37,6 @@ public class DialogueRunner : MonoBehaviour
                 break;
             }
         }
-        StartDialogue();
     }
 
     private void OnEnable()

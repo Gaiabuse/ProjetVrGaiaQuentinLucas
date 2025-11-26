@@ -109,7 +109,7 @@ public class FightManager : MonoBehaviour
             if (actualNote == 2)
             {
                 
-                LinkedNotes linked = actualGO.GetComponent<LinkedNotes>(); // désolé Jacques j'ai honte mais pas le temps
+                LinkedNotes linked = actualGO.GetComponent<LinkedNotes>();
                 linked.ChangeSheetMusicPosition(new Vector3Int(actualMeasure, actualBeat, actualDivision));
                 
             }

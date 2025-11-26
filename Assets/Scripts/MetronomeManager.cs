@@ -11,12 +11,15 @@ public class MetronomeManager : MonoBehaviour
     [SerializeField] private AudioClip otherMetronome;
     [SerializeField] private int timeSignature = 4;
     [SerializeField] private float initialBpm = 120;
+    [SerializeField] private float endMusicCutTime = 0.5f;
    
     
     private int division = 1;
     private int beatCpt = 0;
     private int divisionCpt = 0;
+    
     private float actualTimeBetweenBeat;
+    private float audioClipLength;
 
     private bool isFirstMeasure = true;
     private bool canPlay = false;
@@ -33,6 +36,11 @@ public class MetronomeManager : MonoBehaviour
             return;
         }
 
+        if (audioClipLength - endMusicCutTime <= audioSource.time)
+        {
+            FightManager.INSTANCE.EndFight(true);
+            return;
+        }
        
         initialBpm = Mathf.Clamp(initialBpm, 40, 260);
         float secondsPerBeat = 60f / initialBpm;
@@ -70,12 +78,12 @@ public class MetronomeManager : MonoBehaviour
             actualDivision++;
             FightManager.INSTANCE.NoteSpawn(actualMeasure, actualBeat, actualDivision - 1);
             FightManager.INSTANCE.NotePrevisualisation(actualMeasure, actualBeat, actualDivision - 1);
-            FightManager.INSTANCE.CheckWin(actualMeasure);
         }
     }
 
     public void ChangeValues(AudioClip newSong, float newBpm = 120, int newTimeSignature = 4, int newDivision = 1)
     {
+        audioClipLength = newSong.length;
         audioSource.clip = newSong;
         initialBpm = newBpm;
         timeSignature = newTimeSignature;

@@ -3,13 +3,15 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class LinkedNotes : NoteScript // a clean mieux pour la beta
+public class LinkedNotes : NoteScript
 {
     [SerializeField] private int nextNoteMaxDistance = 6;
     [SerializeField] private float counterDamages = -2f;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private GameObject particles;
     [SerializeField] private float maxLineTime = 1.5f;
+    [SerializeField] private Link link;
+    
     private Vector3 _nextNotePos;
     private Vector3Int _sheetMusicPosition;
     private LineRenderer _line;
@@ -23,7 +25,6 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
     {
         _sheetMusicPosition = newPosition;
         int divisionToNextNote = CountDivisionsToNextNote();
-        Debug.Log(divisionToNextNote);
         if (divisionToNextNote <= nextNoteMaxDistance)
         {
             FightManager.INSTANCE.CanLinkState(true);
@@ -32,6 +33,7 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
         else
         {
             FightManager.INSTANCE.CanLinkState(false);
+            link.Destroy();
         }
     }
 
@@ -45,6 +47,7 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
         int measure = _sheetMusicPosition.x;
         int beat = _sheetMusicPosition.y;
         int division = _sheetMusicPosition.z;
+        
 
         while (remainingDistance > 0)
         {
@@ -67,13 +70,15 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
             {
                 _nextNotePos = FightManager.INSTANCE.GetPos(measure, beat, division);
                 LinkNote();
+                
                 break;
             }
 
             remainingDistance--;
         }
+    
     }
-    int CountDivisionsToNextNote() // c'est quasiment pareil que la fonction d'avant . a changer
+    int CountDivisionsToNextNote()
     {
         int maxMeasure = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(0);
         int maxBeat = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(1);
@@ -110,34 +115,18 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
         return divisionsCounted;
     }
 
-
-
-
     void LinkNote()
     {
-        _line = gameObject.AddComponent<LineRenderer>();
-        _line.positionCount = 2;
-        _line.startWidth = 0.04f;
-        _line.endWidth = 0.04f;
-        _line.material = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
-        _line.startColor = Color.yellow;
-        _line.endColor = Color.yellow;
-        _line.SetPosition(0, transform.position);
-        _line.SetPosition(1, transform.position);
-        _progress = 0f;
-        _active = true;
         int divisionsToNextNote = CountDivisionsToNextNote();
         float timePerDivision = 60f / FightManager.INSTANCE.GetLevel().bpm / FightManager.INSTANCE.GetLevel().beat;
         float duration = timePerDivision * divisionsToNextNote;
-        DOTween.To(() => 0f, t => _line.SetPosition(1, 
-            Vector3.Lerp(transform.position, _nextNotePos, t)), 1f, duration).SetEase(Ease.Linear);
+        link.Move(_nextNotePos, duration);
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            
             FightManager.INSTANCE.AddAnxiety(counterDamages);
             Destroy(meshRenderer);
             Destroy(particles);
@@ -149,7 +138,6 @@ public class LinkedNotes : NoteScript // a clean mieux pour la beta
     {
         yield return new WaitForSeconds(maxLineTime);
         Destroy(gameObject);
-        
     }
     
 

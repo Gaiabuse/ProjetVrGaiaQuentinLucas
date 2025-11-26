@@ -20,7 +20,6 @@ public class NoteScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             FightManager.INSTANCE.AddAnxiety(- damages);
-            Debug.Log("good");
             Destroy(gameObject);
         }
     }

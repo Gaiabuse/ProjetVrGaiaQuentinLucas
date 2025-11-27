@@ -4,5 +4,4 @@ using UnityEngine;
 public class ObjectData : ScriptableObject
 {
     public string Name;
-    public int ID;
 }

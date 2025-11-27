@@ -71,6 +71,7 @@ public class FightManager : MonoBehaviour
     void EndFight(bool win)
     {
         _anxiety = 0f;
+        PlayerConditionManager.instance.AddLevelData(level,win);
         metronome.EndFight();
         FightEnded.Invoke(win);
         end = true;

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+#if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
-using UnityEditor;
+#endif
+
 using UnityEngine;
 
 [Serializable]
@@ -41,12 +43,14 @@ public class Response
     public ConditionData[] ConditionsForShow;
 }
 
+#if UNITY_EDITOR
 public class ResponseEditorWindow : OdinEditorWindow
 {
     private Response response;
 
     public static void ShowWindow(Response pResponse)
     {
+        
         var window = CreateInstance<ResponseEditorWindow>();
         window.response = pResponse;
         window.titleContent = new GUIContent("Responses Editor");
@@ -58,3 +62,4 @@ public class ResponseEditorWindow : OdinEditorWindow
     [ShowInInspector]
     private Response editableResponse => response;
 }
+#endif

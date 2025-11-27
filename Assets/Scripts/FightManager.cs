@@ -18,15 +18,14 @@ public class FightManager : MonoBehaviour
     [SerializeField] private float zAxisPreviewOffset = 10f;
     [SerializeField] private Slider slider;
     [SerializeField] private int maxLinkedTime = 6;
+    
     private Vector2[,,] spawnPositions;
     private int[,,] sheetMusic;
     public static Action<bool> FightEnded;
     private float _anxiety = 0f;
     private bool _canLink = false;
     private bool _isFirstLinkedNote = true;
-    [SerializeField] private float musicDuration = 98f;
-    private float time;
-    private bool end;
+    
     private void Awake()
     {
         if (INSTANCE == null)
@@ -45,22 +44,15 @@ public class FightManager : MonoBehaviour
     
     public void StartFight(LevelData newLevel)
     {
-        end = false;
+        
         StartCoroutine(WaitForStartMusic());
         level = newLevel;
-        time = Time.time;
+        
         spawnPositions = level.spawnPositions;
         sheetMusic = level.sheetMusic;
         metronome.ChangeValues(level.audioClip, level.bpm, level.beat, level.division);
     }
-
-    private void Update()
-    {
-        if (Time.time - time>= musicDuration && end == false )
-        {
-            EndFight(true);
-        }
-    }
+    
 
     IEnumerator WaitForStartMusic()
     {
@@ -68,13 +60,12 @@ public class FightManager : MonoBehaviour
         metronome.audioSource.Play();
     }
 
-    void EndFight(bool win)
+    public void EndFight(bool win)
     {
         _anxiety = 0f;
         PlayerConditionManager.instance.AddLevelData(level,win);
         metronome.EndFight();
         FightEnded.Invoke(win);
-        end = true;
     }
     
     #endregion
@@ -97,19 +88,10 @@ public class FightManager : MonoBehaviour
     {
         if (_anxiety >= maxAnxiety)
         {
-            Debug.Log("You loose"); // changer la plupart des trucs ici c'est uniquement pour le rendu du 13 a 16h c'est pas definitif
             EndFight(false);
         }
     }
-    public void CheckWin(int measure)
-    {
-        if (measure >= sheetMusic.Length-1 )
-        {
-            EndFight(true);
-        }
-    }
-
-
+    
     public void NoteSpawn(int actualMeasure, int actualBeat, int actualDivision)
     {
         int actualNote = sheetMusic[actualMeasure, actualBeat, actualDivision];
@@ -128,7 +110,7 @@ public class FightManager : MonoBehaviour
             if (actualNote == 2)
             {
                 
-                LinkedNotes linked = actualGO.GetComponent<LinkedNotes>(); // désolé Jacques j'ai honte mais pas le temps
+                LinkedNotes linked = actualGO.GetComponent<LinkedNotes>();
                 linked.ChangeSheetMusicPosition(new Vector3Int(actualMeasure, actualBeat, actualDivision));
                 
             }
@@ -157,7 +139,7 @@ public class FightManager : MonoBehaviour
                     return;
                 }
 
-                CanLink();
+                CanLinkState(true);
 
             }
             GameObject actualGO = Instantiate(previewNotesPrefabs[actualPreviewNote - 1]);
@@ -174,13 +156,9 @@ public class FightManager : MonoBehaviour
         return new Vector3(level.spawnPositions[measure, beat, division].x / spawnPosDivider,level.spawnPositions[measure, beat, division].y / spawnPosDivider, zAxisPosition );
     }
 
-    public void CanLink()
+    public void CanLinkState(bool newState) 
     {
-        _canLink = true;
+        _canLink = newState;
     }
-    public void CantLink()
-    {
-        _canLink = false;
-    }
-    
+   
 }

@@ -1,8 +1,11 @@
 using System;
 using System.Reflection.Emit;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class LevelEditorTool : EditorWindow
 {
     private AudioSource previewAudioSource;
@@ -418,3 +421,5 @@ public class LevelEditorTool : EditorWindow
 
 
 }
+
+#endif

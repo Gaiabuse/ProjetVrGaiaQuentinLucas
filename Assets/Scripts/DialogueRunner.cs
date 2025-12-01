@@ -113,12 +113,12 @@ public class DialogueRunner : MonoBehaviour
     {
         fightEnded = false;
         positionStartFight = player.position;
-        player.position = positionForFight;
+        player.SetLocalPositionAndRotation(positionForFight, Quaternion.identity);
         Ui.SetActive(false);
         if (node != null) FightManager.INSTANCE.StartFight(node.level);
         yield return new WaitUntil(()=>fightEnded);
         Debug.Log("end : " + positionStartFight);
-        player.position = positionStartFight;
+        player.SetLocalPositionAndRotation(positionStartFight, Quaternion.identity);
         Ui.SetActive(true);
         Debug.Log(asWin);
         if (asWin)

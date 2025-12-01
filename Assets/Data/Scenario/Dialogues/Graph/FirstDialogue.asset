@@ -31,6 +31,68 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Exit: 
+--- !u!114 &-5456698386791299662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: Assembly-CSharp::EndNode
+  graph: {fileID: 11400000}
+  position: {x: 372, y: -69.5}
+  ports:
+    keys:
+    - Entry
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -5456698386791299662}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: AsLoose
+        node: {fileID: 3400203949882020470}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+--- !u!114 &-4542533401831215631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: Assembly-CSharp::EndNode
+  graph: {fileID: 11400000}
+  position: {x: 303, y: -204.5}
+  ports:
+    keys:
+    - Entry
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -4542533401831215631}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: AsWin
+        node: {fileID: 3400203949882020470}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
 --- !u!114 &-3448771779782136672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,7 +106,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: -328, y: -248}
+  position: {x: -296, y: -216}
   ports:
     keys:
     - Entry
@@ -106,6 +168,8 @@ MonoBehaviour:
   - {fileID: -5753354074505932756}
   - {fileID: -3448771779782136672}
   - {fileID: 3400203949882020470}
+  - {fileID: -4542533401831215631}
+  - {fileID: -5456698386791299662}
   current: {fileID: 0}
 --- !u!114 &3400203949882020470
 MonoBehaviour:
@@ -120,7 +184,7 @@ MonoBehaviour:
   m_Name: Fight
   m_EditorClassIdentifier: Assembly-CSharp::FightNode
   graph: {fileID: 11400000}
-  position: {x: -15, y: -217.5}
+  position: {x: 24, y: -200}
   ports:
     keys:
     - Entry
@@ -143,7 +207,10 @@ MonoBehaviour:
       _node: {fileID: 3400203949882020470}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections: []
+      connections:
+      - fieldName: Entry
+        node: {fileID: -4542533401831215631}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -152,7 +219,10 @@ MonoBehaviour:
       _node: {fileID: 3400203949882020470}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections: []
+      connections:
+      - fieldName: Entry
+        node: {fileID: -5456698386791299662}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0

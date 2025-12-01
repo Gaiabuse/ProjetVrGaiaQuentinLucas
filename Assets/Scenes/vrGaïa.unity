@@ -855,6 +855,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddda0e3b55f82564ab4a7cb9d0c1477b, type: 3}
+--- !u!1 &252722860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 252722862}
+  - component: {fileID: 252722861}
+  m_Layer: 0
+  m_Name: PlayerConditionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &252722861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252722860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 987c422339583a94da12a09a65101996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerConditionManager
+--- !u!4 &252722862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252722860}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.95679, y: 0.2586, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &264830953
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +952,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.7355437, y: 3.8848743, z: 52.085407}
   m_Center: {x: 1.8677728, y: -0.75920147, z: 0.13495846}
+--- !u!114 &271395448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1968259567784965810, guid: 031629147cf1d5942a55738147202768, type: 3}
+  m_PrefabInstance: {fileID: 7487210187732570003}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd447590c4b6da4d9bd20a929e1a7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueRunner
 --- !u!1 &299639867
 GameObject:
   m_ObjectHideFlags: 0
@@ -7289,7 +7344,7 @@ MonoBehaviour:
   - dayName: First
     durationInMinutes: 1
     dialogueOptions:
-    - dialogue: {fileID: 11400000, guid: 7d53bee1bc0f39f4f82c35e2f8883c83, type: 2}
+    - dialogue: {fileID: 11400000, guid: 98d6cc38130b99047a2a486c0543399c, type: 2}
       isFallback: 1
       conditions: []
   - dayName: Second
@@ -7302,8 +7357,7 @@ MonoBehaviour:
     - dialogue: {fileID: 11400000, guid: f9b08da9f23dbcc44873b684ee57a47d, type: 2}
       isFallback: 1
       conditions: []
-  dialogueRunner: {fileID: 0}
-  AC: 0
+  dialogueRunner: {fileID: 271395448}
   currentDay: 0
   autoStart: 0
 --- !u!1 &1636723621
@@ -10089,4 +10143,5 @@ SceneRoots:
   - {fileID: 1173578057}
   - {fileID: 386290555}
   - {fileID: 1624935765}
+  - {fileID: 252722862}
   - {fileID: 2067444885}

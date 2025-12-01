@@ -10,7 +10,6 @@ public class DialogueRunner : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private GameObject Ui;
-    [SerializeField] private DialogueGraph graph;
     [SerializeField] private TMP_Text speaker;
     [SerializeField] private TMP_Text dialogue;
     [SerializeField] private Transform choicesParent;
@@ -19,6 +18,7 @@ public class DialogueRunner : MonoBehaviour
     [SerializeField] private Animator animatorManager;
     [SerializeField] private GameObject[] objectsForMove;
     [SerializeField] private Vector3 positionForFight;
+    private DialogueGraph graph;
     private Vector3 positionStartFight;
     private Coroutine dialogueRunner;
     private Coroutine choicesCoroutine;
@@ -26,18 +26,6 @@ public class DialogueRunner : MonoBehaviour
     private bool switchNode;
     private bool asWin;
     private bool fightEnded;
-    private void Start()
-    {
-        switchNode = false;
-        foreach (BaseNode node in graph.nodes)
-        {
-            if (node.GetString() == "Start")
-            {
-                graph.current = node;
-                break;
-            }
-        }
-    }
 
     private void OnEnable()
     {
@@ -66,6 +54,15 @@ public class DialogueRunner : MonoBehaviour
         {
             obj.SetActive(false);
         }
+        switchNode = false;
+        foreach (BaseNode node in graph.nodes)
+        {
+            if (node.GetString() == "Start")
+            {
+                graph.current = node;
+                break;
+            }
+        }
         dialogueRunner = StartCoroutine(Runner());
     }
 
@@ -80,7 +77,9 @@ public class DialogueRunner : MonoBehaviour
     }
     private IEnumerator Runner()
     {
+        Debug.Log(graph);
         BaseNode currentNode = graph.current;
+        Debug.Log(currentNode);
         string data = currentNode.GetString();
         string[] dataParts = data.Split('/');
         string[] dialogueSplit;
@@ -90,6 +89,7 @@ public class DialogueRunner : MonoBehaviour
                 NextNode("Exit");
                 break;
             case "Dialogue":
+                Debug.Log(PlayerConditionManager.instance);
                 PlayerConditionManager.instance.AddDialogueNode(currentNode as DialogueNode);
                 speaker.text = $"- {dataParts[1]} -";
                 dialogueSplit = dataParts[2].Split('|');

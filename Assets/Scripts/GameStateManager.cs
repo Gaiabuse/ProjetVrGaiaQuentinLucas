@@ -9,7 +9,6 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private Vector3 positionForStartGame;
     [SerializeField] private Transform player;
     [SerializeField] private InputActionProperty keyForPause;
-    [SerializeField] private DayManager dayManager;
     private Vector3 startPositionGame;
     private Game game;
 
@@ -71,7 +70,7 @@ public class GameStateManager : MonoBehaviour
         foreach (var obj in objectsNoMove)
             obj.SetActive(true);
 
-        StartCoroutine(dayManager.DayLoop());
+        StartCoroutine(DayManager.instance.DayLoop());
         startPositionGame = player.position;
         player.position = positionForStartGame;
     }

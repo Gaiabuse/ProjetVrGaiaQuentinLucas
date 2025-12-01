@@ -8,20 +8,13 @@ public class PlayerConditionManager : MonoBehaviour
     public static PlayerConditionManager instance;
 
 
-    private List<LevelData> levelDatasWins;
-    private List<LevelData> levelDatasLose;
-    private List<ObjectData> objectObtained;
-    private List<DialogueNode> dialogueSeen;
+    private List<LevelData> levelDatasWins = new();
+    private List<LevelData> levelDatasLose = new();
+    private List<ObjectData> objectObtained = new();
+    private List<DialogueNode> dialogueSeen = new();
     private void Awake()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
+        instance = this;
     }
 
     public void AddLevelData(LevelData levelData,bool isWin)

@@ -46,6 +46,7 @@ public class DialogueRunner : MonoBehaviour
             asWin = b;
             Debug.Log("end fight");
             fightEnded = true;
+            
         };
     }
 
@@ -57,9 +58,9 @@ public class DialogueRunner : MonoBehaviour
             fightEnded = true;
         };
     }
-
-    private void StartDialogue()
+    public  void StartDialogue(DialogueGraph dialogueGraph)
     {
+        graph = dialogueGraph;
         Ui.SetActive(true);
         foreach (GameObject obj in objectsForMove)
         {
@@ -70,6 +71,7 @@ public class DialogueRunner : MonoBehaviour
 
     private void EndDialogue()
     {
+        StartCoroutine(DayManager.instance.StartDayTimer());
         Ui.SetActive(false);
         foreach (GameObject obj in objectsForMove)
         {
@@ -88,6 +90,7 @@ public class DialogueRunner : MonoBehaviour
                 NextNode("Exit");
                 break;
             case "Dialogue":
+                PlayerConditionManager.instance.AddDialogueNode(currentNode as DialogueNode);
                 speaker.text = $"- {dataParts[1]} -";
                 dialogueSplit = dataParts[2].Split('|');
                 StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode as DialogueNode));

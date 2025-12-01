@@ -7250,7 +7250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1624935765}
-  - component: {fileID: 1624935764}
+  - component: {fileID: 1624935766}
   m_Layer: 0
   m_Name: DaysManager
   m_TagString: Untagged
@@ -7258,26 +7258,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1624935764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624935763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe631ec3ffe469391738d7eb142f44b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DayManager
-  days:
-  - dayName: First
-    durationInMinutes: 1
-    dialogueOptions:
-    - dialogue: {fileID: 0}
-      isFallback: 1
-  dialogueRunner: {fileID: 7487210187732570004}
-  autoStart: 1
 --- !u!4 &1624935765
 Transform:
   m_ObjectHideFlags: 0
@@ -7293,6 +7273,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1624935766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624935763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe631ec3ffe469391738d7eb142f44b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayManager
+  days:
+  - dayName: First
+    durationInMinutes: 1
+    dialogueOptions:
+    - dialogue: {fileID: 11400000, guid: 7d53bee1bc0f39f4f82c35e2f8883c83, type: 2}
+      isFallback: 1
+      conditions: []
+  - dayName: Second
+    durationInMinutes: 1
+    dialogueOptions:
+    - dialogue: {fileID: 11400000, guid: 98d6cc38130b99047a2a486c0543399c, type: 2}
+      isFallback: 0
+      conditions:
+      - {fileID: 11400000, guid: 7fd99181e6f83434ebc14834d1cc6c33, type: 2}
+    - dialogue: {fileID: 11400000, guid: f9b08da9f23dbcc44873b684ee57a47d, type: 2}
+      isFallback: 1
+      conditions: []
+  dialogueRunner: {fileID: 0}
+  AC: 0
+  currentDay: 0
+  autoStart: 0
 --- !u!1 &1636723621
 GameObject:
   m_ObjectHideFlags: 0
@@ -9690,17 +9703,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 031629147cf1d5942a55738147202768, type: 3}
---- !u!114 &7487210187732570004 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1968259567784965810, guid: 031629147cf1d5942a55738147202768, type: 3}
-  m_PrefabInstance: {fileID: 7487210187732570003}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bd447590c4b6da4d9bd20a929e1a7fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueRunner
 --- !u!1001 &8561722466580451616
 PrefabInstance:
   m_ObjectHideFlags: 0

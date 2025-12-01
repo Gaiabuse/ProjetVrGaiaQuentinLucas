@@ -237,6 +237,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1609991861952381984, guid: eefe0cbeccad1764b8eab9e26f43d97b, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609991861952381984, guid: eefe0cbeccad1764b8eab9e26f43d97b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ade27cc277a13c40b1515680bd75469, type: 3}
     - target: {fileID: 1609991861952381986, guid: eefe0cbeccad1764b8eab9e26f43d97b, type: 3}
       propertyPath: m_Name
       value: ModalSingleButton

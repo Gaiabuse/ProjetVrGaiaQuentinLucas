@@ -1,9 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace DefaultNamespace
-{
-    [Serializable]
+[CreateAssetMenu(fileName = "FightCondition", menuName = "Condition/FightCondition")]
     public class FightCondition: Condition
     {
         [SerializeField]private LevelData levelData;
@@ -13,7 +11,5 @@ namespace DefaultNamespace
         public override bool isComplete(PlayerConditionManager manager)
         {
             return  manager.CheckLevel(levelData,isForWin);
-            return  manager.CheckLevel(levelData,isForWin);
         }
     }
-}

@@ -1,18 +1,16 @@
 ﻿using System;
 using UnityEngine;
 
-namespace DefaultNamespace
+
+[CreateAssetMenu(fileName = "DialogueCondition", menuName = "Condition/DialogueSeenCondition")]
+public class DialogueSeenCondition : Condition
 {
-    [Serializable]
-    public class DialogueSeenCondition : Condition
+    [Tooltip("Check in all dialogue graph")]
+    [SerializeField] private DialogueNode dialogueNode;
+    
+    
+    public override bool isComplete(PlayerConditionManager manager)
     {
-        [Tooltip("Check in all dialogue graph")]
-        [SerializeField] private DialogueNode dialogueNode;
-        
-        
-        public override bool isComplete(PlayerConditionManager manager)
-        {
-            return manager.checkDialogueSeen(dialogueNode);
-        }
+        return manager.checkDialogueSeen(dialogueNode);
     }
 }

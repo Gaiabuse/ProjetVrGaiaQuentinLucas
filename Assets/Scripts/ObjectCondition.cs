@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
+[CreateAssetMenu(fileName = "ObjectCondition", menuName = "Condition/ObjectCondition")]
 public class ObjectCondition : Condition
 {
     [SerializeField] private ObjectData objectData;

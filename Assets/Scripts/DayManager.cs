@@ -11,7 +11,8 @@ public class DayManager : MonoBehaviour
     [SerializeField] List<DayData> days = new List<DayData>();
     [SerializeField] DialogueRunner dialogueRunner;
     private PlayerConditionManager playerCondition;
-
+    
+    [SerializeField] private int currentDay;
     private int currentDayIndex = -1;
     [SerializeField] private bool autoStart = true;
     private bool timerFinished = false;
@@ -38,7 +39,7 @@ public class DayManager : MonoBehaviour
         }
     }
 
-    private IEnumerator DayLoop()
+    public IEnumerator DayLoop()
     {
         for (int i = 0; i < days.Count; i++)
         {
@@ -112,25 +113,12 @@ public class DayManager : MonoBehaviour
 }
 
 
-[System.Serializable]
-public class DialogueOption
-{
-    public DialogueGraph dialogue;
-
-    [Tooltip("if true, it's default dialogue with no conditions")]
-    public bool isFallback = false;
-
-    [Tooltip("all conditions need true for the dialogue conditions are true")]
-    public List<Condition> conditions = new ();
-}
-
-[System.Serializable]
+[Serializable]
 public class DayData
 {
     public string dayName;
     [Tooltip("duration of the day")]
     public float durationInMinutes = 1f;
 
-    [Tooltip("All dialogues possibility")]
-    public List<DialogueOption> dialogueOptions = new List<DialogueOption>();
+    [Tooltip("All dialogues possibility")] public DialogueOption[] dialogueOptions;
 }

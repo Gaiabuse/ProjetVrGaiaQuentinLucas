@@ -1,5 +1,9 @@
 ﻿
-public abstract class Condition
+using System;
+using UnityEngine;
+
+[Serializable]
+public abstract class Condition: ScriptableObject
 {
     public abstract bool isComplete(PlayerConditionManager manager);
 }

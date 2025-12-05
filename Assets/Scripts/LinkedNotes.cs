@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using DG.Tweening;
 using UnityEngine;
 
 public class LinkedNotes : NoteScript
@@ -125,6 +124,8 @@ public class LinkedNotes : NoteScript
 
     protected override void OnTriggerEnter(Collider other)
     {
+        if (!FightManager.INSTANCE.GetLinkInputState()) { return; }
+        
         if (other.CompareTag("Player"))
         {
             FightManager.INSTANCE.AddAnxiety(counterDamages);

@@ -19,12 +19,14 @@ public class FightManager : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private int maxLinkedTime = 6;
     
+    
     private Vector2[,,] spawnPositions;
     private int[,,] sheetMusic;
     public static Action<bool> FightEnded;
     private float _anxiety = 0f;
     private bool _canLink = false;
     private bool _isFirstLinkedNote = true;
+    private bool _continueLinkInput = false;
     
     private void Awake()
     {
@@ -160,5 +162,24 @@ public class FightManager : MonoBehaviour
     {
         _canLink = newState;
     }
-   
+
+    public void ReleaseLinkedInputState(bool newState)
+    {
+        
+        _continueLinkInput = newState;
+        
+    }
+
+    public bool GetLinkInputState()
+    {
+        return _continueLinkInput;
+    }
+
+    private void Update()
+    {
+        if (_canLink)
+        {
+            // check si on clique et qu'on release l'input on remet continuelinkinput a false
+        }
+    }
 }

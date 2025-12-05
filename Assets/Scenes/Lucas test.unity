@@ -1231,6 +1231,10 @@ PrefabInstance:
       propertyPath: zAxisPosition
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4071949611283635981, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      propertyPath: maxSliderValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5391973890137032132, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: m_Name
       value: Fight

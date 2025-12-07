@@ -80,6 +80,13 @@ namespace DG.Tweening
             t.SetTarget(target);
             return t;
         }
+        public static TweenerCore<Color, Color, ColorOptions> DoFadeInAndOut(this Image target, float duration)
+        {
+            TweenerCore<Color, Color, ColorOptions> t = DOTween.ToAlpha(() => target.color, x => target.color = x, 1, duration).OnComplete(
+                () => DOTween.ToAlpha(() => target.color, x => target.color = x, 0, duration));
+            t.SetTarget(target);
+            return t;
+        }
 
         /// <summary>Tweens an Image's fillAmount to the given value.
         /// Also stores the image as the tween's target so it can be used for filtered operations</summary>

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8701016281861603896
+--- !u!114 &-9070297375350583024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,28 +13,27 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 968, y: -216}
+  position: {x: 616, y: 168}
   ports:
     keys:
     - Entry
     - Choices
     - Choices 0
-    - Choices 1
     values:
     - _fieldName: Entry
-      _node: {fileID: -8701016281861603896}
+      _node: {fileID: -9070297375350583024}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Choices 0
-        node: {fileID: 3711397366721521796}
+        node: {fileID: 821012262298359759}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices
-      _node: {fileID: -8701016281861603896}
+      _node: {fileID: -9070297375350583024}
       _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -43,24 +42,12 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices 0
-      _node: {fileID: -8701016281861603896}
+      _node: {fileID: -9070297375350583024}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: 3083756049114938600}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: Choices 1
-      _node: {fileID: -8701016281861603896}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Entry
-        node: {fileID: -6644863938796975098}
+        node: {fileID: -3391182270101793495}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -68,11 +55,10 @@ MonoBehaviour:
       _dynamic: 1
   Entry: 
   Choices:
-  - gagner
-  - perdu
-  SpeakerName: combat
-  DialogueLine: 
---- !u!114 &-6644863938796975098
+  - 
+  SpeakerName: Maman
+  DialogueLine: "Mon tr\xE9sor, tu \xE9tais juste trop jeune"
+--- !u!114 &-8466597123043841017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +71,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 1240, y: -56}
+  position: {x: 1992, y: 488}
   ports:
     keys:
     - Entry
@@ -93,19 +79,19 @@ MonoBehaviour:
     - Choices 0
     values:
     - _fieldName: Entry
-      _node: {fileID: -6644863938796975098}
+      _node: {fileID: -8466597123043841017}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: Choices 1
-        node: {fileID: -8701016281861603896}
+      - fieldName: AsLoose
+        node: {fileID: 8726914734240865549}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices
-      _node: {fileID: -6644863938796975098}
+      _node: {fileID: -8466597123043841017}
       _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -114,12 +100,12 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices 0
-      _node: {fileID: -6644863938796975098}
+      _node: {fileID: -8466597123043841017}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: 1327191016586592622}
+        node: {fileID: -6893148227362408880}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -129,8 +115,39 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: 
-  DialogueLine: "Euh je pr\xE9f\xE8re pas d\xE9sol\xE9e."
---- !u!114 &-6186987620327583742
+  DialogueLine: 'J''aurais pas du lui en parler... '
+--- !u!114 &-6893148227362408880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: Assembly-CSharp::EndNode
+  graph: {fileID: 11400000}
+  position: {x: 2386.9011, y: 524.0764}
+  ports:
+    keys:
+    - Entry
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -6893148227362408880}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -8466597123043841017}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+--- !u!114 &-6051421390596760634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +160,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: -24, y: -152}
+  position: {x: -120, y: 8}
   ports:
     keys:
     - Entry
@@ -151,19 +168,19 @@ MonoBehaviour:
     - Choices 0
     values:
     - _fieldName: Entry
-      _node: {fileID: -6186987620327583742}
+      _node: {fileID: -6051421390596760634}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Choices 0
-        node: {fileID: 5462217644304452317}
+        node: {fileID: 8820664618492859271}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices
-      _node: {fileID: -6186987620327583742}
+      _node: {fileID: -6051421390596760634}
       _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -172,114 +189,12 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices 0
-      _node: {fileID: -6186987620327583742}
+      _node: {fileID: -6051421390596760634}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: 1598024310179464211}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-  Entry: 
-  Choices:
-  - 
-  SpeakerName: Sursaut
-  DialogueLine: 
---- !u!114 &-5458267994211511052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
-  graph: {fileID: 11400000}
-  position: {x: 728, y: 72}
-  ports:
-    keys:
-    - Entry
-    - Choices
-    values:
-    - _fieldName: Entry
-      _node: {fileID: -5458267994211511052}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Choices 0
-        node: {fileID: 4892030586111845671}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices
-      _node: {fileID: -5458267994211511052}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  Entry: 
-  Choices: []
-  SpeakerName: Camille
-  DialogueLine: "... n'h\xE9site pas si tu veux parler, je suis la. "
---- !u!114 &-4329726845285609178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
-  graph: {fileID: 11400000}
-  position: {x: 472, y: -200}
-  ports:
-    keys:
-    - Entry
-    - Choices
-    - Choices 0
-    values:
-    - _fieldName: Entry
-      _node: {fileID: -4329726845285609178}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Choices 0
-        node: {fileID: 1598024310179464211}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices
-      _node: {fileID: -4329726845285609178}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices 0
-      _node: {fileID: -4329726845285609178}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Entry
-        node: {fileID: 3711397366721521796}
+        node: {fileID: 3437320773226101230}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -289,8 +204,154 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: 
-  DialogueLine: "Oh d'accord, moi \xE7a va et toi \xE7a va? T'\xE9tais d\xE9ja dans
-    l'\xE9cole avant? "
+  DialogueLine: 'oui maman? '
+--- !u!114 &-3864812457393503167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: Assembly-CSharp::EndNode
+  graph: {fileID: 11400000}
+  position: {x: 2296.9011, y: 304.07642}
+  ports:
+    keys:
+    - Entry
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -3864812457393503167}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -494047322401493960}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+--- !u!114 &-3391182270101793495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 927.33344, y: 219.19998}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -3391182270101793495}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -9070297375350583024}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: -3391182270101793495}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: -3391182270101793495}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 3465091446825610606}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: 
+  DialogueLine: Oui mais moi je l'aime pas Jean!
+--- !u!114 &-494047322401493960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 1992, y: 248}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -494047322401493960}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: AsWin
+        node: {fileID: 8726914734240865549}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: -494047322401493960}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: -494047322401493960}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -3864812457393503167}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: 
+  DialogueLine: Bon, aller je vais essayer de me faire un ami!
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,24 +362,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba587dcc4dfeeb946900bcd69593c30b, type: 3}
-  m_Name: New Dialogue Graph
+  m_Name: Day3Matin
   m_EditorClassIdentifier: Assembly-CSharp::DialogueGraph
   nodes:
-  - {fileID: 4237287831320645207}
-  - {fileID: 5462217644304452317}
-  - {fileID: -6186987620327583742}
-  - {fileID: 1598024310179464211}
-  - {fileID: -4329726845285609178}
-  - {fileID: 4892030586111845671}
-  - {fileID: 3711397366721521796}
-  - {fileID: -5458267994211511052}
-  - {fileID: -8701016281861603896}
-  - {fileID: 3083756049114938600}
-  - {fileID: -6644863938796975098}
-  - {fileID: 1327191016586592622}
-  - {fileID: 6773862597717094769}
+  - {fileID: 8620251640439209171}
+  - {fileID: 8820664618492859271}
+  - {fileID: -6051421390596760634}
+  - {fileID: 3437320773226101230}
+  - {fileID: 4927817177816660578}
+  - {fileID: 7559566346729182895}
+  - {fileID: 821012262298359759}
+  - {fileID: -9070297375350583024}
+  - {fileID: -3391182270101793495}
+  - {fileID: 3465091446825610606}
+  - {fileID: 4604160806123765075}
+  - {fileID: 8726914734240865549}
+  - {fileID: -494047322401493960}
+  - {fileID: -8466597123043841017}
+  - {fileID: -3864812457393503167}
+  - {fileID: -6893148227362408880}
   current: {fileID: 0}
---- !u!114 &1327191016586592622
+--- !u!114 &821012262298359759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,72 +395,27 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 1528, y: -72}
-  ports:
-    keys:
-    - Entry
-    - Choices
-    values:
-    - _fieldName: Entry
-      _node: {fileID: 1327191016586592622}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Choices 0
-        node: {fileID: -6644863938796975098}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices
-      _node: {fileID: 1327191016586592622}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  Entry: 
-  Choices: []
-  SpeakerName: Camille
-  DialogueLine: "oh okay, mais ... n'h\xE9site pas si tu veux parler, je suis la. "
---- !u!114 &1598024310179464211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
-  graph: {fileID: 11400000}
-  position: {x: 200, y: -152}
+  position: {x: 376, y: 152}
   ports:
     keys:
     - Entry
     - Choices
     - Choices 0
-    - Choices 1
     values:
     - _fieldName: Entry
-      _node: {fileID: 1598024310179464211}
+      _node: {fileID: 821012262298359759}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: Choices 0
-        node: {fileID: -6186987620327583742}
+      - fieldName: Choices 1
+        node: {fileID: 3437320773226101230}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices
-      _node: {fileID: 1598024310179464211}
+      _node: {fileID: 821012262298359759}
       _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -405,84 +424,12 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices 0
-      _node: {fileID: 1598024310179464211}
+      _node: {fileID: 821012262298359759}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: -4329726845285609178}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: Choices 1
-      _node: {fileID: 1598024310179464211}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Entry
-        node: {fileID: 4892030586111845671}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-  Entry: 
-  Choices:
-  - Questionner
-  - "Se d\xE9sinteresser "
-  SpeakerName: ???
-  DialogueLine: "D\xE9sol\xE9e je voulais pas te faire peur, je m'appelle Camille,
-    je suis dans ta classe. "
---- !u!114 &3083756049114938600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
-  graph: {fileID: 11400000}
-  position: {x: 1320, y: -360}
-  ports:
-    keys:
-    - Entry
-    - Choices
-    - Choices 0
-    values:
-    - _fieldName: Entry
-      _node: {fileID: 3083756049114938600}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Choices 0
-        node: {fileID: -8701016281861603896}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices
-      _node: {fileID: 3083756049114938600}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices 0
-      _node: {fileID: 3083756049114938600}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Entry
-        node: {fileID: 6773862597717094769}
+        node: {fileID: -9070297375350583024}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -492,8 +439,8 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: 
-  DialogueLine: "Tiens mon num\xE9ro."
---- !u!114 &3711397366721521796
+  DialogueLine: "Mais papa... lui il n'a jamais fais \xE7a"
+--- !u!114 &3437320773226101230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -506,27 +453,28 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 728, y: -232}
+  position: {x: 104, y: 8}
   ports:
     keys:
     - Entry
     - Choices
     - Choices 0
+    - Choices 1
     values:
     - _fieldName: Entry
-      _node: {fileID: 3711397366721521796}
+      _node: {fileID: 3437320773226101230}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Choices 0
-        node: {fileID: -4329726845285609178}
+        node: {fileID: -6051421390596760634}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices
-      _node: {fileID: 3711397366721521796}
+      _node: {fileID: 3437320773226101230}
       _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -535,12 +483,83 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices 0
-      _node: {fileID: 3711397366721521796}
+      _node: {fileID: 3437320773226101230}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: -8701016281861603896}
+        node: {fileID: 4927817177816660578}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: Choices 1
+      _node: {fileID: 3437320773226101230}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 821012262298359759}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - "amu\xEFr "
+  - 
+  SpeakerName: Maman
+  DialogueLine: "\xE7a arrive dans toute les familles donc n'en parle pas d'accord "
+--- !u!114 &3465091446825610606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 1205.2667, y: 256.59998}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 3465091446825610606}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -3391182270101793495}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: 3465091446825610606}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: 3465091446825610606}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 4604160806123765075}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -549,10 +568,171 @@ MonoBehaviour:
   Entry: 
   Choices:
   - 
-  SpeakerName: Camille
-  DialogueLine: "Oui \xE7a va, et j'y \xE9tais, si t'as besoin je peux t'aider. On
-    \xE9changes nos tels? "
---- !u!114 &4237287831320645207
+  SpeakerName: Maman
+  DialogueLine: "Je n'y peut rien \xE0 \xE7a, dans tout les cas n'en parles pas.|
+    A ce soir mon ch\xE9ri"
+--- !u!114 &4604160806123765075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 1453.8667, y: 318.19998}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 4604160806123765075}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 3465091446825610606}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: 4604160806123765075}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: 4604160806123765075}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 8726914734240865549}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: 
+  DialogueLine: A ce soir maman...
+--- !u!114 &4927817177816660578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 360, y: -120}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 4927817177816660578}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 3437320773226101230}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: 4927817177816660578}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: 4927817177816660578}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 7559566346729182895}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: Maman
+  DialogueLine: "c'est bien mon tr\xE9sor, allez va \xE0 l'\xE9cole, bonne journ\xE9e
+    je t'aime."
+--- !u!114 &7559566346729182895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 600, y: -120}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 7559566346729182895}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 4927817177816660578}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: 7559566346729182895}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  Choices: []
+  SpeakerName: 
+  DialogueLine: A ce soir maman
+--- !u!114 &8620251640439209171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -565,25 +745,25 @@ MonoBehaviour:
   m_Name: Start
   m_EditorClassIdentifier: Assembly-CSharp::StartNode
   graph: {fileID: 11400000}
-  position: {x: -456, y: -120}
+  position: {x: -679.3333, y: -38.333344}
   ports:
     keys:
     - Exit
     values:
     - _fieldName: Exit
-      _node: {fileID: 4237287831320645207}
+      _node: {fileID: 8620251640439209171}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: 5462217644304452317}
+        node: {fileID: 8820664618492859271}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   Exit: 
---- !u!114 &4892030586111845671
+--- !u!114 &8726914734240865549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -592,146 +772,91 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  m_Script: {fileID: 11500000, guid: 78cb2401a803c174b88437bb77a6cfe2, type: 3}
+  m_Name: Fight
+  m_EditorClassIdentifier: Assembly-CSharp::FightNode
   graph: {fileID: 11400000}
-  position: {x: 456, y: 88}
+  position: {x: 1746.066, y: 347.96576}
   ports:
     keys:
     - Entry
-    - Choices
-    - Choices 0
+    - AsWin
+    - AsLoose
     values:
     - _fieldName: Entry
-      _node: {fileID: 4892030586111845671}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Choices 1
-        node: {fileID: 1598024310179464211}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices
-      _node: {fileID: 4892030586111845671}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices 0
-      _node: {fileID: 4892030586111845671}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Entry
-        node: {fileID: -5458267994211511052}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-  Entry: 
-  Choices:
-  - 
-  SpeakerName: 
-  DialogueLine: "Ah oui je t'ai d\xE9ja vu, dans la classe. "
---- !u!114 &5462217644304452317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
-  graph: {fileID: 11400000}
-  position: {x: -248, y: -168}
-  ports:
-    keys:
-    - Entry
-    - Choices
-    - Choices 0
-    values:
-    - _fieldName: Entry
-      _node: {fileID: 5462217644304452317}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Exit
-        node: {fileID: 4237287831320645207}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices
-      _node: {fileID: 5462217644304452317}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Choices 0
-      _node: {fileID: 5462217644304452317}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Entry
-        node: {fileID: -6186987620327583742}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-  Entry: 
-  Choices:
-  - 
-  SpeakerName: ???
-  DialogueLine: "Eh salut comment \xE7a va, t'as reussi a t'int\xE9grer un peu hier? "
---- !u!114 &6773862597717094769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
-  graph: {fileID: 11400000}
-  position: {x: 1544, y: -360}
-  ports:
-    keys:
-    - Entry
-    - Choices
-    values:
-    - _fieldName: Entry
-      _node: {fileID: 6773862597717094769}
+      _node: {fileID: 8726914734240865549}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Choices 0
-        node: {fileID: 3083756049114938600}
+        node: {fileID: 4604160806123765075}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: AsWin
+      _node: {fileID: 8726914734240865549}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -494047322401493960}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: AsLoose
+      _node: {fileID: 8726914734240865549}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -8466597123043841017}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  AsWin: 
+  AsLoose: 
+  level: {fileID: 0}
+--- !u!114 &8820664618492859271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: -353.3333, y: -43}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 8820664618492859271}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Exit
+        node: {fileID: 8620251640439209171}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Choices
-      _node: {fileID: 6773862597717094769}
+      _node: {fileID: 8820664618492859271}
       _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -739,7 +864,21 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: 8820664618492859271}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -6051421390596760634}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
   Entry: 
-  Choices: []
-  SpeakerName: Camille
-  DialogueLine: 'Super, je te rappele une prochaine fois. '
+  Choices:
+  - 
+  SpeakerName: Maman
+  DialogueLine: "Bonne chance pour l'\xE9cole aujourd'hui mon ange .| tu sais mon
+    ch\xE9ri ce qui s'est pass\xE9 hier..."

@@ -2,7 +2,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class DayManager : MonoBehaviour
 {
@@ -10,11 +15,13 @@ public class DayManager : MonoBehaviour
     public static DayManager instance;
     [SerializeField] List<DayData> days = new List<DayData>();
     [SerializeField] DialogueRunner dialogueRunner;
+    [SerializeField] XRGrabInteractable[] doors;
     private PlayerConditionManager playerCondition;
-    
+    [SerializeField] private Image fadeImage;
     [SerializeField] private int currentDay;
     private int currentDayIndex = -1;
     [SerializeField] private bool autoStart = true;
+    [SerializeField] private float durationFade = 0.5f;
     private bool timerFinished = false;
     private float duration = 0f;
 
@@ -39,6 +46,7 @@ public class DayManager : MonoBehaviour
         }
     }
 
+   
     public IEnumerator DayLoop()
     {
         for (int i = 0; i < days.Count; i++)
@@ -46,6 +54,30 @@ public class DayManager : MonoBehaviour
             timerFinished = false;
             currentDayIndex = i;
             DayData day = days[i];
+            Tween fade = null;
+            if (day.fadeAtStart)
+            {
+                fade = fadeImage.DoFadeInAndOut(durationFade);
+            }
+
+            if (day.doorsLockedIndex.Length > 0)
+            {
+                foreach (var door in doors)
+                {
+                    door.enabled = true;
+                }
+                foreach (int index in day.doorsLockedIndex)
+                {
+                    if(doors.Length > index)
+                        doors[index].enabled = false;
+                }
+            }
+            if (fade != null)
+            {
+                yield return new WaitUntil(() => fade.IsComplete());
+            }
+
+           
             
             DialogueGraph dialogue = ChooseDialogueForDay(day);
 
@@ -64,6 +96,8 @@ public class DayManager : MonoBehaviour
             Debug.Log("Fin du jour : " + day.dayName);
         }
     }
+    
+    
 
     DialogueGraph ChooseDialogueForDay(DayData day)
     {
@@ -119,6 +153,11 @@ public class DayData
     public string dayName;
     [Tooltip("duration of the day")]
     public float durationInMinutes = 1f;
+
+    [Tooltip(" one index > at max doors  for open all doors")]
+    public int[] doorsLockedIndex;
+
+    public bool fadeAtStart = false;
 
     [Tooltip("All dialogues possibility")] public DialogueOption[] dialogueOptions;
 }

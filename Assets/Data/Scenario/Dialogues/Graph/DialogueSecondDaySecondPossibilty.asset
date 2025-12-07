@@ -417,7 +417,7 @@ MonoBehaviour:
   - {fileID: 5909302123693826983}
   - {fileID: -907180280966978152}
   - {fileID: -6120666473443306553}
-  current: {fileID: -1564224275831707701}
+  current: {fileID: -6120666473443306553}
 --- !u!114 &3576416725527875893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,3 +849,5 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Exit: 
+  SetPosition: 1
+  StartDialoguePosition: {x: 0, y: 0, z: 0}

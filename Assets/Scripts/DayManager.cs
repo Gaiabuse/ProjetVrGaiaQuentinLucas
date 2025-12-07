@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -15,7 +16,7 @@ public class DayManager : MonoBehaviour
     public static DayManager instance;
     [SerializeField] List<DayData> days = new List<DayData>();
     [SerializeField] DialogueRunner dialogueRunner;
-    [SerializeField] XRGrabInteractable[] doors;
+    [SerializeField] HingeJoint[] doors;
     private PlayerConditionManager playerCondition;
     [SerializeField] private Image fadeImage;
     [SerializeField] private int currentDay;
@@ -24,6 +25,7 @@ public class DayManager : MonoBehaviour
     [SerializeField] private float durationFade = 0.5f;
     private bool timerFinished = false;
     private float duration = 0f;
+    [SerializeField] private float maxValueDoor = 130f;
 
     private void Awake()
     {
@@ -54,31 +56,33 @@ public class DayManager : MonoBehaviour
             timerFinished = false;
             currentDayIndex = i;
             DayData day = days[i];
-            Tween fade = null;
+            bool fadeIsFinish = true;
             if (day.fadeAtStart)
             {
-                fade = fadeImage.DoFadeInAndOut(durationFade);
+                fadeIsFinish = false;
+                fadeImage.color = Color.black;
+                fadeImage.DOFade(0f, duration).SetEase(Ease.OutBounce).OnComplete((() => fadeIsFinish = true));
             }
-
+            
+            yield return new WaitUntil(() => fadeIsFinish);
             if (day.doorsLockedIndex.Length > 0)
             {
                 foreach (var door in doors)
                 {
-                    door.enabled = true;
+                    var limits = door.limits;
+                    limits.max = maxValueDoor;
+                    door.limits = limits;
                 }
                 foreach (int index in day.doorsLockedIndex)
                 {
                     if(doors.Length > index)
-                        doors[index].enabled = false;
+                    {
+                        var limits = doors[index].limits;
+                        limits.max = 0;
+                        doors[index].limits = limits;
+                    }
                 }
             }
-            if (fade != null)
-            {
-                yield return new WaitUntil(() => fade.IsComplete());
-            }
-
-           
-            
             DialogueGraph dialogue = ChooseDialogueForDay(day);
 
             if (dialogue != null)
@@ -161,3 +165,6 @@ public class DayData
 
     [Tooltip("All dialogues possibility")] public DialogueOption[] dialogueOptions;
 }
+
+
+

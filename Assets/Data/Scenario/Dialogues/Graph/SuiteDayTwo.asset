@@ -352,7 +352,7 @@ MonoBehaviour:
   Entry: 
   AsWin: 
   AsLoose: 
-  level: {fileID: 11400000, guid: 9d8ae156ead73de44a51552b6134a81f, type: 2}
+  level: {fileID: 11400000, guid: 770a83356d811ed47afed3b03814d981, type: 2}
 --- !u!114 &3898432622706798907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
   Entry: 
   AsWin: 
   AsLoose: 
-  level: {fileID: 11400000, guid: 9d8ae156ead73de44a51552b6134a81f, type: 2}
+  level: {fileID: 11400000, guid: 770a83356d811ed47afed3b03814d981, type: 2}
 --- !u!114 &4090319763587044860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,3 +605,5 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Exit: 
+  SetPosition: 1
+  StartDialoguePosition: {x: 0, y: 0, z: 0}

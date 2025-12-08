@@ -18,6 +18,16 @@ public class PlayerConditionManager : MonoBehaviour
         instance = this;
     }
 
+    private void OnEnable()
+    {
+        GameStateManager.ReturnToMenu += ClearList;
+    }
+
+    private void OnDisable()
+    {
+        GameStateManager.ReturnToMenu -= ClearList;
+    }
+
     public void AddLevelData(LevelData levelData,bool isWin)
     {
         if (isWin)
@@ -31,6 +41,13 @@ public class PlayerConditionManager : MonoBehaviour
         
     }
 
+    private void ClearList()
+    {
+        levelDatasWins.Clear();
+        levelDatasLose.Clear();
+        objectObtained.Clear();
+        dialogueSeen.Clear();
+    }
     public void AddSuccess(SuccessData data)
     {
         objectObtained.Add(data);
@@ -59,5 +76,5 @@ public class PlayerConditionManager : MonoBehaviour
     {
         return dialogueSeen.Contains(dialogueNode);
     }
-    
+
 }

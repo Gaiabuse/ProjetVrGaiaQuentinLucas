@@ -85,6 +85,11 @@ public class DialogueRunner : MonoBehaviour
             obj.SetActive(true);
         }
     }
+
+    private void SetPosition(StartNode node)
+    {
+        player.position = node.StartDialoguePosition;
+    }
     private IEnumerator Runner()
     {
         Debug.Log(graph);
@@ -97,6 +102,7 @@ public class DialogueRunner : MonoBehaviour
         {
             case "Start":
                 NextNode("Exit");
+                SetPosition(currentNode as StartNode);
                 break;
             case "Dialogue":
                 Debug.Log(PlayerConditionManager.instance);

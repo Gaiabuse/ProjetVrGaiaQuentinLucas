@@ -27,15 +27,15 @@ public class DialogueRunner : MonoBehaviour
     private bool asWin;
     private bool fightEnded;
 
+    private Coroutine dayTimer = null;
     private void OnEnable()
     {
         FightManager.FightEnded += b =>
         {
             asWin = b;
-            Debug.Log("end fight");
             fightEnded = true;
-            
         };
+        GameStateManager.ReturnToMenu += StopTimer;
     }
 
     private void OnDisable()
@@ -45,7 +45,17 @@ public class DialogueRunner : MonoBehaviour
             asWin = b;
             fightEnded = true;
         };
+        GameStateManager.ReturnToMenu -= StopTimer;
     }
+
+    private void StopTimer()
+    {
+        if (dayTimer != null)
+        {
+            StopCoroutine(dayTimer);
+        }
+    }
+    
     public  void StartDialogue(DialogueGraph dialogueGraph)
     {
         graph = dialogueGraph;
@@ -68,7 +78,7 @@ public class DialogueRunner : MonoBehaviour
 
     private void EndDialogue()
     {
-        StartCoroutine(DayManager.instance.StartDayTimer());
+        dayTimer = StartCoroutine(DayManager.instance.StartDayTimer());
         Ui.SetActive(false);
         foreach (GameObject obj in objectsForMove)
         {
@@ -105,7 +115,6 @@ public class DialogueRunner : MonoBehaviour
             case "End":
                 EndDialogue();
                 break;
-            default: break;
         }
     }
 
@@ -120,20 +129,7 @@ public class DialogueRunner : MonoBehaviour
         Debug.Log("end : " + positionStartFight);
         player.SetLocalPositionAndRotation(positionStartFight, Quaternion.identity);
         Ui.SetActive(true);
-        Debug.Log(asWin);
-        if (asWin)
-        {
-            
-            NextNode("AsWin");
-        }
-        else
-        {
-            Debug.Log("nion");
-            NextNode("AsLoose");
-        }
-        
-             
-        
+        NextNode(asWin ? "AsWin" : "AsLoose");
     }
 
     private IEnumerator InstantiateDialogues(string[] dialogueSplit, DialogueNode dialogueNode)

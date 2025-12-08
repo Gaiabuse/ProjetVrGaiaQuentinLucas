@@ -10,7 +10,7 @@ public class PlayerConditionManager : MonoBehaviour
 
     private List<LevelData> levelDatasWins = new();
     private List<LevelData> levelDatasLose = new();
-    private List<ObjectData> objectObtained = new();
+    private List<SuccessData> objectObtained = new();
     private List<DialogueNode> dialogueSeen = new();
     private void Awake()
     {
@@ -30,9 +30,14 @@ public class PlayerConditionManager : MonoBehaviour
         
     }
 
-    public void AddObjectData(ObjectData objectData)
+    public void AddSuccess(SuccessData data)
     {
-        objectObtained.Add(objectData);
+        objectObtained.Add(data);
+    }
+
+    public bool CheckSuccessObtained(SuccessData data)
+    {
+        return objectObtained.Contains(data);
     }
 
     public void AddDialogueNode(DialogueNode dialogueNode)
@@ -53,9 +58,5 @@ public class PlayerConditionManager : MonoBehaviour
     {
         return dialogueSeen.Contains(dialogueNode);
     }
-
-    public bool checkObjectObtained(ObjectData objectData)
-    {
-        return objectObtained.Contains(objectData);
-    }
+    
 }

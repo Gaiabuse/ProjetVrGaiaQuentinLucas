@@ -336,7 +336,7 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 1
-  StartDialoguePosition: {x: 0, y: 0, z: 0}
+  StartDialoguePosition: {x: -0.07, y: 0, z: 6.95}
 --- !u!114 &1280653108237969915
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -606,4 +606,4 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 1
-  StartDialoguePosition: {x: 0, y: 0, z: 0}
+  StartDialoguePosition: {x: 0.22, y: 0, z: 13.03}

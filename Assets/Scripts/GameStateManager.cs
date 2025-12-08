@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,9 @@ public class GameStateManager : MonoBehaviour
     private Vector3 startPositionGame;
     private Game game;
 
-    public enum GameState { Start, Playing, Paused, ResumeGame, GameOver }
+    private Coroutine dayLoop;
+    public static Action ReturnToMenu;
+    public enum GameState { Start, Playing, Paused, ResumeGame}
 
     class Game
     {
@@ -70,7 +73,7 @@ public class GameStateManager : MonoBehaviour
         foreach (var obj in objectsNoMove)
             obj.SetActive(true);
 
-        StartCoroutine(DayManager.instance.DayLoop());
+        dayLoop = StartCoroutine(DayManager.instance.DayLoop());
         startPositionGame = player.position;
         player.position = positionForStartGame;
     }
@@ -96,6 +99,17 @@ public class GameStateManager : MonoBehaviour
         UIPause.SetActive(false);
 
         game.SetState(GameState.Playing);
+    }
+
+    public void ReturnMenu()
+    {
+        game.SetState(GameState.Start);
+        UIStart.SetActive(true);
+        UIPause.SetActive(false);
+
+        MoveOnStart();
+        ReturnToMenu.Invoke();
+        StopCoroutine(dayLoop);
     }
 
     public void Quit()

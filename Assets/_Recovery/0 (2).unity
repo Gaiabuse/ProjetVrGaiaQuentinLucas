@@ -1921,7 +1921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2199236685927621558, guid: ce86edf02176ce74582356269598b442, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 92.4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2199236685927621558, guid: ce86edf02176ce74582356269598b442, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9738,7 +9738,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 877691788771574632, guid: 880da9bb493f3b4459a2cf02805a5426, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 103.36
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 877691788771574632, guid: 880da9bb493f3b4459a2cf02805a5426, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9746,9 +9746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 880142769878625602, guid: 880da9bb493f3b4459a2cf02805a5426, type: 3}
       propertyPath: m_text
-      value: 'Menu
-
-'
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 2407782724586577675, guid: 880da9bb493f3b4459a2cf02805a5426, type: 3}
       propertyPath: m_Name
@@ -9772,7 +9770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7247212675349873066, guid: 880da9bb493f3b4459a2cf02805a5426, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReturnMenu
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 7247212675349873066, guid: 880da9bb493f3b4459a2cf02805a5426, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

@@ -195,6 +195,14 @@ MonoBehaviour:
         m_Groups: 
         m_Action: Element 1
         m_Flags: 0
+      - m_Name: 
+        m_Id: e03bc41f-285f-4d49-9f27-0f5c814367bf
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/secondarybutton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   - m_UseReference: 0
@@ -214,6 +222,14 @@ MonoBehaviour:
         m_Groups: 
         m_Action: Element 0
         m_Flags: 0
+      - m_Name: 
+        m_Id: 2a99cd06-0ce1-4878-bd94-79de5ac3d508
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/primarybutton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 0
+        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   - m_UseReference: 0
@@ -228,6 +244,14 @@ MonoBehaviour:
       - m_Name: 
         m_Id: 189564e1-9a76-436d-b9b1-20c0f06a3d69
         m_Path: <OculusTouchController>{RightHand}/gripPressed
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 2
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 6b0ade29-0927-43bc-8206-49b82770d66f
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/grippressed
         m_Interactions: 
         m_Processors: 
         m_Groups: 

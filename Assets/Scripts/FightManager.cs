@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class FightManager : MonoBehaviour
 {
@@ -25,8 +26,10 @@ public class FightManager : MonoBehaviour
     public static Action<bool> FightEnded;
     private float _anxiety = 0f;
     private bool _canLink = false;
+    private bool _inLine = true;
     private bool _isFirstLinkedNote = true;
-    private bool _continueLinkInput = false;
+    private InputDevice leftHand;
+    private InputDevice rightHand;
     
     private void Awake()
     {
@@ -111,10 +114,8 @@ public class FightManager : MonoBehaviour
             actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition);
             if (actualNote == 2)
             {
-                
                 LinkedNotes linked = actualGO.GetComponent<LinkedNotes>();
                 linked.ChangeSheetMusicPosition(new Vector3Int(actualMeasure, actualBeat, actualDivision));
-                
             }
         }
     }
@@ -162,24 +163,31 @@ public class FightManager : MonoBehaviour
     {
         _canLink = newState;
     }
+    
 
-    public void ReleaseLinkedInputState(bool newState)
+    public bool TakeFirstLinked()
     {
-        
-        _continueLinkInput = newState;
-        
-    }
-
-    public bool GetLinkInputState()
-    {
-        return _continueLinkInput;
-    }
-
-    private void Update()
-    {
-        if (_canLink)
+        bool saveState = _isFirstLinkedNote;
+        _isFirstLinkedNote = false;
+        if (saveState == true)
         {
-            // check si on clique et qu'on release l'input on remet continuelinkinput a false
+            return true;
         }
+        return false;
     }
+    public void ReleaseFirstLinked()
+    {
+        _isFirstLinkedNote = true;
+        _inLine = true;
+    }
+
+    public bool IsInLine()
+    {
+        return _inLine;
+    }
+    public void InLineState(bool newState)
+    {
+        _inLine = newState;
+    }
+    
 }

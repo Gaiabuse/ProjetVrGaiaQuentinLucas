@@ -14,6 +14,7 @@ public class PlayerConditionManager : MonoBehaviour
     private List<DialogueNode> dialogueSeen = new();
     private void Awake()
     {
+        
         instance = this;
     }
 

@@ -3,19 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XNode;
 using XNodeEditor;
-
-public class StartNode : BaseNode 
-{
-	[Output] public string Exit;
-
-	public bool SetPosition = true;
-	public Vector3 StartDialoguePosition;
-	public override string GetString()
-	{
-		return "Start";
-	}
-}
-
+#if UNITY_EDITOR
 [CustomNodeEditor(typeof(StartNode))]
 public class StartNodeEditor : NodeEditor
 {
@@ -36,3 +24,4 @@ public class StartNodeEditor : NodeEditor
 		serializedObject.ApplyModifiedProperties();
 	}
 }
+#endif

@@ -88,7 +88,8 @@ public class DialogueRunner : MonoBehaviour
 
     private void SetPosition(StartNode node)
     {
-        player.position = node.StartDialoguePosition;
+        if(node.SetPosition)
+            player.position = node.StartDialoguePosition;
     }
     private IEnumerator Runner()
     {

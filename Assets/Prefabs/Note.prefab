@@ -112,8 +112,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2195932, y: 1.7260522, z: 1.7577648}
+  m_Center: {x: 0.02504224, y: 0.014595687, z: -0.042533875}
 --- !u!54 &1923245081965428201
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   damages: 2
   hitSpeed: 1
   maxHit: 5
+  inputActivation: 0.5
 --- !u!1001 &7668999451213274229
 PrefabInstance:
   m_ObjectHideFlags: 0

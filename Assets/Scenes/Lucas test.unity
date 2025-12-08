@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &40470180 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1808012755922945378, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
-  m_PrefabInstance: {fileID: 1003324133281319382}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5355742241b58e3428ce292109073f69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FightManager
 --- !u!1 &130764331
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +176,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18949476, y: 0.18444169, z: 0.2755127}
   m_Center: {x: 0.00669925, y: -0.017361492, z: -0.02684366}
+--- !u!54 &313008706
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313008698}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &409368281
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +285,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18949476, y: 0.18444169, z: 0.2755127}
   m_Center: {x: 0.00669925, y: -0.017361492, z: -0.02684366}
+--- !u!54 &947268757
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947268749}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!20 &954885990 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 657184242118504724, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
@@ -384,15 +427,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.82
+      value: 0.657
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.81
+      value: -0.369
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.643
+      value: -996.569
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LocalRotation.w
@@ -557,7 +600,7 @@ PrefabInstance:
     - target: {fileID: 7845263727989067209, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_VolumeTrigger
       value: 
-      objectReference: {fileID: 1663663246}
+      objectReference: {fileID: 0}
     - target: {fileID: 7845263727989067209, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
@@ -622,9 +665,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 657184243640684908, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       insertIndex: -1
       addedObject: {fileID: 313008700}
+    - targetCorrespondingSourceObject: {fileID: 657184243640684908, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 313008706}
     - targetCorrespondingSourceObject: {fileID: 657184242222895507, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       insertIndex: -1
       addedObject: {fileID: 947268751}
+    - targetCorrespondingSourceObject: {fileID: 657184242222895507, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 947268757}
   m_SourcePrefab: {fileID: 100100000, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
 --- !u!4 &1053823886 stripped
 Transform:
@@ -832,6 +881,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3910408762165081306, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
   m_PrefabInstance: {fileID: 1018404727}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1287042091 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7982048001956566618, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+  m_PrefabInstance: {fileID: 1003324133281319382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1339676338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,11 +1091,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2698219e3231e94c8765d49b9dd5cff, type: 3}
---- !u!4 &1663663246 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6217389844031579987, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+--- !u!114 &1508777924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6939340760031476834, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
   m_PrefabInstance: {fileID: 1003324133281319382}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5355742241b58e3428ce292109073f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FightManager
 --- !u!1 &2049884123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,13 +1185,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 40470180}
+      - m_Target: {fileID: 1508777924}
         m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
         m_MethodName: StartFight
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: b9349305cb2774446a7ba8c90abdc778, type: 2}
           m_ObjectArgumentAssemblyTypeName: LevelData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1287042091}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1183,6 +1255,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 843063376733560626, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1073571516914040424, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.21142
@@ -1231,9 +1307,17 @@ PrefabInstance:
       propertyPath: zAxisPosition
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4071949611283635981, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      propertyPath: maxSliderValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5391973890137032132, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: m_Name
       value: Fight
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939340760031476834, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      propertyPath: zAxisPosition
+      value: -995.4
       objectReference: {fileID: 0}
     - target: {fileID: 7341338975348447683, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: m_AnchorMax.y

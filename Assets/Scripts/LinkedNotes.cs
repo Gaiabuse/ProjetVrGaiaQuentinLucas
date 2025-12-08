@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using DG.Tweening;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class LinkedNotes : NoteScript
 {
@@ -14,9 +14,7 @@ public class LinkedNotes : NoteScript
     
     private Vector3 _nextNotePos;
     private Vector3Int _sheetMusicPosition;
-    private LineRenderer _line;
-    private float _progress;
-    private bool _active;
+    private bool _isFirstLinked = false;
     
 
     private const int LinkedNoteIndex = 2;
@@ -28,11 +26,16 @@ public class LinkedNotes : NoteScript
         if (divisionToNextNote <= nextNoteMaxDistance)
         {
             FightManager.INSTANCE.CanLinkState(true);
+            if (FightManager.INSTANCE.TakeFirstLinked())
+            {
+                _isFirstLinked = true;
+            }
             CheckNextNote();
         }
         else
         {
             FightManager.INSTANCE.CanLinkState(false);
+            FightManager.INSTANCE.ReleaseFirstLinked();
             link.Destroy();
         }
     }
@@ -125,17 +128,49 @@ public class LinkedNotes : NoteScript
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (FightManager.INSTANCE.IsInLine())
         {
-            FightManager.INSTANCE.AddAnxiety(counterDamages);
-            Destroy(meshRenderer);
-            Destroy(particles);
-            StartCoroutine(WaitForDestroy());
+            base.OnTriggerEnter(other);
         }
     }
 
+    protected override IEnumerator PlayerInTrigger()
+    {
+        while (_inTrigger)
+        {
+            bool rightPressed = rightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
+            bool leftPressed  = leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
+            if (rightPressed || leftPressed)
+            {
+                FightManager.INSTANCE.AddAnxiety(counterDamages);
+                if (rightPressed)
+                {
+                    rightHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                }
+                else
+                {
+                    leftHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                }
+                StartCoroutine(WaitForDestroy());
+            }
+            else if (!_isFirstLinked)
+            {
+                FightManager.INSTANCE.InLineState(false);
+                yield break;
+            }
+
+            yield return null;
+            
+        }
+    }
+    
+    
+
     IEnumerator WaitForDestroy()
     {
+        FightManager.INSTANCE.AddAnxiety(counterDamages);
+        Destroy(meshRenderer);
+        Destroy(particles);
         yield return new WaitForSeconds(maxLineTime);
         Destroy(gameObject);
     }

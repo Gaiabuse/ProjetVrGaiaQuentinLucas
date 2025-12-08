@@ -32,7 +32,7 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 1
-  StartDialoguePosition: {x: -3.97, y: 0, z: 0.63}
+  StartDialoguePosition: {x: -3.97, y: 0, z: 16.16}
 --- !u!114 &-3448771779782136672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   - {fileID: -5753354074505932756}
   - {fileID: -3448771779782136672}
   - {fileID: 2942689416934897250}
-  current: {fileID: 0}
+  current: {fileID: 2942689416934897250}
 --- !u!114 &2942689416934897250
 MonoBehaviour:
   m_ObjectHideFlags: 0

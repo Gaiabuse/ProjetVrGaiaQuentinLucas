@@ -1826,7 +1826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7725386375131354371, guid: ce86edf02176ce74582356269598b442, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.305
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7725386375131354371, guid: ce86edf02176ce74582356269598b442, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2405,7 +2405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: 45e431b8e7d5d0d49b35fdd5ce226261, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.22
+      value: -14.02
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: 45e431b8e7d5d0d49b35fdd5ce226261, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2413,7 +2413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: 45e431b8e7d5d0d49b35fdd5ce226261, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.03
+      value: -30.8
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: 45e431b8e7d5d0d49b35fdd5ce226261, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10100,6 +10100,22 @@ PrefabInstance:
       propertyPath: 'doors.Array.data[3]'
       value: 
       objectReference: {fileID: 1573956564}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[0].durationInMinutes
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[2].durationInMinutes
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[5].durationInMinutes
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[6].durationInMinutes
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8916381888068047760, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: m_Name
       value: Managers

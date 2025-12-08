@@ -19,8 +19,8 @@ public class DayManager : MonoBehaviour
     [SerializeField] HingeJoint[] doors;
     private PlayerConditionManager playerCondition;
     [SerializeField] private Image fadeImage;
+    [SerializeField] private CanvasGroup cvg;
     [SerializeField] private int currentDay;
-    private int currentDayIndex = -1;
     [SerializeField] private bool autoStart = true;
     [SerializeField] private float durationFade = 0.5f;
     private bool timerFinished = false;
@@ -53,15 +53,23 @@ public class DayManager : MonoBehaviour
     {
         for (int i = 0; i < days.Count; i++)
         {
+            Debug.Log(days[i].dayName);
             timerFinished = false;
-            currentDayIndex = i;
             DayData day = days[i];
             bool fadeIsFinish = true;
             if (day.fadeAtStart)
             {
                 fadeIsFinish = false;
-                fadeImage.color = Color.black;
-                fadeImage.DOFade(0f, duration).SetEase(Ease.OutBounce).OnComplete((() => fadeIsFinish = true));
+                Debug.Log("prout");
+                Debug.Log("caca");
+                fadeImage.DOKill();
+                Debug.Log(durationFade);
+                cvg.alpha = 1f;
+                cvg.DOFade(0f, durationFade).SetEase(Ease.OutBounce).OnComplete((() =>
+                {
+                    Debug.Log("requin");
+                    fadeIsFinish = true;
+                }));
             }
             
             yield return new WaitUntil(() => fadeIsFinish);
@@ -101,8 +109,6 @@ public class DayManager : MonoBehaviour
         }
     }
     
-    
-
     DialogueGraph ChooseDialogueForDay(DayData day)
     {
         DialogueOption fallback = null;

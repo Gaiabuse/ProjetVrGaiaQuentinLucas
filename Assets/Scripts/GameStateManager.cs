@@ -76,6 +76,7 @@ public class GameStateManager : MonoBehaviour
         dayLoop = StartCoroutine(DayManager.instance.DayLoop());
         startPositionGame = player.position;
         player.position = positionForStartGame;
+        Time.timeScale = 1;
     }
 
     public void Paused()
@@ -87,6 +88,7 @@ public class GameStateManager : MonoBehaviour
             obj.SetActive(false);
 
         UIPause.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void ResumeGame()
@@ -99,6 +101,7 @@ public class GameStateManager : MonoBehaviour
         UIPause.SetActive(false);
 
         game.SetState(GameState.Playing);
+        Time.timeScale = 1;
     }
 
     public void ReturnMenu()
@@ -109,7 +112,9 @@ public class GameStateManager : MonoBehaviour
 
         MoveOnStart();
         ReturnToMenu.Invoke();
+        player.position = startPositionGame;
         StopCoroutine(dayLoop);
+        Time.timeScale = 1;
     }
 
     public void Quit()

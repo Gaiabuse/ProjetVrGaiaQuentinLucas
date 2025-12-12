@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using XNode;
 
 namespace Nodes
@@ -6,6 +7,6 @@ namespace Nodes
 	[CreateAssetMenu]
 	public class DialogueGraph : NodeGraph 
 	{ 
-		public BaseNode current;
+		public BaseNode Current;
 	}
 }

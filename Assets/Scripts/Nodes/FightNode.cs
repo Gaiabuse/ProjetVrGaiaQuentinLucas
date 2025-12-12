@@ -1,4 +1,5 @@
 using Data;
+using UnityEngine.Serialization;
 
 namespace Nodes
 {
@@ -8,7 +9,7 @@ namespace Nodes
         [Output] public string AsWin;
         [Output] public string AsLoose;
 
-        public LevelData level;
+        public LevelData Level;
 
         public override string GetString()
         {

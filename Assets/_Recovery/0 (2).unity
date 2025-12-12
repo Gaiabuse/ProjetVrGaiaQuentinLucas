@@ -4400,7 +4400,7 @@ MonoBehaviour:
         m_CallState: 1
       - m_Target: {fileID: 769435748}
         m_TargetAssemblyTypeName: SimpleXRObjetScript, Assembly-CSharp
-        m_MethodName: ActiveDescriptionAndVerifSuccess
+        m_MethodName: ActiveDescription
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

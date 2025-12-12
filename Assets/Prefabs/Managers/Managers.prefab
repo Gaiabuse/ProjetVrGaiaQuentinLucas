@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 3587390266389451686}
   - component: {fileID: 9210164564878480971}
   m_Layer: 0
-  m_Name: SuccesManager
+  m_Name: NotificationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,8 +290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28994d7c58f96347a3c4448e98bc96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SuccessManager
-  notificationPanel: {fileID: 0}
-  notificationText: {fileID: 0}
+  notificationDisplay: {fileID: 0}
+  takeObjectNotification: {fileID: 0}
   displayDuration: 3
 --- !u!1001 &430701532188142230
 PrefabInstance:

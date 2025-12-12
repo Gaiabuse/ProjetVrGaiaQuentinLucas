@@ -13,48 +13,48 @@ namespace Fight
         [SerializeField] private float inputActivation = 0.5f;
     
         private bool _canHit = true;
-        protected bool _inTrigger = false;
+        protected bool InTrigger = false;
     
-        protected InputDevice _leftHand;
-        protected InputDevice _rightHand;
+        protected InputDevice LeftHand;
+        protected InputDevice RightHand;
 
         protected virtual void Awake()
         {
             StartCoroutine(WaitForDamages());
-            _leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-            _rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+            LeftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+            RightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         }
 
         protected virtual void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                _inTrigger = true;
+                InTrigger = true;
                 StartCoroutine(PlayerInTrigger());
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            _inTrigger = false;
+            InTrigger = false;
         }
 
         protected virtual IEnumerator PlayerInTrigger()
         {
-            while (_inTrigger)
+            while (InTrigger)
             {
-                bool rightPressed = _rightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
-                bool leftPressed  = _leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
+                bool rightPressed = RightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
+                bool leftPressed  = LeftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
                 if (rightPressed || leftPressed) 
                 {
                     FightManager.INSTANCE.AddAnxiety(- damages);
                     if (rightPressed)
                     {
-                        _rightHand.SendHapticImpulse(0, 0.5f, 0.1f);
+                        RightHand.SendHapticImpulse(0, 0.5f, 0.1f);
                     }
                     else
                     {
-                        _leftHand.SendHapticImpulse(0, 0.5f, 0.1f);
+                        LeftHand.SendHapticImpulse(0, 0.5f, 0.1f);
                     }
                     Destroy(gameObject);
                 }

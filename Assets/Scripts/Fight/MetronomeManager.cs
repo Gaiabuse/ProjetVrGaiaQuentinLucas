@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Fight
 {
     public class MetronomeManager : MonoBehaviour 
     {
-        public AudioSource audioSource;
+        public AudioSource AudioSourceMusic;
     
         [SerializeField] private AudioSource audioSourceMetronome;
         [SerializeField] private AudioClip firstMetronome; 
@@ -22,8 +23,6 @@ namespace Fight
         private float _audioClipLength;
 
         private bool _isFirstMeasure = true;
-        private bool _canPlay = false;
-    
         private int _actualMeasure = 0;
         private int _actualBeat = 0;
         private int _actualDivision = 0;
@@ -34,12 +33,12 @@ namespace Fight
         private int _currentDivision;
         private void Update()
         {
-            if (!audioSource.isPlaying)
+            if (!AudioSourceMusic.isPlaying)
             {
                 return;
             }
 
-            if (_audioClipLength - endMusicCutTime <= audioSource.time)
+            if (_audioClipLength - endMusicCutTime <= AudioSourceMusic.time)
             {
                 FightManager.INSTANCE.EndFight(true);
                 return;
@@ -48,8 +47,8 @@ namespace Fight
             initialBpm = Mathf.Clamp(initialBpm, 40, 260);
             _secondsPerBeat = 60f / initialBpm;
             _secondsPerDivision = (60f / initialBpm)/_division;
-            _currentBeat = Mathf.FloorToInt(audioSource.time / _secondsPerBeat) % timeSignature + 1;
-            _currentDivision= Mathf.FloorToInt(audioSource.time / _secondsPerDivision) % timeSignature + 1;
+            _currentBeat = Mathf.FloorToInt(AudioSourceMusic.time / _secondsPerBeat) % timeSignature + 1;
+            _currentDivision= Mathf.FloorToInt(AudioSourceMusic.time / _secondsPerDivision) % timeSignature + 1;
             if (_currentBeat != _beatCpt)
             {
             
@@ -87,7 +86,7 @@ namespace Fight
         public void ChangeValues(AudioClip newSong, float newBpm = 120, int newTimeSignature = 4, int newDivision = 1)
         {
             _audioClipLength = newSong.length;
-            audioSource.clip = newSong;
+            AudioSourceMusic.clip = newSong;
             initialBpm = newBpm;
             timeSignature = newTimeSignature;
             _division = newDivision;
@@ -95,7 +94,7 @@ namespace Fight
 
         public void EndFight()
         {
-            audioSource.Stop();
+            AudioSourceMusic.Stop();
             audioSourceMetronome.Stop();
             _actualBeat = 0;
             _actualDivision = 0;

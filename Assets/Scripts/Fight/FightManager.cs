@@ -57,16 +57,16 @@ namespace Fight
             StartCoroutine(WaitForStartMusic());
             level = newLevel;
         
-            _spawnPositions = level.spawnPositions;
-            _sheetMusic = level.sheetMusic;
-            metronome.ChangeValues(level.audioClip, level.bpm, level.beat, level.division);
+            _spawnPositions = level.SpawnPositions;
+            _sheetMusic = level.SheetMusic;
+            metronome.ChangeValues(level.AudioClip, level.Bpm, level.Beat, level.Division);
         }
     
 
         IEnumerator WaitForStartMusic()
         {
             yield return new WaitForSecondsRealtime(3f);
-            metronome.audioSource.Play();
+            metronome.AudioSourceMusic.Play();
         }
 
         public void EndFight(bool win)
@@ -155,11 +155,11 @@ namespace Fight
 
         public int GetNote(int measure, int beat, int division)
         {
-            return level.sheetMusic[measure, beat, division];
+            return level.SheetMusic[measure, beat, division];
         }
         public Vector3 GetPos(int measure, int beat, int division)
         {
-            return new Vector3(level.spawnPositions[measure, beat, division].x / spawnPosDivider,level.spawnPositions[measure, beat, division].y / spawnPosDivider, zAxisPosition );
+            return new Vector3(level.SpawnPositions[measure, beat, division].x / spawnPosDivider,level.SpawnPositions[measure, beat, division].y / spawnPosDivider, zAxisPosition );
         }
 
         public void CanLinkState(bool newState) 

@@ -25,9 +25,9 @@ namespace Fight
         protected override void Awake()
         {
             base.Awake();
-            _maxMeasure = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(0);
-            _maxBeat = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(1);
-            _maxDivision = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(2);
+            _maxMeasure = FightManager.INSTANCE.GetLevel().SheetMusic.GetLength(0);
+            _maxBeat = FightManager.INSTANCE.GetLevel().SheetMusic.GetLength(1);
+            _maxDivision = FightManager.INSTANCE.GetLevel().SheetMusic.GetLength(2);
         }
 
         public void ChangeSheetMusicPosition(Vector3Int newPosition)
@@ -115,7 +115,7 @@ namespace Fight
         void LinkNote()
         {
             int divisionsToNextNote = CountDivisionsToNextNote(_sheetMusicPosition.x,_sheetMusicPosition.y,_sheetMusicPosition.z);
-            float timePerDivision = 60f / FightManager.INSTANCE.GetLevel().bpm / FightManager.INSTANCE.GetLevel().beat;
+            float timePerDivision = 60f / FightManager.INSTANCE.GetLevel().Bpm / FightManager.INSTANCE.GetLevel().Beat;
             float duration = timePerDivision * divisionsToNextNote;
             link.Move(_nextNotePos, duration);
         }
@@ -130,20 +130,20 @@ namespace Fight
 
         protected override IEnumerator PlayerInTrigger()
         {
-            while (_inTrigger)
+            while (InTrigger)
             {
-                bool rightPressed = _rightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
-                bool leftPressed  = _leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
+                bool rightPressed = RightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
+                bool leftPressed  = LeftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
                 if (rightPressed || leftPressed)
                 {
                     FightManager.INSTANCE.AddAnxiety(counterDamages);
                     if (rightPressed)
                     {
-                        _rightHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                        RightHand.SendHapticImpulse(0, 0.5f, maxLineTime);
                     }
                     else
                     {
-                        _leftHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                        LeftHand.SendHapticImpulse(0, 0.5f, maxLineTime);
                     }
                     StartCoroutine(WaitForDestroy());
                 }

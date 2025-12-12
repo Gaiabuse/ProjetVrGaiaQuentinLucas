@@ -93,13 +93,13 @@ namespace Editor
                 _levelData = newLevelData;
                 if (_levelData != null)
                 {
-                    _audioClip = _levelData.audioClip;
-                    _noteSound = _levelData.noteSound;
-                    _sheetMusic = _levelData.sheetMusic;
-                    _spawnPositions = _levelData.spawnPositions;
-                    _bpm = _levelData.bpm;
-                    _beat = _levelData.beat;
-                    _division = _levelData.division;
+                    _audioClip = _levelData.AudioClip;
+                    _noteSound = _levelData.NoteSound;
+                    _sheetMusic = _levelData.SheetMusic;
+                    _spawnPositions = _levelData.SpawnPositions;
+                    _bpm = _levelData.Bpm;
+                    _beat = _levelData.Beat;
+                    _division = _levelData.Division;
                     _numberOfMeasure = (_sheetMusic != null) ? _sheetMusic.GetLength(0) : 0;
                 }
             }
@@ -115,13 +115,13 @@ namespace Editor
                     if (!string.IsNullOrEmpty(path))
                     {
                         LevelData newLevel = ScriptableObject.CreateInstance<LevelData>();
-                        newLevel.audioClip = _audioClip;
-                        newLevel.noteSound = _noteSound;
-                        newLevel.sheetMusic = _sheetMusic;
-                        newLevel.spawnPositions = _spawnPositions;
-                        newLevel.bpm = _bpm;
-                        newLevel.beat = _beat;
-                        newLevel.division = _division;
+                        newLevel.AudioClip = _audioClip;
+                        newLevel.NoteSound = _noteSound;
+                        newLevel.SheetMusic = _sheetMusic;
+                        newLevel.SpawnPositions = _spawnPositions;
+                        newLevel.Bpm = _bpm;
+                        newLevel.Beat = _beat;
+                        newLevel.Division = _division;
                         AssetDatabase.CreateAsset(newLevel, path);
                         AssetDatabase.SaveAssets();
                         AssetDatabase.Refresh();
@@ -131,13 +131,13 @@ namespace Editor
 
                 if (_levelData != null && GUILayout.Button("Update Level"))
                 {
-                    _levelData.audioClip = _audioClip;
-                    _levelData.noteSound = _noteSound;
-                    _levelData.sheetMusic = _sheetMusic;
-                    _levelData.spawnPositions = _spawnPositions;
-                    _levelData.bpm = _bpm;
-                    _levelData.beat = _beat;
-                    _levelData.division = _division;
+                    _levelData.AudioClip = _audioClip;
+                    _levelData.NoteSound = _noteSound;
+                    _levelData.SheetMusic = _sheetMusic;
+                    _levelData.SpawnPositions = _spawnPositions;
+                    _levelData.Bpm = _bpm;
+                    _levelData.Beat = _beat;
+                    _levelData.Division = _division;
                     EditorUtility.SetDirty(_levelData);
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();

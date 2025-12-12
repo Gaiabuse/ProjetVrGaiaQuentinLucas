@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Scenario
@@ -10,16 +11,16 @@ namespace Scenario
     {
         [SerializeField] private Button button;
         [SerializeField] private TMP_Text titleOfChoice;
-        [SerializeField] private InputActionProperty[] keysForChoices;
-        [SerializeField] private Sprite[] visualKeysSprites;
-        [SerializeField] private Image visualKey;
+        [SerializeField] private InputActionProperty[] inputKeysForChoices;
+        [SerializeField] private Sprite[] spritesOfInputKeys;
+        [SerializeField] private Image visualOfInput;
 
-        private UnityEvent choiceButtonPressed;
-        private InputAction action;
+        private UnityEvent _choiceButtonPressed;
+        private InputAction _action;
 
         private void Awake()
         {
-            choiceButtonPressed = null;
+            _choiceButtonPressed = null;
         }
 
         public void Init(string title, UnityAction onClickEvent, int index)
@@ -27,22 +28,22 @@ namespace Scenario
             button.onClick.AddListener(onClickEvent);
             titleOfChoice.text = title;
             Debug.Log(index);
-            Debug.Log(keysForChoices[index].action.name);
-            action = keysForChoices[index].action;
-            action.Enable();
+            Debug.Log(inputKeysForChoices[index].action.name);
+            _action = inputKeysForChoices[index].action;
+            _action.Enable();
         
-            visualKey.sprite = visualKeysSprites[index];
+            visualOfInput.sprite = spritesOfInputKeys[index];
         
-            choiceButtonPressed = new UnityEvent();
-            choiceButtonPressed.AddListener(onClickEvent);
+            _choiceButtonPressed = new UnityEvent();
+            _choiceButtonPressed.AddListener(onClickEvent);
         }
 
         private void Update()
         {
-            if (action == null || !action.IsPressed() || choiceButtonPressed == null) return;
-            choiceButtonPressed.Invoke();
-            choiceButtonPressed.RemoveAllListeners();
-            choiceButtonPressed = null;
+            if (_action == null || !_action.IsPressed() || _choiceButtonPressed == null) return;
+            _choiceButtonPressed.Invoke();
+            _choiceButtonPressed.RemoveAllListeners();
+            _choiceButtonPressed = null;
         }
     }
 }

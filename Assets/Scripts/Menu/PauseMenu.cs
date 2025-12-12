@@ -8,9 +8,6 @@ namespace Menu
     {
         [SerializeField] private GameObject pauseMenuGameObject;
         [SerializeField] private InputActionProperty keyForPause;
-
-
-        private GameManager.GameState state;
     
         private void Start()
         {
@@ -31,7 +28,7 @@ namespace Menu
     
         private void OnPauseButton(InputAction.CallbackContext ctx)
         {
-            state= GameManager.INSTANCE.GetState();
+            var state= GameManager.INSTANCE.GetState();
             if(state == GameManager.GameState.Start)return;
             switch (state)
             {

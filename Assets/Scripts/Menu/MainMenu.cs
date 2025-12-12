@@ -28,11 +28,8 @@ namespace Menu
         public void Play()
         {
             GameManager.INSTANCE.SetState(GameManager.GameState.Playing);
-
             mainMenuGameObject.SetActive(false);
-
             PlayerManager.INSTANCE.SetCanMove(true);
-
             GameManager.INSTANCE.DayLoop = StartCoroutine(DayManager.INSTANCE.DayLoop());
             PlayerManager.INSTANCE.TeleportPlayer(positionForStartGame);
             Time.timeScale = 1;

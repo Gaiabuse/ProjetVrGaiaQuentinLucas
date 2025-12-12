@@ -59,7 +59,7 @@ namespace Scenario
             {
                 if (node.GetString() == "Start")
                 {
-                    _graph.current = node;
+                    _graph.Current = node;
                     break;
                 }
             }
@@ -81,7 +81,7 @@ namespace Scenario
         private IEnumerator Runner()
         {
             Debug.Log(_graph);
-            BaseNode currentNode = _graph.current;
+            BaseNode currentNode = _graph.Current;
             Debug.Log(currentNode);
             string data = currentNode.GetString();
             string[] dataParts = data.Split('/');// dataParts[0] = type of the node
@@ -163,7 +163,7 @@ namespace Scenario
             _positionStartFight = PlayerManager.INSTANCE.GetPlayerPosition();
             PlayerManager.INSTANCE.TeleportPlayer(positionForFight);
             dialogueRunnerUI.SetUIGameObject(false);
-            if (node != null) FightManager.INSTANCE.StartFight(node.level);
+            if (node != null) FightManager.INSTANCE.StartFight(node.Level);
         }
 
         private void EndFightNode()
@@ -176,12 +176,12 @@ namespace Scenario
         private void NextNode(string fieldName)
         {
             KillAllCoroutines();
-            foreach (NodePort port in _graph.current.Ports)
+            foreach (NodePort port in _graph.Current.Ports)
             {
                 if (port.fieldName == fieldName)
                 {
                     if (!port.IsConnected) continue;
-                    _graph.current = port.Connection.node as BaseNode;
+                    _graph.Current = port.Connection.node as BaseNode;
                     break;
                 }
             }

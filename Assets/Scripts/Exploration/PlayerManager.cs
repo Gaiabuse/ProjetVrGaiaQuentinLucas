@@ -12,11 +12,10 @@ namespace Exploration
         [SerializeField] private GameObject locomotion;
         private readonly List<LevelData> _levelDatasWins = new();
         private readonly List<LevelData> _levelDatasLose = new();
-        private readonly List<SuccessData> _objectObtained = new();
+        private readonly List<ObjectData> _objectObtained = new();
         private readonly List<DialogueNode> _dialogueSeen = new();
         private void Awake()
         {
-        
             INSTANCE = this;
         }
 
@@ -62,12 +61,12 @@ namespace Exploration
             }
         
         }
-        public void AddSuccess(SuccessData data)
+        public void AddObject(ObjectData data)
         {
             _objectObtained.Add(data);
         }
 
-        public bool CheckSuccessObtained(SuccessData data)
+        public bool CheckObjectObtained(ObjectData data)
         {
             return _objectObtained.Contains(data);
         }
@@ -81,7 +80,7 @@ namespace Exploration
         {
             if (!_levelDatasWins.Contains(levelData) && !_levelDatasLose.Contains(levelData))
             {
-                return true;// if you don't do the levels, so you win the level
+                return true;// if you don't do the level, so you win the level
             }
             return isWin ? _levelDatasWins.Contains(levelData) : _levelDatasLose.Contains(levelData);
         }

@@ -30,7 +30,7 @@ namespace Fight
 
         void StartMovement()
         {
-            transform.DOMove(_targetPos, 60f /_level.bpm * _level.beat).OnComplete(() =>
+            transform.DOMove(_targetPos, 60f /_level.Bpm * _level.Beat).OnComplete(() =>
             {
                 Destroy(gameObject);
             }).SetEase(Ease.Linear);

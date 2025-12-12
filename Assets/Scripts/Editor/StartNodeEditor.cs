@@ -1,27 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using XNode;
+﻿using Nodes;
 using XNodeEditor;
-#if UNITY_EDITOR
-[CustomNodeEditor(typeof(StartNode))]
-public class StartNodeEditor : NodeEditor
-{
-	public override void OnBodyGUI()
-	{
-		serializedObject.Update();
 
-		StartNode node = target as StartNode;
-		
-		NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("Exit"));
-		
-		NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("SetPosition"));
-		
-		if (node.SetPosition)
+#if UNITY_EDITOR
+namespace Editor
+{
+	[CustomNodeEditor(typeof(StartNode))]
+	public class StartNodeEditor : NodeEditor
+	{
+		public override void OnBodyGUI()
 		{
-			NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("StartDialoguePosition"));
+			serializedObject.Update();
+
+			StartNode node = target as StartNode;
+		
+			NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("Exit"));
+		
+			NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("SetPosition"));
+		
+			if (node.SetPosition)
+			{
+				NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("StartDialoguePosition"));
+			}
+			serializedObject.ApplyModifiedProperties();
 		}
-		serializedObject.ApplyModifiedProperties();
 	}
 }
 #endif

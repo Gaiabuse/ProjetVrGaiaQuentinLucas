@@ -9,6 +9,8 @@ public class FightManager : MonoBehaviour
 {
     public static FightManager INSTANCE;
     
+    public static Action<bool> FightEnded;
+    
     [SerializeField] private float maxAnxiety = 100f;
     [SerializeField] private MetronomeManager metronome;
     [SerializeField] private GameObject[] notesPrefabs;
@@ -21,15 +23,14 @@ public class FightManager : MonoBehaviour
     [SerializeField] private int maxLinkedTime = 6;
     
     
-    private Vector2[,,] spawnPositions;
-    private int[,,] sheetMusic;
-    public static Action<bool> FightEnded;
-    private float anxiety = 0f;
-    private bool canLink = false;
-    private bool inLine = true;
-    private bool isFirstLinkedNote = true;
-    private InputDevice leftHand;
-    private InputDevice rightHand;
+    private Vector2[,,] _spawnPositions;
+    private int[,,] _sheetMusic;
+    private float _anxiety = 0f;
+    private bool _canLink = false;
+    private bool _inLine = true;
+    private bool _isFirstLinkedNote = true;
+    private InputDevice _leftHand;
+    private InputDevice _rightHand;
     
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class FightManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //StartFight(level); // à effacer, uniquement pour tests
     }
 
     #region Start / End
@@ -52,8 +54,8 @@ public class FightManager : MonoBehaviour
         StartCoroutine(WaitForStartMusic());
         level = newLevel;
         
-        spawnPositions = level.spawnPositions;
-        sheetMusic = level.sheetMusic;
+        _spawnPositions = level.spawnPositions;
+        _sheetMusic = level.sheetMusic;
         metronome.ChangeValues(level.audioClip, level.bpm, level.beat, level.division);
     }
     
@@ -66,8 +68,8 @@ public class FightManager : MonoBehaviour
 
     public void EndFight(bool win)
     {
-        anxiety = 0f;
-        PlayerManager.INSTANCE.AddLevelData(level,win);
+        _anxiety = 0f;
+        PlayerConditionManager.instance.AddLevelData(level,win);
         metronome.EndFight();
         FightEnded.Invoke(win);
     }
@@ -77,8 +79,8 @@ public class FightManager : MonoBehaviour
     
     public void AddAnxiety(float value)
     {
-        anxiety += value;
-        slider.value = anxiety;
+        _anxiety += value;
+        slider.value = _anxiety;
         CheckLoose();
     }
 
@@ -87,10 +89,9 @@ public class FightManager : MonoBehaviour
 		return level;
 	}
 
-
     void CheckLoose()
     {
-        if (anxiety >= maxAnxiety)
+        if (_anxiety >= maxAnxiety)
         {
             EndFight(false);
         }
@@ -98,14 +99,14 @@ public class FightManager : MonoBehaviour
     
     public void NoteSpawn(int actualMeasure, int actualBeat, int actualDivision)
     {
-        int actualNote = sheetMusic[actualMeasure, actualBeat, actualDivision];
+        int actualNote = _sheetMusic[actualMeasure, actualBeat, actualDivision];
         
         if (actualNote > notesPrefabs.Length)
         {
             return;
         }
         
-        Vector2 actualPos = spawnPositions[actualMeasure, actualBeat, actualDivision];
+        Vector2 actualPos = _spawnPositions[actualMeasure, actualBeat, actualDivision];
 
         if (actualNote != 0)
         {
@@ -123,20 +124,20 @@ public class FightManager : MonoBehaviour
     {
         actualMeasure += 1;
         
-        int actualPreviewNote = sheetMusic[actualMeasure, actualBeat, actualDivision];
+        int actualPreviewNote = _sheetMusic[actualMeasure, actualBeat, actualDivision];
         
         if (actualPreviewNote > previewNotesPrefabs.Length)
         {
             return;
         }
         
-        Vector2 actualPos = spawnPositions[actualMeasure, actualBeat, actualDivision];
+        Vector2 actualPos = _spawnPositions[actualMeasure, actualBeat, actualDivision];
         
         if (actualPreviewNote != 0)
         {
             if (actualPreviewNote == 2 )
             {
-                if (canLink)
+                if (_canLink)
                 {
                     return;
                 }
@@ -160,14 +161,13 @@ public class FightManager : MonoBehaviour
 
     public void CanLinkState(bool newState) 
     {
-        canLink = newState;
+        _canLink = newState;
     }
     
-
     public bool TakeFirstLinked()
     {
-        bool saveState = isFirstLinkedNote;
-        isFirstLinkedNote = false;
+        bool saveState = _isFirstLinkedNote;
+        _isFirstLinkedNote = false;
         if (saveState == true)
         {
             return true;
@@ -176,17 +176,17 @@ public class FightManager : MonoBehaviour
     }
     public void ReleaseFirstLinked()
     {
-        isFirstLinkedNote = true;
-        inLine = true;
+        _isFirstLinkedNote = true;
+        _inLine = true;
     }
 
     public bool IsInLine()
     {
-        return inLine;
+        return _inLine;
     }
-    public void InLineState(bool newState)
+    public void ChangeInLineState(bool newState)
     {
-        inLine = newState;
+        _inLine = newState;
     }
     
 }

@@ -11,17 +11,17 @@ public class NoteScript : MonoBehaviour
 
     [SerializeField] private float inputActivation = 0.5f;
     
-    private bool canHit = true;
+    private bool _canHit = true;
     protected bool _inTrigger = false;
     
-    protected InputDevice leftHand;
-    protected InputDevice rightHand;
+    protected InputDevice _leftHand;
+    protected InputDevice _rightHand;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         StartCoroutine(WaitForDamages());
-        leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-        rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+        _leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+        _rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -40,21 +40,20 @@ public class NoteScript : MonoBehaviour
 
     protected virtual IEnumerator PlayerInTrigger()
     {
-        
         while (_inTrigger)
         {
-            bool rightPressed = rightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
-            bool leftPressed  = leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
+            bool rightPressed = _rightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
+            bool leftPressed  = _leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
             if (rightPressed || leftPressed) 
             {
                 FightManager.INSTANCE.AddAnxiety(- damages);
                 if (rightPressed)
                 {
-                    rightHand.SendHapticImpulse(0, 0.5f, 0.1f);
+                    _rightHand.SendHapticImpulse(0, 0.5f, 0.1f);
                 }
                 else
                 {
-                    leftHand.SendHapticImpulse(0, 0.5f, 0.1f);
+                    _leftHand.SendHapticImpulse(0, 0.5f, 0.1f);
                 }
                 Destroy(gameObject);
             }
@@ -65,7 +64,7 @@ public class NoteScript : MonoBehaviour
 
     IEnumerator WaitForDamages()
     {
-        if (canHit)
+        if (_canHit)
         {
             for (int i = 0; i < maxHit; i++)
             {

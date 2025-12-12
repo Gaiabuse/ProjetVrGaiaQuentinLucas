@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.XR;
 
 public class LinkedNotes : NoteScript
@@ -15,14 +16,24 @@ public class LinkedNotes : NoteScript
     private Vector3 _nextNotePos;
     private Vector3Int _sheetMusicPosition;
     private bool _isFirstLinked = false;
-    
+    private int _maxMeasure;
+    private int _maxBeat;
+    private int _maxDivision;
 
-    private const int LinkedNoteIndex = 2;
+    private const int _linkedNoteIndex = 2;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _maxMeasure = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(0);
+        _maxBeat = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(1);
+        _maxDivision = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(2);
+    }
 
     public void ChangeSheetMusicPosition(Vector3Int newPosition)
     {
         _sheetMusicPosition = newPosition;
-        int divisionToNextNote = CountDivisionsToNextNote();
+        int divisionToNextNote = CountDivisionsToNextNote(_sheetMusicPosition.x,_sheetMusicPosition.y,_sheetMusicPosition.z);
         if (divisionToNextNote <= nextNoteMaxDistance)
         {
             FightManager.INSTANCE.CanLinkState(true);
@@ -30,46 +41,37 @@ public class LinkedNotes : NoteScript
             {
                 _isFirstLinked = true;
             }
-            CheckNextNote();
+            CheckNextNote(_sheetMusicPosition.x,_sheetMusicPosition.y,_sheetMusicPosition.z);
         }
         else
         {
             FightManager.INSTANCE.CanLinkState(false);
             FightManager.INSTANCE.ReleaseFirstLinked();
-            link.Destroy();
+            Destroy(link.gameObject);
         }
     }
 
-    void CheckNextNote()
+    void CheckNextNote(int measure , int beat , int division)
     {
-        
-        int maxMeasure = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(0);
-        int maxBeat = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(1);
-        int maxDivision = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(2);
         int remainingDistance = nextNoteMaxDistance;
-        int measure = _sheetMusicPosition.x;
-        int beat = _sheetMusicPosition.y;
-        int division = _sheetMusicPosition.z;
-        
-
         while (remainingDistance > 0)
         {
             division++;
-            if (division >= maxDivision)
+            if (division >= _maxDivision)
             {
                 division = 0;
                 beat++;
-                if (beat >= maxBeat)
+                if (beat >= _maxBeat)
                 {
                     beat = 0;
                     measure++;
-                    if (measure >= maxMeasure)
+                    if (measure >= _maxMeasure)
                         break;
                 }
             }
 
             int noteType = FightManager.INSTANCE.GetNote(measure, beat, division);
-            if (noteType == LinkedNoteIndex)
+            if (noteType == _linkedNoteIndex)
             {
                 _nextNotePos = FightManager.INSTANCE.GetPos(measure, beat, division);
                 LinkNote();
@@ -81,36 +83,28 @@ public class LinkedNotes : NoteScript
         }
     
     }
-    int CountDivisionsToNextNote()
+    int CountDivisionsToNextNote(int measure, int beat, int division)
     {
-        int maxMeasure = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(0);
-        int maxBeat = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(1);
-        int maxDivision = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(2);
-        int measure = _sheetMusicPosition.x;
-        int beat = _sheetMusicPosition.y;
-        int division = _sheetMusicPosition.z;
         int divisionsCounted = 0;
-
         while (divisionsCounted < nextNoteMaxDistance + 1)
         {
             division++;
-            if (division >= maxDivision)
+            if (division >= _maxDivision)
             {
                 division = 0;
                 beat++;
-                if (beat >= maxBeat)
+                if (beat >= _maxBeat)
                 {
                     beat = 0;
                     measure++;
-                    if (measure >= maxMeasure)
+                    if (measure >= _maxMeasure)
                         break;
                 }
             }
 
             divisionsCounted++;
-
             int noteType = FightManager.INSTANCE.GetNote(measure, beat, division);
-            if (noteType == LinkedNoteIndex)
+            if (noteType == _linkedNoteIndex)
             {
                 return divisionsCounted;
             }
@@ -120,7 +114,7 @@ public class LinkedNotes : NoteScript
 
     void LinkNote()
     {
-        int divisionsToNextNote = CountDivisionsToNextNote();
+        int divisionsToNextNote = CountDivisionsToNextNote(_sheetMusicPosition.x,_sheetMusicPosition.y,_sheetMusicPosition.z);
         float timePerDivision = 60f / FightManager.INSTANCE.GetLevel().bpm / FightManager.INSTANCE.GetLevel().beat;
         float duration = timePerDivision * divisionsToNextNote;
         link.Move(_nextNotePos, duration);
@@ -138,24 +132,24 @@ public class LinkedNotes : NoteScript
     {
         while (_inTrigger)
         {
-            bool rightPressed = rightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
-            bool leftPressed  = leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
+            bool rightPressed = _rightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
+            bool leftPressed  = _leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
             if (rightPressed || leftPressed)
             {
                 FightManager.INSTANCE.AddAnxiety(counterDamages);
                 if (rightPressed)
                 {
-                    rightHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                    _rightHand.SendHapticImpulse(0, 0.5f, maxLineTime);
                 }
                 else
                 {
-                    leftHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                    _leftHand.SendHapticImpulse(0, 0.5f, maxLineTime);
                 }
                 StartCoroutine(WaitForDestroy());
             }
             else if (!_isFirstLinked)
             {
-                FightManager.INSTANCE.InLineState(false);
+                FightManager.INSTANCE.ChangeInLineState(false);
                 yield break;
             }
 

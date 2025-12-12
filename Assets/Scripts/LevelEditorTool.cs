@@ -8,21 +8,21 @@ using UnityEngine;
 #if UNITY_EDITOR
 public class LevelEditorTool : EditorWindow
 {
-    private AudioSource previewAudioSource;
-    private bool isPlaying = false;
-    private AudioClip audioClip;
-    public AudioClip noteSound;
-    private bool loopPreview = false;
-    private Rect clickArea;
+    private AudioSource _previewAudioSource;
+    private bool _isPlaying = false;
+    private AudioClip _audioClip;
+    private AudioClip _noteSound;
+    private bool _loopPreview = false;
+    private Rect _clickArea;
 
-    private int bpm = 90;
-    private int numberOfMeasure = 20;
-    private int measure = 0;
-    private int beat = 4;
-    private int division = 4;
-    private int actualRythm = 1;
+    private int _bpm = 90;
+    private int _numberOfMeasure = 20;
+    private int _measure = 0;
+    private int _beat = 4;
+    private int _division = 4;
+    private int _actualRythm = 1;
 
-    private Color[] colors = new Color[5]
+    private Color[] _colors = new Color[5]
     {
         Color.cyan, 
         Color.red,
@@ -30,27 +30,26 @@ public class LevelEditorTool : EditorWindow
         Color.green, 
         Color.purple
     };
-    private int[,,] sheetMusic;
-    private Vector2[,,] spawnPositions;
+    private int[,,] _sheetMusic;
+    private Vector2[,,] _spawnPositions;
 
-    private Texture2D waveformTexture;
-    private Vector3Int lastCheckedIndex = new Vector3Int(-1, -1, -1);
+    private Texture2D _waveformTexture;
+    private Vector3Int _lastCheckedIndex = new Vector3Int(-1, -1, -1);
 
+    private const int _waveformWidth = 500;
+    private const int _waveformHeight = 100;
+    private const int _maxBpm = 250;
+    private const int _maxTimePerMeasure = 12;
+    private const int _maxDivision = 8;
 
-    private const int waveformWidth = 500;
-    private const int waveformHeight = 100;
-    private const int maxBpm = 250;
-    private const int maxTimePerMeasure = 12;
-    private const int maxDivision = 8;
+    private int _lastPlayedMeasure = -1;
+    private int _lastPlayedBeat = -1;
+    private int _lastPlayedDivision = -1;
 
-    private int lastPlayedMeasure = -1;
-    private int lastPlayedBeat = -1;
-    private int lastPlayedDivision = -1;
+    private LevelData _levelData;
+    private LevelData _lastLoadedLevelData;
 
-    private LevelData levelData;
-    private LevelData lastLoadedLevelData;
-
-    private Vector2 actualPos;
+    private Vector2 _actualPos;
 
     [MenuItem("Tools/Level Editor")]
     public static void ShowWindow()
@@ -64,47 +63,47 @@ public class LevelEditorTool : EditorWindow
         LevelEditorTool window = GetWindow<LevelEditorTool>();
         window.minSize = new Vector2(700, 850);
         window.maxSize = new Vector2(1920, 1080);
-        if (previewAudioSource == null)
+        if (_previewAudioSource == null)
         {
-            clickArea = new Rect(30, 450, 640, 360);
+            _clickArea = new Rect(30, 450, 640, 360);
             GameObject audioPreviewer = new GameObject("AudioPreviewer");
-            previewAudioSource = audioPreviewer.AddComponent<AudioSource>();
-            previewAudioSource.hideFlags = HideFlags.HideAndDontSave;
+            _previewAudioSource = audioPreviewer.AddComponent<AudioSource>();
+            _previewAudioSource.hideFlags = HideFlags.HideAndDontSave;
         }
     }
 
     private void OnDisable()
     {
-        if (previewAudioSource != null)
+        if (_previewAudioSource != null)
         {
-            DestroyImmediate(previewAudioSource.gameObject);
+            DestroyImmediate(_previewAudioSource.gameObject);
         }
     }
 
     private void OnGUI()
     {
-        audioClip = (AudioClip)EditorGUILayout.ObjectField("Audio Clip", audioClip, typeof(AudioClip), false);
-        noteSound = (AudioClip)EditorGUILayout.ObjectField("Note Sound", noteSound, typeof(AudioClip), false);
+        _audioClip = (AudioClip)EditorGUILayout.ObjectField("Audio Clip", _audioClip, typeof(AudioClip), false);
+        _noteSound = (AudioClip)EditorGUILayout.ObjectField("Note Sound", _noteSound, typeof(AudioClip), false);
 
-        LevelData newLevelData = (LevelData)EditorGUILayout.ObjectField("Level Data", levelData, typeof(LevelData), false);
+        LevelData newLevelData = (LevelData)EditorGUILayout.ObjectField("Level Data", _levelData, typeof(LevelData), false);
 
-        if (newLevelData != levelData)
+        if (newLevelData != _levelData)
         {
-            levelData = newLevelData;
-            if (levelData != null)
+            _levelData = newLevelData;
+            if (_levelData != null)
             {
-                audioClip = levelData.audioClip;
-                noteSound = levelData.noteSound;
-                sheetMusic = levelData.sheetMusic;
-                spawnPositions = levelData.spawnPositions;
-                bpm = levelData.bpm;
-                beat = levelData.beat;
-                division = levelData.division;
-                numberOfMeasure = (sheetMusic != null) ? sheetMusic.GetLength(0) : 0;
+                _audioClip = _levelData.audioClip;
+                _noteSound = _levelData.noteSound;
+                _sheetMusic = _levelData.sheetMusic;
+                _spawnPositions = _levelData.spawnPositions;
+                _bpm = _levelData.bpm;
+                _beat = _levelData.beat;
+                _division = _levelData.division;
+                _numberOfMeasure = (_sheetMusic != null) ? _sheetMusic.GetLength(0) : 0;
             }
         }
 
-        if (audioClip != null)
+        if (_audioClip != null)
         {
             
 
@@ -115,92 +114,92 @@ public class LevelEditorTool : EditorWindow
                 if (!string.IsNullOrEmpty(path))
                 {
                     LevelData newLevel = ScriptableObject.CreateInstance<LevelData>();
-                    newLevel.audioClip = audioClip;
-                    newLevel.noteSound = noteSound;
-                    newLevel.sheetMusic = sheetMusic;
-                    newLevel.spawnPositions = spawnPositions;
-                    newLevel.bpm = bpm;
-                    newLevel.beat = beat;
-                    newLevel.division = division;
+                    newLevel.audioClip = _audioClip;
+                    newLevel.noteSound = _noteSound;
+                    newLevel.sheetMusic = _sheetMusic;
+                    newLevel.spawnPositions = _spawnPositions;
+                    newLevel.bpm = _bpm;
+                    newLevel.beat = _beat;
+                    newLevel.division = _division;
                     AssetDatabase.CreateAsset(newLevel, path);
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();
-                    levelData = newLevel;
+                    _levelData = newLevel;
                 }
             }
 
-            if (levelData != null && GUILayout.Button("Update Level"))
+            if (_levelData != null && GUILayout.Button("Update Level"))
             {
-                levelData.audioClip = audioClip;
-                levelData.noteSound = noteSound;
-                levelData.sheetMusic = sheetMusic;
-                levelData.spawnPositions = spawnPositions;
-                levelData.bpm = bpm;
-                levelData.beat = beat;
-                levelData.division = division;
-                EditorUtility.SetDirty(levelData);
+                _levelData.audioClip = _audioClip;
+                _levelData.noteSound = _noteSound;
+                _levelData.sheetMusic = _sheetMusic;
+                _levelData.spawnPositions = _spawnPositions;
+                _levelData.bpm = _bpm;
+                _levelData.beat = _beat;
+                _levelData.division = _division;
+                EditorUtility.SetDirty(_levelData);
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
             }
             GUILayout.EndHorizontal();
 
-            EditorGUI.DrawRect(clickArea, Color.black);
+            EditorGUI.DrawRect(_clickArea, Color.black);
 
-            float secondsPerBeat = 60f / bpm;
-            float secondsPerMeasure = secondsPerBeat * beat;
-            numberOfMeasure = Mathf.CeilToInt(audioClip.length / secondsPerMeasure);
+            float secondsPerBeat = 60f / _bpm;
+            float secondsPerMeasure = secondsPerBeat * _beat;
+            _numberOfMeasure = Mathf.CeilToInt(_audioClip.length / secondsPerMeasure);
             
-            actualRythm = EditorGUILayout.IntField("Index rythme actuel : ", actualRythm);
-            actualRythm = Mathf.Clamp(actualRythm, 1, colors.Length);
+            _actualRythm = EditorGUILayout.IntField("Index rythme actuel : ", _actualRythm);
+            _actualRythm = Mathf.Clamp(_actualRythm, 1, _colors.Length);
 
-            bpm = EditorGUILayout.IntField("Battement par minute : ", bpm);
-            bpm = Mathf.Clamp(bpm, 1, maxBpm);
+            _bpm = EditorGUILayout.IntField("Battement par minute : ", _bpm);
+            _bpm = Mathf.Clamp(_bpm, 1, _maxBpm);
 
-            measure = EditorGUILayout.IntField("Mesure actuelle : ", measure);
-            measure = Mathf.Clamp(measure, 0, Mathf.Max(0, numberOfMeasure - 1));
+            _measure = EditorGUILayout.IntField("Mesure actuelle : ", _measure);
+            _measure = Mathf.Clamp(_measure, 0, Mathf.Max(0, _numberOfMeasure - 1));
 
-            beat = EditorGUILayout.IntField("Nombre de temps : ", beat);
-            beat = Mathf.Clamp(beat, 1, maxTimePerMeasure);
+            _beat = EditorGUILayout.IntField("Nombre de temps : ", _beat);
+            _beat = Mathf.Clamp(_beat, 1, _maxTimePerMeasure);
 
-            division = EditorGUILayout.IntField("Division par temps : ", division);
-            division = Mathf.Clamp(division, 1, maxDivision);
+            _division = EditorGUILayout.IntField("Division par temps : ", _division);
+            _division = Mathf.Clamp(_division, 1, _maxDivision);
 
-            if (sheetMusic == null || sheetMusic.GetLength(0) != numberOfMeasure || sheetMusic.GetLength(1) != beat || sheetMusic.GetLength(2) != division)
+            if (_sheetMusic == null || _sheetMusic.GetLength(0) != _numberOfMeasure || _sheetMusic.GetLength(1) != _beat || _sheetMusic.GetLength(2) != _division)
             {
-                sheetMusic = ResizeSheetMusic(sheetMusic, numberOfMeasure, beat, division);
-                spawnPositions = ResizeSheetMusic(spawnPositions, numberOfMeasure, beat, division);
+                _sheetMusic = ResizeSheetMusic(_sheetMusic, _numberOfMeasure, _beat, _division);
+                _spawnPositions = ResizeSheetMusic(_spawnPositions, _numberOfMeasure, _beat, _division);
             }
 
-            for (int i = 0; i < beat; i++)
+            for (int i = 0; i < _beat; i++)
             {
                 GUILayout.BeginHorizontal();
-                for (int j = 0; j < division; j++)
+                for (int j = 0; j < _division; j++)
                 {
-                    int actualInt = sheetMusic[measure, i, j];
-                    spawnPositions[measure, i, j].x = Mathf.Clamp(spawnPositions[measure, i, j].x, 0, clickArea.width - 20);
-                    spawnPositions[measure, i, j].y = Mathf.Clamp(spawnPositions[measure, i, j].y, 0, clickArea.height - 20);
+                    int actualInt = _sheetMusic[_measure, i, j];
+                    _spawnPositions[_measure, i, j].x = Mathf.Clamp(_spawnPositions[_measure, i, j].x, 0, _clickArea.width - 20);
+                    _spawnPositions[_measure, i, j].y = Mathf.Clamp(_spawnPositions[_measure, i, j].y, 0, _clickArea.height - 20);
                     if (actualInt != 0)
                     {
-                        EditorGUI.DrawRect(new Rect(clickArea.x + spawnPositions[measure, i, j].x, clickArea.y + clickArea.height - spawnPositions[measure, i, j].y - 20, 20, 20), colors[actualInt - 1]);
-                        GUI.backgroundColor = colors[actualInt - 1]; 
+                        EditorGUI.DrawRect(new Rect(_clickArea.x + _spawnPositions[_measure, i, j].x, _clickArea.y + _clickArea.height - _spawnPositions[_measure, i, j].y - 20, 20, 20), _colors[actualInt - 1]);
+                        GUI.backgroundColor = _colors[actualInt - 1]; 
                     }
                     float oldWidth = EditorGUIUtility.labelWidth;
                     EditorGUIUtility.labelWidth = 20f;
                     GUILayout.Space(50);
 
-                    bool isChecked = sheetMusic[measure, i, j] != 0;
+                    bool isChecked = _sheetMusic[_measure, i, j] != 0;
                     bool newChecked = EditorGUILayout.Toggle(isChecked, GUILayout.Width(20));
                     if (newChecked != isChecked)
                     {
-                        sheetMusic[measure, i, j] = newChecked ? actualRythm : 0;
+                        _sheetMusic[_measure, i, j] = newChecked ? _actualRythm : 0;
                         if (newChecked)
                         {
-                            lastCheckedIndex = new Vector3Int(measure, i, j);
+                            _lastCheckedIndex = new Vector3Int(_measure, i, j);
                         }
                     }
 
-                    spawnPositions[measure, i, j].x = EditorGUILayout.FloatField("x :", spawnPositions[measure, i, j].x, GUILayout.Width(50));
-                    spawnPositions[measure, i, j].y = EditorGUILayout.FloatField("y :", spawnPositions[measure, i, j].y, GUILayout.Width(50));
+                    _spawnPositions[_measure, i, j].x = EditorGUILayout.FloatField("x :", _spawnPositions[_measure, i, j].x, GUILayout.Width(50));
+                    _spawnPositions[_measure, i, j].y = EditorGUILayout.FloatField("y :", _spawnPositions[_measure, i, j].y, GUILayout.Width(50));
                     EditorGUIUtility.labelWidth = oldWidth;
                     GUI.backgroundColor = Color.white;
                     GUILayout.Space(2);
@@ -208,25 +207,25 @@ public class LevelEditorTool : EditorWindow
                 GUILayout.EndHorizontal();
             }
 
-            if (waveformTexture != null)
+            if (_waveformTexture != null)
             {
                 GUILayout.Label("Waveform");
-                GUILayout.Box(waveformTexture);
+                GUILayout.Box(_waveformTexture);
 
-                if (isPlaying)
+                if (_isPlaying)
                 {
                     Rect waveformRect = GUILayoutUtility.GetLastRect();
-                    float playheadPosition = Mathf.Min((previewAudioSource.time / previewAudioSource.clip.length) * waveformRect.width, waveformRect.width);
-                    Rect playheadRect = new Rect(playheadPosition, waveformRect.y, 2, waveformHeight);
+                    float playheadPosition = Mathf.Min((_previewAudioSource.time / _previewAudioSource.clip.length) * waveformRect.width, waveformRect.width);
+                    Rect playheadRect = new Rect(playheadPosition, waveformRect.y, 2, _waveformHeight);
                     EditorGUI.DrawRect(playheadRect, Color.red);
                 }
             }
 
-            loopPreview = GUILayout.Toggle(loopPreview, "Loop");
+            _loopPreview = GUILayout.Toggle(_loopPreview, "Loop");
 
             if (GUI.changed)
             {
-                waveformTexture = DrawWaveform(audioClip, waveformWidth, waveformHeight, new Color(1, 0.5f, 0), numberOfMeasure);
+                _waveformTexture = DrawWaveform(_audioClip, _waveformWidth, _waveformHeight, new Color(1, 0.5f, 0), _numberOfMeasure);
             }
 
             GUILayout.BeginHorizontal();
@@ -241,22 +240,22 @@ public class LevelEditorTool : EditorWindow
             GUILayout.EndHorizontal();
 
             Event actualEvent = Event.current;
-            if (actualEvent.type == EventType.MouseDown && clickArea.Contains(actualEvent.mousePosition))
+            if (actualEvent.type == EventType.MouseDown && _clickArea.Contains(actualEvent.mousePosition))
             {
-                actualPos = actualEvent.mousePosition - new Vector2(clickArea.x, clickArea.y);
-                actualPos.y = clickArea.height - actualPos.y;
-                if (lastCheckedIndex.x >= 0)
+                _actualPos = actualEvent.mousePosition - new Vector2(_clickArea.x, _clickArea.y);
+                _actualPos.y = _clickArea.height - _actualPos.y;
+                if (_lastCheckedIndex.x >= 0)
                 {
-                    spawnPositions[lastCheckedIndex.x, lastCheckedIndex.y, lastCheckedIndex.z].x = actualPos.x;
-                    spawnPositions[lastCheckedIndex.x, lastCheckedIndex.y, lastCheckedIndex.z].y = actualPos.y;
+                    _spawnPositions[_lastCheckedIndex.x, _lastCheckedIndex.y, _lastCheckedIndex.z].x = _actualPos.x;
+                    _spawnPositions[_lastCheckedIndex.x, _lastCheckedIndex.y, _lastCheckedIndex.z].y = _actualPos.y;
                 }
 
 
             }
             GUILayout.Space(385);
-            GUILayout.Label("Click position -> x : " + actualPos.x + " / y : "+ actualPos.y);
+            GUILayout.Label("Click position -> x : " + _actualPos.x + " / y : "+ _actualPos.y);
             
-            if (isPlaying)
+            if (_isPlaying)
             {
                 PlaySheetMusicNotes();
                 Repaint();
@@ -305,59 +304,59 @@ public class LevelEditorTool : EditorWindow
 
     private void PlayPreview()
     {
-        if (previewAudioSource == null || audioClip == null)
+        if (_previewAudioSource == null || _audioClip == null)
             return;
 
-        if (isPlaying)
+        if (_isPlaying)
             StopPreview();
 
-        previewAudioSource.loop = loopPreview;
-        previewAudioSource.clip = audioClip;
-        previewAudioSource.Play();
+        _previewAudioSource.loop = _loopPreview;
+        _previewAudioSource.clip = _audioClip;
+        _previewAudioSource.Play();
 
-        isPlaying = true;
-        lastPlayedMeasure = -1;
-        lastPlayedBeat = -1;
-        lastPlayedDivision = -1;
+        _isPlaying = true;
+        _lastPlayedMeasure = -1;
+        _lastPlayedBeat = -1;
+        _lastPlayedDivision = -1;
     }
 
     private void StopPreview()
     {
-        if (previewAudioSource == null || !isPlaying)
+        if (_previewAudioSource == null || !_isPlaying)
             return;
 
-        previewAudioSource.Stop();
-        isPlaying = false;
+        _previewAudioSource.Stop();
+        _isPlaying = false;
     }
 
     private void PlaySheetMusicNotes()
     {
-        if (!isPlaying || audioClip == null || noteSound == null) return;
+        if (!_isPlaying || _audioClip == null || _noteSound == null) return;
 
-        float totalTime = previewAudioSource.time;
-        float secondsPerBeat = 60f / bpm;
-        float secondsPerMeasure = secondsPerBeat * beat;
-        float secondsPerDivision = secondsPerBeat / division;
+        float totalTime = _previewAudioSource.time;
+        float secondsPerBeat = 60f / _bpm;
+        float secondsPerMeasure = secondsPerBeat * _beat;
+        float secondsPerDivision = secondsPerBeat / _division;
 
-        for (int m = 0; m < numberOfMeasure; m++)
+        for (int m = 0; m < _numberOfMeasure; m++)
         {
-            for (int b = 0; b < beat; b++)
+            for (int b = 0; b < _beat; b++)
             {
-                for (int d = 0; d < division; d++)
+                for (int d = 0; d < _division; d++)
                 {
                     float divisionStartTime = m * secondsPerMeasure + b * secondsPerBeat + d * secondsPerDivision;
 
                     bool alreadyPlayed = false;
-                    if (m < lastPlayedMeasure) alreadyPlayed = true;
-                    else if (m == lastPlayedMeasure && b < lastPlayedBeat) alreadyPlayed = true;
-                    else if (m == lastPlayedMeasure && b == lastPlayedBeat && d <= lastPlayedDivision) alreadyPlayed = true;
+                    if (m < _lastPlayedMeasure) alreadyPlayed = true;
+                    else if (m == _lastPlayedMeasure && b < _lastPlayedBeat) alreadyPlayed = true;
+                    else if (m == _lastPlayedMeasure && b == _lastPlayedBeat && d <= _lastPlayedDivision) alreadyPlayed = true;
 
-                    if (!alreadyPlayed && sheetMusic[m, b, d] != 0 && divisionStartTime <= totalTime)
+                    if (!alreadyPlayed && _sheetMusic[m, b, d] != 0 && divisionStartTime <= totalTime)
                     {
-                        previewAudioSource.PlayOneShot(noteSound);
-                        lastPlayedMeasure = m;
-                        lastPlayedBeat = b;
-                        lastPlayedDivision = d;
+                        _previewAudioSource.PlayOneShot(_noteSound);
+                        _lastPlayedMeasure = m;
+                        _lastPlayedBeat = b;
+                        _lastPlayedDivision = d;
                     }
                 }
             }
@@ -405,7 +404,7 @@ public class LevelEditorTool : EditorWindow
             {
                 int x = Mathf.FloorToInt((float)m / measures * width);
                 if (x >= width) continue;
-                Color actualColor = (m == measure) ? Color.white : Color.black;
+                Color actualColor = (m == _measure) ? Color.white : Color.black;
                 for (int y = 0; y < height; y++)
                 {
                     colors[y * width + x] = actualColor;

@@ -28,11 +28,9 @@ public class PreviewNoteScript : MonoBehaviour
 
     void StartMovement()
     {
-        transform.DOMove(_targetPos, 60f /_level.bpm * _level.beat).OnComplete(()=> DestroyPreview()).SetEase(Ease.Linear);
-    }
-
-    void DestroyPreview()
-    {
-        Destroy(gameObject);
+        transform.DOMove(_targetPos, 60f /_level.bpm * _level.beat).OnComplete(() =>
+        {
+            Destroy(gameObject);
+        }).SetEase(Ease.Linear);
     }
 }

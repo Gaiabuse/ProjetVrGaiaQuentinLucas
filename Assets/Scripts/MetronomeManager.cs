@@ -97,9 +97,9 @@ public class MetronomeManager : MonoBehaviour
     {
         audioSource.Stop();
         audioSourceMetronome.Stop();
-        actualBeat = 0;
-        actualDivision = 0;
-        actualMeasure = 0;
+        _actualBeat = 0;
+        _actualDivision = 0;
+        _actualMeasure = 0;
     }
     
 }

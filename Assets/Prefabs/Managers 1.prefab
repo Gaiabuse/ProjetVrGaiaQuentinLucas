@@ -75,32 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4115160477615f142825d7a8aedfb1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
-  objectsNoMove:
-  - {fileID: 0}
-  UIStart: {fileID: 0}
-  UIPause: {fileID: 0}
-  positionForStartGame: {x: -3.39, y: 0.63, z: 17.42}
-  player: {fileID: 0}
-  keyForPause:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Key For Pause
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: b8cb5ac6-2ca1-4b5f-a627-e715e468fd5d
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: 25169ae2-6587-4724-b607-47b2ea728b77
-        m_Path: <OculusTouchController>{LeftHand}/menuButton
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Key For Pause
-        m_Flags: 0
-      m_Flags: 0
-    m_Reference: {fileID: 0}
 --- !u!1 &7826759009137454217
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987c422339583a94da12a09a65101996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerConditionManager
+  player: {fileID: 0}
+  locomotion: {fileID: 0}
 --- !u!1 &8916381888068047760
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +203,7 @@ Transform:
   - {fileID: 4363209558963368508}
   - {fileID: 2459089608699090102}
   - {fileID: 4665297134102008298}
+  - {fileID: 3587390266389451686}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9096671602977914664
@@ -316,6 +293,53 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
   m_CancelButton: Cancel
+--- !u!1 &9108647077689897006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3587390266389451686}
+  - component: {fileID: 9210164564878480971}
+  m_Layer: 0
+  m_Name: SuccesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3587390266389451686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9108647077689897006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4956604695065047945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9210164564878480971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9108647077689897006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28994d7c58f96347a3c4448e98bc96f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SuccessManager
+  notificationPanel: {fileID: 0}
+  notificationText: {fileID: 0}
+  displayDuration: 3
 --- !u!1001 &430701532188142230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -369,6 +393,10 @@ PrefabInstance:
       value: DaysManager
       objectReference: {fileID: 0}
     - target: {fileID: 7108353124697808982, guid: e87965fda92a80e4bb7935decd7f3dfa, type: 3}
+      propertyPath: durationFade
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7108353124697808982, guid: e87965fda92a80e4bb7935decd7f3dfa, type: 3}
       propertyPath: dialogueRunner
       value: 
       objectReference: {fileID: 5355877006445201912}
@@ -394,15 +422,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7108353124697808982, guid: e87965fda92a80e4bb7935decd7f3dfa, type: 3}
       propertyPath: days.Array.data[0].durationInMinutes
-      value: 1
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7108353124697808982, guid: e87965fda92a80e4bb7935decd7f3dfa, type: 3}
+      propertyPath: days.Array.data[2].durationInMinutes
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7108353124697808982, guid: e87965fda92a80e4bb7935decd7f3dfa, type: 3}
       propertyPath: days.Array.data[5].durationInMinutes
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7108353124697808982, guid: e87965fda92a80e4bb7935decd7f3dfa, type: 3}
       propertyPath: days.Array.data[6].durationInMinutes
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7108353124697808982, guid: e87965fda92a80e4bb7935decd7f3dfa, type: 3}
       propertyPath: days.Array.data[5].dialogueOptions.Array.size
@@ -482,6 +514,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4956604695065047945}
     m_Modifications:
+    - target: {fileID: 1968259567784965810, guid: 031629147cf1d5942a55738147202768, type: 3}
+      propertyPath: dialogueRunnerUI
+      value: 
+      objectReference: {fileID: 7919260814470035631}
     - target: {fileID: 1968259567784965810, guid: 031629147cf1d5942a55738147202768, type: 3}
       propertyPath: positionForFight.y
       value: -1
@@ -581,14 +617,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5437807654077520848, guid: 031629147cf1d5942a55738147202768, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7919260814470035631}
   m_SourcePrefab: {fileID: 100100000, guid: 031629147cf1d5942a55738147202768, type: 3}
+--- !u!1 &1906629186110334106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5437807654077520848, guid: 031629147cf1d5942a55738147202768, type: 3}
+  m_PrefabInstance: {fileID: 5837593537441398602}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7919260814470035631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906629186110334106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f7f1e8bfbe4331b40b3755a1e751e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueRunnerUI
+  uiGameObject: {fileID: 0}
+  speakerUI: {fileID: 0}
+  dialogueUI: {fileID: 0}
+  choicesParent: {fileID: 0}
+  choicePrefab: {fileID: 8771153131892788169, guid: 880da9bb493f3b4459a2cf02805a5426, type: 3}
+  dialogueDurationByChar: 0.1
 --- !u!114 &5355877006445201912 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1968259567784965810, guid: 031629147cf1d5942a55738147202768, type: 3}
   m_PrefabInstance: {fileID: 5837593537441398602}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1906629186110334106}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bd447590c4b6da4d9bd20a929e1a7fd, type: 3}

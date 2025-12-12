@@ -2,11 +2,11 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-public class SuccessManager : MonoBehaviour
+public class SuccessUIManager : MonoBehaviour
 {
-    public static SuccessManager INSTANCE;
+    public static SuccessUIManager INSTANCE;
 
-    [Header("UI de Notification")]
+    [Header("UI Success")]
     [SerializeField] private GameObject notificationPanel;
     [SerializeField] private TextMeshProUGUI notificationText;
     [SerializeField] private float displayDuration = 3.0f;
@@ -30,12 +30,12 @@ public class SuccessManager : MonoBehaviour
 
     public void UnlockSuccess(SuccessData data)
     {
-        PlayerConditionManager.instance.AddSuccess(data);
+        PlayerManager.INSTANCE.AddSuccess(data);
         string message = $" NOUVEAU SUCCÈS : {data.descriptionSuccess} !";
         Debug.Log(message);
     }
 
-    private void ShowNotification(string message)
+    public void ShowNotification(string message)
     {
         if (notificationPanel != null && notificationText != null)
         {

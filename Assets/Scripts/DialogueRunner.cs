@@ -1,152 +1,129 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
 using XNode;
 
 public class DialogueRunner : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private GameObject Ui;
-    [SerializeField] private TMP_Text speaker;
-    [SerializeField] private TMP_Text dialogue;
-    [SerializeField] private Transform choicesParent;
-    [SerializeField] private ChoiceButton choicePrefab;
-    [SerializeField] private float dialogueDurationByChar = 0.1f;
+    [SerializeField] private DialogueRunnerUI dialogueRunnerUI;
     [SerializeField] private Animator animatorManager;
-    [SerializeField] private GameObject[] objectsForMove;
     [SerializeField] private Vector3 positionForFight;
-    private DialogueGraph graph;
-    private Vector3 positionStartFight;
-    private Coroutine dialogueRunner;
-    private Coroutine choicesCoroutine;
-    private Coroutine fightCoroutine;
-    private bool switchNode;
-    private bool asWin;
-    private bool fightEnded;
+    private DialogueGraph _graph;
+    private Vector3 _positionStartFight;
+    private Coroutine _dialogueRunner;
+    private Coroutine _choicesCoroutine;
+    private Coroutine _fightCoroutine;
+    private bool _asWin;
+    private bool _fightEnded;
 
-    private Coroutine dayTimer = null;
+    private Coroutine _dayTimer = null;
     private void OnEnable()
     {
         FightManager.FightEnded += b =>
         {
-            asWin = b;
-            fightEnded = true;
+            _asWin = b;
+            _fightEnded = true;
         };
-        GameStateManager.ReturnToMenu += StopTimer;
+        GameManager.ReturnToMainMenu += StopDayTimer;
     }
 
     private void OnDisable()
     {
         FightManager.FightEnded -= b =>
         {
-            asWin = b;
-            fightEnded = true;
+            _asWin = b;
+            _fightEnded = true;
         };
-        GameStateManager.ReturnToMenu -= StopTimer;
+        GameManager.ReturnToMainMenu -= StopDayTimer;
     }
 
-    private void StopTimer()
+    private void StopDayTimer()
     {
-        if (dayTimer != null)
+        if (_dayTimer != null)
         {
-            StopCoroutine(dayTimer);
+            StopCoroutine(_dayTimer);
         }
     }
     
     public  void StartDialogue(DialogueGraph dialogueGraph)
     {
-        graph = dialogueGraph;
-        Ui.SetActive(true);
-        foreach (GameObject obj in objectsForMove)
-        {
-            obj.SetActive(false);
-        }
-        switchNode = false;
-        foreach (BaseNode node in graph.nodes)
+        _graph = dialogueGraph;
+        dialogueRunnerUI.SetUIGameObject(true);
+        PlayerManager.INSTANCE.SetCanMove(false);
+        foreach (BaseNode node in _graph.nodes)
         {
             if (node.GetString() == "Start")
             {
-                graph.current = node;
+                _graph.current = node;
                 break;
             }
         }
-        dialogueRunner = StartCoroutine(Runner());
+        _dialogueRunner = StartCoroutine(Runner());
     }
 
     private void EndDialogue()
     {
-        dayTimer = StartCoroutine(DayManager.instance.StartDayTimer());
-        Ui.SetActive(false);
-        foreach (GameObject obj in objectsForMove)
-        {
-            obj.SetActive(true);
-        }
+        _dayTimer = StartCoroutine(DayManager.INSTANCE.StartDayTimer());
+        dialogueRunnerUI.SetUIGameObject(false);
+        PlayerManager.INSTANCE.SetCanMove(true);
     }
 
     private void SetPosition(StartNode node)
     {
         if(node.SetPosition)
-            player.position = node.StartDialoguePosition;
+            PlayerManager.INSTANCE.TeleportPlayer(node.StartDialoguePosition);
     }
     private IEnumerator Runner()
     {
-        Debug.Log(graph);
-        BaseNode currentNode = graph.current;
+        Debug.Log(_graph);
+        BaseNode currentNode = _graph.current;
         Debug.Log(currentNode);
         string data = currentNode.GetString();
-        string[] dataParts = data.Split('/');
-        string[] dialogueSplit;
+        string[] dataParts = data.Split('/');// dataParts[0] = type of the node
+        // if is DialogueNode : dataParts[1] = speaker name, dataParts[2] = dialogue
+        ChooseAction(dataParts,currentNode);
+        yield return null;
+    }
+
+    private void ChooseAction(string[] dataParts, Node currentNode)
+    {
         switch (dataParts[0])
         {
             case "Start":
-                NextNode("Exit");
                 SetPosition(currentNode as StartNode);
+                NextNode("Exit");
                 break;
             case "Dialogue":
-                Debug.Log(PlayerConditionManager.instance);
-                PlayerConditionManager.instance.AddDialogueNode(currentNode as DialogueNode);
-                speaker.text = $"- {dataParts[1]} -";
-                dialogueSplit = dataParts[2].Split('|');
-                StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode as DialogueNode));
-                yield return new WaitUntil(() => switchNode );
+                DialogueNode(dataParts, currentNode as DialogueNode);
                 break;
             case "Fight":
-                Debug.Log("Fight");
-                FightNode node = currentNode as FightNode;
-                fightCoroutine = StartCoroutine(StartFightNode(node));
-                yield return new WaitUntil(() => switchNode );
+                _fightCoroutine = StartCoroutine(FightNode(currentNode as FightNode));
                 break;
             case "End":
                 EndDialogue();
                 break;
         }
     }
-
-    private IEnumerator StartFightNode(FightNode node)
+    
+    private void DialogueNode(string[] dataParts, DialogueNode currentNode)
     {
-        fightEnded = false;
-        positionStartFight = player.position;
-        player.SetLocalPositionAndRotation(positionForFight, Quaternion.identity);
-        Ui.SetActive(false);
-        if (node != null) FightManager.INSTANCE.StartFight(node.level);
-        yield return new WaitUntil(()=>fightEnded);
-        Debug.Log("end : " + positionStartFight);
-        player.SetLocalPositionAndRotation(positionStartFight, Quaternion.identity);
-        Ui.SetActive(true);
-        NextNode(asWin ? "AsWin" : "AsLoose");
+        PlayerManager.INSTANCE.AddDialogueNode(currentNode);
+        dialogueRunnerUI.SetSpeaker($"- {dataParts[1]} -");
+        string[] dialogueSplit = DialogueSplit(dataParts[2]); 
+        StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode ));
     }
-
+    private string[] DialogueSplit(string dialogue)
+    {
+        return  dialogue.Split('|');
+    }
     private IEnumerator InstantiateDialogues(string[] dialogueSplit, DialogueNode dialogueNode)
     {
-        foreach (var t in dialogueSplit)
-        {
-            dialogue.text = t;
-            yield return new WaitForSeconds(dialogueDurationByChar*t.Length);
-        }
-        choicesCoroutine = StartCoroutine(InstantiateChoices(dialogueNode));
+        Coroutine dialogueCoroutine = StartCoroutine(dialogueRunnerUI.SetDialogue(dialogueSplit));
+        yield return dialogueCoroutine;
+        _choicesCoroutine = StartCoroutine(InstantiateChoices(dialogueNode));
     }
     
     private IEnumerator InstantiateChoices(DialogueNode node)
@@ -158,58 +135,75 @@ public class DialogueRunner : MonoBehaviour
         }
         else
         {
-            for(int i  = 0; i < node.Choices.Length; i++)
+            List<ChoiceButton> choices = dialogueRunnerUI.InstantiateChoices(node.Choices.Length);
+            for(int i  = 0; i < choices.Count; i++)
             {
-                ChoiceButton choice =  Instantiate(choicePrefab, choicesParent);
                 var i1 = i;
-                choice.Init(node.Choices[i], () =>
+                choices[i].Init(node.Choices[i], () =>
                 {
                     NextNode("Choices " + i1);
                     animatorManager.SetTrigger("Choices"+i1);
-                },i1);
+                },i);
             }
         }
     }
     
+    private IEnumerator FightNode(FightNode node)
+    {
+        SetFightNode(node);
+        yield return new WaitUntil(()=>_fightEnded);
+        EndFightNode();
+    }
+
+    private void SetFightNode(FightNode node)
+    {
+        _fightEnded = false;
+        _positionStartFight = PlayerManager.INSTANCE.GetPlayerPosition();
+        PlayerManager.INSTANCE.TeleportPlayer(positionForFight);
+        dialogueRunnerUI.SetUIGameObject(false);
+        if (node != null) FightManager.INSTANCE.StartFight(node.level);
+    }
+
+    private void EndFightNode()
+    {
+        PlayerManager.INSTANCE.TeleportPlayer(positionForFight);
+        dialogueRunnerUI.SetUIGameObject(true);
+        NextNode(_asWin ? "AsWin" : "AsLoose");
+    }
+    
     private void NextNode(string fieldName)
     {
-        switchNode = true;
-        switchNode = false;
-        if (dialogueRunner != null)
-        {
-            StopCoroutine(dialogueRunner);
-            dialogueRunner = null;
-        }
-
-        if (choicesCoroutine != null)
-        {
-            StopCoroutine(choicesCoroutine);
-            choicesCoroutine = null;
-        }
-
-        if (fightCoroutine != null)
-        {
-            StopCoroutine(fightCoroutine);
-            fightCoroutine = null;
-        }
-        foreach (NodePort port in graph.current.Ports)
+        KillAllCoroutines();
+        foreach (NodePort port in _graph.current.Ports)
         {
             if (port.fieldName == fieldName)
             {
-                if (port.IsConnected)
-                {
-                    graph.current = port.Connection.node as BaseNode;
-                    break;
-                }
+                if (!port.IsConnected) continue;
+                _graph.current = port.Connection.node as BaseNode;
+                break;
             }
         }
-
-        foreach (Transform children in choicesParent)
-        {
-            Destroy(children.gameObject);
-        }
-        
-        dialogueRunner = StartCoroutine(Runner());
+        dialogueRunnerUI.KillChoices();
+        _dialogueRunner = StartCoroutine(Runner());
     }
-  
+    private void KillAllCoroutines()
+    {
+        if (_dialogueRunner != null)
+        {
+            StopCoroutine(_dialogueRunner);
+            _dialogueRunner = null;
+        }
+
+        if (_choicesCoroutine != null)
+        {
+            StopCoroutine(_choicesCoroutine);
+            _choicesCoroutine = null;
+        }
+
+        if (_fightCoroutine != null)
+        {
+            StopCoroutine(_fightCoroutine);
+            _fightCoroutine = null;
+        }
+    }
 }

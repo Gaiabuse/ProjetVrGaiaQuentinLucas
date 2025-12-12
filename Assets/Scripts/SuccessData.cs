@@ -4,12 +4,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewSuccessData", menuName = "Succès VR/Données de Succès")]
 public class SuccessData : ScriptableObject
 {
-    [Header("Identification")]
-    [Tooltip("L'ID unique pour PlayerPrefs (ex: 'CLE_SECRETE_GRAB').")]
+    [Header("Name")]
     public string successName;
     
-    [Header("Contenu")]
-    [Tooltip("La description de l'objet ou du succès qui sera affichée.")]
+    [Header("Descriptions")]
     [TextArea]
     public string descriptionSuccess;
     public string descriptionObjet;

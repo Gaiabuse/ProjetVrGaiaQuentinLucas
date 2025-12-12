@@ -8,7 +8,6 @@ public class ChoiceButton : MonoBehaviour
 {
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text titleOfChoice;
-
     [SerializeField] private InputActionProperty[] keysForChoices;
     [SerializeField] private Sprite[] visualKeysSprites;
     [SerializeField] private Image visualKey;
@@ -38,12 +37,9 @@ public class ChoiceButton : MonoBehaviour
 
     private void Update()
     {
-        if (action != null && action.IsPressed() && choiceButtonPressed != null)
-        {
-            Debug.Log("Pressed");
-            choiceButtonPressed.Invoke();
-            choiceButtonPressed.RemoveAllListeners();
-            choiceButtonPressed = null;
-        }
+        if (action == null || !action.IsPressed() || choiceButtonPressed == null) return;
+        choiceButtonPressed.Invoke();
+        choiceButtonPressed.RemoveAllListeners();
+        choiceButtonPressed = null;
     }
 }

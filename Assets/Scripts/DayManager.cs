@@ -13,35 +13,34 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class DayManager : MonoBehaviour
 {
     
-    public static DayManager instance;
+    public static DayManager INSTANCE;
     [SerializeField] List<DayData> days = new List<DayData>();
     [SerializeField] DialogueRunner dialogueRunner;
     [SerializeField] HingeJoint[] doors;
-    private PlayerConditionManager playerCondition;
-    [SerializeField] private Image fadeImage;
     [SerializeField] private CanvasGroup cvg;
     [SerializeField] private int currentDay;
     [SerializeField] private bool autoStart = true;
     [SerializeField] private float durationFade = 0.5f;
-    private bool timerFinished = false;
-    private float duration = 0f;
     [SerializeField] private float maxValueDoor = 130f;
-
+    
+    private bool _dayTimerFinished;
+    private float _durationOfDay;
+    
+    private readonly PlayerManager _player = PlayerManager.INSTANCE;
     private void Awake()
     {
-        if (instance != null)
+        if (INSTANCE != null)
         {
             Destroy(gameObject);
         }
         else
         {
-            instance = this;
+            INSTANCE = this;
         }
     }
 
     void Start()
     {
-        playerCondition = PlayerConditionManager.instance;
         if (autoStart)
         {
             StartCoroutine(DayLoop());
@@ -51,27 +50,18 @@ public class DayManager : MonoBehaviour
    
     public IEnumerator DayLoop()
     {
-        for (int i = 0; i < days.Count; i++)
+        foreach (DayData dayData in days)
         {
-            Debug.Log(days[i].dayName);
-            timerFinished = false;
-            DayData day = days[i];
+            _dayTimerFinished = false;
+            DayData day = dayData;
             bool fadeIsFinish = true;
             if (day.fadeAtStart)
             {
                 fadeIsFinish = false;
-                Debug.Log("prout");
-                Debug.Log("caca");
-                fadeImage.DOKill();
-                Debug.Log(durationFade);
+                cvg.DOKill();
                 cvg.alpha = 1f;
-                cvg.DOFade(0f, durationFade).SetEase(Ease.OutBounce).OnComplete((() =>
-                {
-                    Debug.Log("requin");
-                    fadeIsFinish = true;
-                }));
+                cvg.DOFade(0f, durationFade).SetEase(Ease.OutBounce).OnComplete(() =>fadeIsFinish = true);
             }
-            
             yield return new WaitUntil(() => fadeIsFinish);
             if (day.doorsLockedIndex.Length > 0)
             {
@@ -91,7 +81,7 @@ public class DayManager : MonoBehaviour
                     }
                 }
             }
-            DialogueGraph dialogue = ChooseDialogueForDay(day);
+            DialogueGraph dialogue = SelectDialogueOfTheDay(day);
 
             if (dialogue != null)
             {
@@ -102,16 +92,14 @@ public class DayManager : MonoBehaviour
                 Debug.LogWarning("Aucun dialogue trouvé pour le jour " + day.dayName);
             }
             
-            duration = day.durationInMinutes * 60f;
-            yield return new WaitUntil(() => timerFinished);
-
-            Debug.Log("Fin du jour : " + day.dayName);
+            _durationOfDay = day.durationInMinutes * 60f;
+            yield return new WaitUntil(() => _dayTimerFinished);// Wait Day is Finished and go to next day
         }
     }
     
-    DialogueGraph ChooseDialogueForDay(DayData day)
+    DialogueGraph SelectDialogueOfTheDay(DayData day)
     {
-        DialogueOption fallback = null;
+        DialogueOption fallback = null;// dialogue option if no dialogue with condition is complete
 
         foreach (var option in day.dialogueOptions)
         {
@@ -126,33 +114,24 @@ public class DayManager : MonoBehaviour
             {
                 if (cond == null) continue;
 
-                if (!cond.isComplete(playerCondition))
-                {
-                    conditionsComplete = false;
-                    break;
-                }
+                if (cond.IsComplete(_player)) continue;
+                conditionsComplete = false;
+                break;
             }
 
             if (conditionsComplete)
             {
-                Debug.Log("condition complete");
                 return option.dialogue;
             }
         }
         
-        if (fallback != null)
-        {
-            Debug.Log("no condition for dialogue complete");
-            return fallback.dialogue;
-        }
-        
-        return null;
+        return fallback?.dialogue;
     }
     public IEnumerator StartDayTimer()
     {
-        timerFinished = false;
-        yield return new WaitForSeconds(duration);
-        timerFinished = true;
+        _dayTimerFinished = false;
+        yield return new WaitForSeconds(_durationOfDay);
+        _dayTimerFinished = true;
     }
 }
 
@@ -172,5 +151,12 @@ public class DayData
     [Tooltip("All dialogues possibility")] public DialogueOption[] dialogueOptions;
 }
 
-
+[Serializable]
+public class DialogueOption 
+{
+    public DialogueGraph dialogue;
+    [Tooltip("if true, it's default dialogue with no conditions")]
+    [SerializeField]public bool isFallback = false;
+    public Condition[] conditions;
+}
 

@@ -24,10 +24,10 @@ public class FightManager : MonoBehaviour
     private Vector2[,,] spawnPositions;
     private int[,,] sheetMusic;
     public static Action<bool> FightEnded;
-    private float _anxiety = 0f;
-    private bool _canLink = false;
-    private bool _inLine = true;
-    private bool _isFirstLinkedNote = true;
+    private float anxiety = 0f;
+    private bool canLink = false;
+    private bool inLine = true;
+    private bool isFirstLinkedNote = true;
     private InputDevice leftHand;
     private InputDevice rightHand;
     
@@ -42,7 +42,6 @@ public class FightManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //StartFight(level); // à effacer, uniquement pour tests
     }
 
     #region Start / End
@@ -67,8 +66,8 @@ public class FightManager : MonoBehaviour
 
     public void EndFight(bool win)
     {
-        _anxiety = 0f;
-        PlayerConditionManager.instance.AddLevelData(level,win);
+        anxiety = 0f;
+        PlayerManager.INSTANCE.AddLevelData(level,win);
         metronome.EndFight();
         FightEnded.Invoke(win);
     }
@@ -78,8 +77,8 @@ public class FightManager : MonoBehaviour
     
     public void AddAnxiety(float value)
     {
-        _anxiety += value;
-        slider.value = _anxiety;
+        anxiety += value;
+        slider.value = anxiety;
         CheckLoose();
     }
 
@@ -91,7 +90,7 @@ public class FightManager : MonoBehaviour
 
     void CheckLoose()
     {
-        if (_anxiety >= maxAnxiety)
+        if (anxiety >= maxAnxiety)
         {
             EndFight(false);
         }
@@ -137,7 +136,7 @@ public class FightManager : MonoBehaviour
         {
             if (actualPreviewNote == 2 )
             {
-                if (_canLink)
+                if (canLink)
                 {
                     return;
                 }
@@ -161,14 +160,14 @@ public class FightManager : MonoBehaviour
 
     public void CanLinkState(bool newState) 
     {
-        _canLink = newState;
+        canLink = newState;
     }
     
 
     public bool TakeFirstLinked()
     {
-        bool saveState = _isFirstLinkedNote;
-        _isFirstLinkedNote = false;
+        bool saveState = isFirstLinkedNote;
+        isFirstLinkedNote = false;
         if (saveState == true)
         {
             return true;
@@ -177,17 +176,17 @@ public class FightManager : MonoBehaviour
     }
     public void ReleaseFirstLinked()
     {
-        _isFirstLinkedNote = true;
-        _inLine = true;
+        isFirstLinkedNote = true;
+        inLine = true;
     }
 
     public bool IsInLine()
     {
-        return _inLine;
+        return inLine;
     }
     public void InLineState(bool newState)
     {
-        _inLine = newState;
+        inLine = newState;
     }
     
 }

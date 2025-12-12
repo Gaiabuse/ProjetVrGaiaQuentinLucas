@@ -4024,7 +4024,7 @@ MonoBehaviour:
         m_CallState: 1
       - m_Target: {fileID: 769435748}
         m_TargetAssemblyTypeName: SimpleXRObjetScript, Assembly-CSharp
-        m_MethodName: DesactiveDescriptionApresGrab
+        m_MethodName: DisableDescriptionAfterGrab
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

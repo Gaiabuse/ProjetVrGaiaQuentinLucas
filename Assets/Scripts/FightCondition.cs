@@ -5,11 +5,10 @@ using UnityEngine;
     public class FightCondition: Condition
     {
         [SerializeField]private LevelData levelData;
-        
-        [Tooltip("if false check if is loose, else check if isw win")]
+        [Tooltip("if false check if is loose, else check if is win")]
         [SerializeField] private bool isForWin;
-        public override bool isComplete(PlayerConditionManager manager)
+        public override bool IsComplete(PlayerManager manager)
         {
-            return  manager.CheckLevel(levelData,isForWin);
+            return  manager.CheckLevelIsWin(levelData,isForWin);
         }
     }

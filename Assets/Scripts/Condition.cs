@@ -5,5 +5,5 @@ using UnityEngine;
 [Serializable]
 public abstract class Condition: ScriptableObject
 {
-    public abstract bool isComplete(PlayerConditionManager manager);
+    public abstract bool IsComplete(PlayerManager manager);
 }

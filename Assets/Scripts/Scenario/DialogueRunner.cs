@@ -20,7 +20,7 @@ namespace Scenario
         private Coroutine _fightCoroutine;
         private bool _asWin;
         private bool _fightEnded;
-
+        private bool _switchNode;
         private Coroutine _dayTimer = null;
         private void OnEnable()
         {
@@ -80,34 +80,44 @@ namespace Scenario
         }
         private IEnumerator Runner()
         {
-            Debug.Log(_graph);
+            Debug.Log("Running dialogue");
+            bool waitEndOfAction = false;
             BaseNode currentNode = _graph.Current;
-            Debug.Log(currentNode);
             string data = currentNode.GetString();
             string[] dataParts = data.Split('/');// dataParts[0] = type of the node
             // if is DialogueNode : dataParts[1] = speaker name, dataParts[2] = dialogue
-            ChooseAction(dataParts,currentNode);
-            yield return null;
+            ChooseAction(dataParts,currentNode, out waitEndOfAction);
+
+            if (waitEndOfAction)
+            {
+                yield return new WaitUntil(() => _switchNode);
+            }
         }
 
-        private void ChooseAction(string[] dataParts, Node currentNode)
+        private void ChooseAction(string[] dataParts, Node currentNode,out bool waitEndOfAction)
         {
             switch (dataParts[0])
             {
                 case "Start":
                     SetPosition(currentNode as StartNode);
                     NextNode("Exit");
+                    waitEndOfAction = false;
                     break;
                 case "Dialogue":
                     DialogueNode(dataParts, currentNode as DialogueNode);
+                    waitEndOfAction = true;
                     break;
                 case "Fight":
                     _fightCoroutine = StartCoroutine(FightNode(currentNode as FightNode));
+                    waitEndOfAction = true;
                     break;
                 case "End":
                     EndDialogue();
+                    waitEndOfAction = false;
                     break;
             }
+
+            waitEndOfAction = false;
         }
     
         private void DialogueNode(string[] dataParts, DialogueNode currentNode)
@@ -175,6 +185,8 @@ namespace Scenario
     
         private void NextNode(string fieldName)
         {
+            _switchNode = false;
+            _switchNode = true;
             KillAllCoroutines();
             foreach (NodePort port in _graph.Current.Ports)
             {
@@ -186,6 +198,7 @@ namespace Scenario
                 }
             }
             dialogueRunnerUI.KillChoices();
+            _switchNode = false;
             _dialogueRunner = StartCoroutine(Runner());
         }
         private void KillAllCoroutines()

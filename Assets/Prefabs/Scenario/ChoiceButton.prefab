@@ -177,58 +177,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceButton
   button: {fileID: 7247212675349873066}
   titleOfChoice: {fileID: 880142769878625602}
-  keysForChoices:
-  - m_UseReference: 0
-    m_Action:
-      m_Name: Element 1
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: ec1b06cf-2f91-4e6a-85aa-6d0cae77e26e
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: ab14c422-6ea9-404e-a559-c58be289c550
-        m_Path: <OculusTouchController>{RightHand}/secondaryButton
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Element 1
-        m_Flags: 0
-      - m_Name: 
-        m_Id: e03bc41f-285f-4d49-9f27-0f5c814367bf
-        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/secondarybutton
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Element 1
-        m_Flags: 0
-      m_Flags: 0
-    m_Reference: {fileID: 0}
+  inputKeysForChoices:
   - m_UseReference: 0
     m_Action:
       m_Name: Element 0
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: e3a4d2c7-90c5-4b14-87b6-0a1d773cdd5c
+      m_Id: 0ba65539-8cc3-4470-b2c6-5f3a222a6a68
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 6c0a6195-2180-4f60-ac0e-89434db32781
-        m_Path: <OculusTouchController>{RightHand}/primaryButton
+        m_Id: 33ed0acd-5248-41b6-beac-31ea8aefde90
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/secondarybutton
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Element 0
         m_Flags: 0
       - m_Name: 
-        m_Id: 2a99cd06-0ce1-4878-bd94-79de5ac3d508
-        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/primarybutton
+        m_Id: d130c2d9-c2cd-42a4-a022-9c3ad6ba6cb6
+        m_Path: <OculusTouchController>{RightHand}/secondaryButton
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Element 0
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  - m_UseReference: 0
+    m_Action:
+      m_Name: Element 1
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: bd471ea4-9b94-49e7-9711-94c1f4cc1ad7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: ce5dfebe-24eb-407d-8c20-f426a1f38e1d
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/primarybutton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
+      - m_Name: 
+        m_Id: a49cb89f-9421-4a35-b1aa-4c5c80873475
+        m_Path: <OculusTouchController>{RightHand}/primaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
@@ -237,21 +237,21 @@ MonoBehaviour:
       m_Name: Element 2
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 22cb98b2-ff82-4f29-93fd-447d623e24b0
+      m_Id: ea8ceae9-66e9-44f3-a087-8dbc341590e6
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 189564e1-9a76-436d-b9b1-20c0f06a3d69
-        m_Path: <OculusTouchController>{RightHand}/gripPressed
+        m_Id: a007a21d-9982-4a98-ad78-1e7ad8d06c6a
+        m_Path: <OculusTouchController>{RightHand}/trigger
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Element 2
         m_Flags: 0
       - m_Name: 
-        m_Id: 6b0ade29-0927-43bc-8206-49b82770d66f
-        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/grippressed
+        m_Id: 11a08371-7fd3-4872-a951-c546689d3edf
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/trigger
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -259,11 +259,11 @@ MonoBehaviour:
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
-  visualKeysSprites:
+  spritesOfInputKeys:
   - {fileID: 21300000, guid: 35f8af7fafc05784285a6e1db6d1c891, type: 3}
   - {fileID: 21300000, guid: 628cbf1393ecb9a47ba2ef843de2cf94, type: 3}
   - {fileID: 21300000, guid: 28aa1131042d0124db714b34a8d9ae45, type: 3}
-  visualKey: {fileID: 646145863019999936}
+  visualOfInput: {fileID: 0}
 --- !u!1 &3531681015140398473
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,7 +24,8 @@ namespace Scenario
     
         private bool _dayTimerFinished;
         private float _durationOfDay;
-    
+
+        
         private readonly PlayerManager _player = PlayerManager.INSTANCE;
         private void Awake()
         {

@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3542d8fb0c96edf4fa1ac61c2eb15468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LinkedNotes
-  damages: 2
+  damages: 3
   hitSpeed: 1
   maxHit: 5
   inputActivation: 0.5

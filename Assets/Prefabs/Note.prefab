@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186445b03939cba4fbdb6215b5a5bfb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteScript
-  damages: 2
+  damages: 3
   hitSpeed: 1
   maxHit: 5
   inputActivation: 0.5

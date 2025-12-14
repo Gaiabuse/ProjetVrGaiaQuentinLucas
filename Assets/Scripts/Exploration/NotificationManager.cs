@@ -24,6 +24,7 @@ namespace Exploration
             else
             {
                 Destroy(gameObject);
+                // ptet un petit return ici pour éviter le code appellé dessous
             }
 
             if (notificationDisplay != null)
@@ -37,6 +38,11 @@ namespace Exploration
             if (notificationDisplay != null && takeObjectNotification != null)
             {
                 takeObjectNotification.text = message;
+                // assez risqué le stopAllCoroutines, tu pouvais vraiment pas
+                // récupérer une potentielle ref vers la showNotification pour la stop que elle?
+                // c'est surtout si ton script évolue, et qu'il se retrouve à avoir d'autres coroutines,
+                // tu risques de pas comprendre pourquoi ca pete
+                // je vois pas mal de stopAllCoroutines dans le projet, caca incoming dans le futur avec ca, je préviens
                 StopAllCoroutines(); 
                 StartCoroutine(ShowNotification());
             }

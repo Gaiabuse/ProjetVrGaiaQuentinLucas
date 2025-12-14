@@ -24,6 +24,7 @@ namespace Scenario
         private Coroutine _dayTimer = null;
         private void OnEnable()
         {
+            // b ? c'po clair, hésite pas à donner un nom un poil + explicite
             FightManager.FightEnded += b =>
             {
                 _asWin = b;

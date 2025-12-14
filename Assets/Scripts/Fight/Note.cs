@@ -56,6 +56,7 @@ namespace Fight
                     {
                         LeftHand.SendHapticImpulse(0, 0.5f, 0.1f);
                     }
+                    // ca aurait pu être pas mal, si t'as de longs fights, de ne pas détruire, mais ajouter à une pool
                     Destroy(gameObject);
                 }
             
@@ -72,6 +73,7 @@ namespace Fight
                     yield return new WaitForSeconds(hitSpeed);
                     FightManager.INSTANCE.AddAnxiety(damages);
                 }
+                // pareil ici, maybe un peu de pooling
                 Destroy(gameObject);
             }
         }

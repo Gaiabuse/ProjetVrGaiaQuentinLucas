@@ -45,6 +45,8 @@ namespace Scenario
 
         public void KillChoices()
         {
+            // tu aurais peut etre pu faire un systeme oû tu gardes les choix en cache, tu actives / désactives
+            // et reset quand tu as besoin pour éviter la masse instanciation
             foreach (Transform children in choicesParent)
             {
                 Destroy(children.gameObject);

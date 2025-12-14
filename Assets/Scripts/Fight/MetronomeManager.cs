@@ -31,6 +31,9 @@ namespace Fight
         private float _secondsPerDivision;
         private int _currentBeat;
         private int _currentDivision;
+        
+        // évite au maximum les grands bouts de logiques dans l'update, tu ne devrais avoir que quelques appels de fonction
+        // là c'est une énorme poubelle contenant une tonne de choses dont on n'a aucune idée de ce qu'elles font
         private void Update()
         {
             if (!AudioSourceMusic.isPlaying)
@@ -44,6 +47,7 @@ namespace Fight
                 return;
             }
        
+            // attention aux magic numbers
             initialBpm = Mathf.Clamp(initialBpm, 40, 260);
             _secondsPerBeat = 60f / initialBpm;
             _secondsPerDivision = (60f / initialBpm)/_division;
@@ -92,6 +96,7 @@ namespace Fight
             _division = newDivision;
         }
 
+        // ta fonction EndFight, au final, elle endfight pas, elle fait un reset, gaffe au naming
         public void EndFight()
         {
             AudioSourceMusic.Stop();

@@ -65,6 +65,9 @@ namespace Fight
 
         IEnumerator WaitForStartMusic()
         {
+            // évite au maximum les magic numbers, perso j'aime bien faire un petit script GameConstants.cs, et mettre
+            // mes différents trucs magiques dedans pour les bricoler au même endroit, et facilement les rendre modifiable
+            // par exemple via scriptable ou serializeField
             yield return new WaitForSecondsRealtime(3f);
             metronome.AudioSourceMusic.Play();
         }
@@ -115,7 +118,7 @@ namespace Fight
             {
                 GameObject actualGO = Instantiate(notesPrefabs[actualNote - 1]);
                 actualGO.transform.position = new Vector3(actualPos.x / spawnPosDivider, actualPos.y / spawnPosDivider, zAxisPosition);
-                if (actualNote == 2)
+                if (actualNote == 2) // -> pas claire, pourquoi 2 ? c'est des notes liées entre elles ?
                 {
                     LinkedNotes linked = actualGO.GetComponent<LinkedNotes>();
                     linked.ChangeSheetMusicPosition(new Vector3Int(actualMeasure, actualBeat, actualDivision));
@@ -133,7 +136,8 @@ namespace Fight
             {
                 return;
             }
-        
+        // hésite pas à commenter un peu par ici, ou ajouter des sous fonctions pour rendre la lecture du code plus simple,
+        // là c'est dur de se projeter dans ce que ce bout de code fait vraiment
             Vector2 actualPos = _spawnPositions[actualMeasure, actualBeat, actualDivision];
         
             if (actualPreviewNote != 0)
@@ -153,6 +157,7 @@ namespace Fight
             }
         }
 
+        // c'est bien ce genre de helpers, ca aide à la lisibilité plutot qu'avoir level.sheetmusic[truc, chose, bidule] partout
         public int GetNote(int measure, int beat, int division)
         {
             return level.SheetMusic[measure, beat, division];

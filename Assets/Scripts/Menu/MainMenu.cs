@@ -32,7 +32,9 @@ namespace Menu
             PlayerManager.INSTANCE.SetCanMove(true);
             GameManager.INSTANCE.DayLoop = StartCoroutine(DayManager.INSTANCE.DayLoop());
             PlayerManager.INSTANCE.TeleportPlayer(positionForStartGame);
-            Time.timeScale = 1;
+            Time.timeScale = 1; 
+            // Gaffe aux time.timescale perdus dans des scripts,
+            // perso j'encourage grandement à faire un petit TimeManager, qui gère ca de maniere sécurisée ( logs, etc )
         }
 
         private void ReturnToMainMenu()

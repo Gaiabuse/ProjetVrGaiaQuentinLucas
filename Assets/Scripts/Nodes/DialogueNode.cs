@@ -13,6 +13,7 @@ namespace Nodes
 
         public override string GetString()
         {
+            // hésite pas à interpoler pour éviter des allocs inutiles potentielles
             return "Dialogue/" + SpeakerName + "/" + DialogueLine;
         }
     }

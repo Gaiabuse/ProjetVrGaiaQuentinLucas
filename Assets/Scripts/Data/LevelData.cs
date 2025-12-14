@@ -8,6 +8,16 @@ namespace Data
     {
         public AudioClip AudioClip;
         public AudioClip NoteSound;
+        // ok j'crois que je commence à comprendre apres relecture, x c'est genre measure, y c'est bpm, et z division? 
+        // c'est pas incroyable niveau maintien et compréhension
+        // ca aurait pu être pas mal d'utiliser par exemple une struct ou une class comme ca:
+      //  struct note
+      //  {
+      //      int measure, beat, division
+      //  }
+      //  
+      //  public note[] SheetMusic
+        
         public int[,,] SheetMusic;
         public Vector2[,,] SpawnPositions;
         public int Bpm;
@@ -40,6 +50,8 @@ namespace Data
                 spawnPositionData = new Vector2[spawnPositionSize.x * spawnPositionSize.y * spawnPositionSize.z];
 
                 int index = 0;
+                // waaaa premiere fois de ma vie que je vois le triple for comme ca, ca fait peur, mais si ca marche tant mieux
+                // parcontre, aucune idée de ce que ca doit faire, mais ca fait tres peur la triple imbrication
                 for (int x = 0; x < spawnPositionSize.x; x++)
                 for (int y = 0; y < spawnPositionSize.y; y++)
                 for (int z = 0; z < spawnPositionSize.z; z++)

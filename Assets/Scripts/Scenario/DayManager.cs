@@ -50,6 +50,8 @@ namespace Scenario
    
         public IEnumerator DayLoop()
         {
+            // beaucoup trop long, beaucoup trop complexe, des machins partout,
+            // faudrait découper tout ca, c'est un nid à bug de l'infini cette méthode
             foreach (DayData dayData in days)
             {
                 _dayTimerFinished = false;

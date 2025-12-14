@@ -51,6 +51,7 @@ namespace Fight
             }
         }
 
+        // j'ai l'impression que cette fonction fait tout sauf checker la next note ( honnetement j'ai pas compris ce qu'il s'y passe )
         void CheckNextNote(int measure , int beat , int division)
         {
             int remainingDistance = nextNoteMaxDistance;

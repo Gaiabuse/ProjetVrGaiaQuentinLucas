@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     public enum GameState { Start, Playing, Paused}
     private GameState _state = GameState.Start;
+    
+    public bool ChoiceSelected = false;
     private void Awake()
     {
         if (INSTANCE == null)
@@ -39,8 +41,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-       
-        
+        ChoiceSelected = false;
         PlayerManager.INSTANCE.SetCanMove(false);
     }
 

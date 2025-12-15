@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -14,10 +15,13 @@ namespace Scenario
         [SerializeField] private InputActionProperty[] inputKeysForChoices;
         [SerializeField] private Sprite[] spritesOfInputKeys;
         [SerializeField] private Image visualOfInput;
-
+        [SerializeField] private Image fill;
+        [SerializeField] private float maxHoldTime = 2f;
         private UnityEvent _choiceButtonPressed;
         private InputAction _action;
 
+        private float _holdTime;
+        private bool _isHolding;
         private void Awake()
         {
             _choiceButtonPressed = null;
@@ -27,8 +31,6 @@ namespace Scenario
         {
             button.onClick.AddListener(onClickEvent);
             titleOfChoice.text = title;
-            Debug.Log(index);
-            Debug.Log(inputKeysForChoices[index].action.name);
             _action = inputKeysForChoices[index].action;
             _action.Enable();
         
@@ -36,14 +38,52 @@ namespace Scenario
         
             _choiceButtonPressed = new UnityEvent();
             _choiceButtonPressed.AddListener(onClickEvent);
+            InitAction();
+        }
+
+        private void InitAction()
+        {
+            _action.started += StartHold;
+            _action.canceled += RevertHold;
+            _action.performed += FinishHold;
+        }
+
+        private void FinishHold(InputAction.CallbackContext context)
+        {
+            _choiceButtonPressed?.Invoke();
+            _isHolding = false;
+            GameManager.INSTANCE.ChoiceSelected = false;
+            ClearAction();
+        }
+
+        private void StartHold(InputAction.CallbackContext context)
+        {
+            if(GameManager.INSTANCE.ChoiceSelected)return;
+            GameManager.INSTANCE.ChoiceSelected = true;
+            _holdTime = 0f;
+            _isHolding = true;
+        }
+
+        private void RevertHold(InputAction.CallbackContext context)
+        {
+           _isHolding = false;
+           GameManager.INSTANCE.ChoiceSelected = false;
+           fill.fillAmount = 0f;
+        }
+        private void ClearAction()
+        {
+            _action.started -= StartHold;
+            _action.canceled -= RevertHold;
+            _action.performed -= FinishHold;
         }
 
         private void Update()
         {
-            if (_action == null || !_action.IsPressed() || _choiceButtonPressed == null) return;
-            _choiceButtonPressed.Invoke();
-            _choiceButtonPressed.RemoveAllListeners();
-            _choiceButtonPressed = null;
+            if (_action == null || !_isHolding|| _choiceButtonPressed == null) return;
+            _holdTime += Time.deltaTime;
+            float holdTimeNormalized = math.clamp(_holdTime / maxHoldTime, 0f, 1f);
+            fill.fillAmount = holdTimeNormalized;
         }
+        
     }
 }

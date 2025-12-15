@@ -9199,6 +9199,94 @@ PrefabInstance:
       propertyPath: choicesParent
       value: 
       objectReference: {fileID: 1066712692}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_Interactions
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 7492b807-97be-4a00-8c22-ef56d6e4a044
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[1].m_Id
+      value: 824c0936-83b8-47f9-9c22-c6d865008ea0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[2].m_Id
+      value: 830fd9c7-34bd-43fe-ba11-2de232d23a09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[3].m_Id
+      value: 3268bea3-c47f-4d31-86f9-f2a288b109ee
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[4].m_Id
+      value: 0a632bea-3ee9-4cd0-839e-a80243ccbfca
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[5].m_Id
+      value: 8b40b219-3783-4a6d-9249-45c96e247231
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[6].m_Id
+      value: e4f1ee8b-25b0-4030-8429-78d664d31722
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[7].m_Id
+      value: e4f1ee8b-25b0-4030-8429-78d664d31722
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <OculusTouchController>{LeftHand}/primaryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <QuestTouchPlusController>{RightHand}/primaryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[2].m_Path
+      value: <QuestTouchPlusController>{LeftHand}/primaryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[3].m_Path
+      value: <OculusTouchController>{RightHand}/secondaryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[4].m_Path
+      value: <OculusTouchController>{LeftHand}/secondaryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[5].m_Path
+      value: <QuestTouchPlusController>{RightHand}/secondaryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[6].m_Path
+      value: <QuestTouchPlusController>{LeftHand}/secondaryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[7].m_Path
+      value: <QuestTouchPlusController>{LeftHand}/secondaryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[4].m_Action
+      value: Element 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[5].m_Action
+      value: Element 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[6].m_Action
+      value: Element 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: switchToNextDialogue.m_Action.m_SingletonActionBindings.Array.data[7].m_Action
+      value: Element 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8916381888068047760, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: m_Name
       value: Managers

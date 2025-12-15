@@ -598,6 +598,50 @@ MonoBehaviour:
   choicesParent: {fileID: 0}
   choicePrefab: {fileID: 8771153131892788169, guid: 880da9bb493f3b4459a2cf02805a5426, type: 3}
   dialogueDurationByChar: 0.1
+  switchToNextDialogue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Element 1
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 756599f3-f0f2-4605-88d6-b9cc4b3040c7
+      m_Processors: 
+      m_Interactions: Hold(duration=1,pressPoint=0.5)
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 1f433aab-ab99-4c3d-bbc6-877b82773c1e
+        m_Path: <OculusTouchController>{RightHand}/primaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 824c0936-83b8-47f9-9c22-c6d865008ea0
+        m_Path: <QuestTouchPlusController>{RightHand}/primaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 3268bea3-c47f-4d31-86f9-f2a288b109ee
+        m_Path: <OculusTouchController>{RightHand}/secondaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 8b40b219-3783-4a6d-9249-45c96e247231
+        m_Path: <QuestTouchPlusController>{RightHand}/secondaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!114 &5355877006445201912 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1968259567784965810, guid: 031629147cf1d5942a55738147202768, type: 3}

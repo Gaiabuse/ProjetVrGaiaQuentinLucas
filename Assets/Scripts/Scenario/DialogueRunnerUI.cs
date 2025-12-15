@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Scenario
 {
@@ -13,6 +15,15 @@ namespace Scenario
         [SerializeField] private Transform choicesParent;
         [SerializeField] private ChoiceButton choicePrefab;
         [SerializeField] private float dialogueDurationByChar = 0.1f;
+        [SerializeField] private InputActionProperty switchToNextDialogue;
+        private InputAction _action;
+
+        private void Start()
+        {
+            _action = switchToNextDialogue.action;
+            _action.Enable();
+        }
+
         public void SetUIGameObject(bool value)
         {
             uiGameObject.SetActive(value);
@@ -28,7 +39,8 @@ namespace Scenario
             foreach (var dialogueLine in dialogueSplit)
             {
                 dialogueUI.text = dialogueLine;
-                yield return new WaitForSeconds(dialogueDurationByChar*dialogueLine.Length);
+                Debug.Log(dialogueLine);
+                yield return new WaitUntil(_action.IsPressed);
             }
         }
 
@@ -45,7 +57,7 @@ namespace Scenario
 
         public void KillChoices()
         {
-            // tu aurais peut etre pu faire un systeme oû tu gardes les choix en cache, tu actives / désactives
+            // tu aurais peut-etre pu faire un systeme oû tu gardes les choix en cache, tu actives / désactives
             // et reset quand tu as besoin pour éviter la masse instanciation
             foreach (Transform children in choicesParent)
             {

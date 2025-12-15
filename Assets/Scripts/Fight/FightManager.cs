@@ -46,7 +46,6 @@ namespace Fight
             {
                 Destroy(gameObject);
             }
-            //StartFight(level); // à effacer, uniquement pour tests
         }
 
         #region Start / End
@@ -76,6 +75,7 @@ namespace Fight
         {
             _anxiety = 0f;
             PlayerManager.INSTANCE.AddLevelData(level,win);
+            _ = StatManager.Instance.IncrementLevelWin("A",level.levelName,win);
             metronome.EndFight();
             FightEnded.Invoke(win);
         }

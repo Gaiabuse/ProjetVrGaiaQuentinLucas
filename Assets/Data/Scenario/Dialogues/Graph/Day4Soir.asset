@@ -59,7 +59,7 @@ MonoBehaviour:
   Entry: 
   AsWin: 
   AsLoose: 
-  level: {fileID: 11400000, guid: 9d8ae156ead73de44a51552b6134a81f, type: 2}
+  Level: {fileID: 11400000, guid: 32e844d71fa064949adc92de664fb43a, type: 2}
 --- !u!114 &-5119245162969109919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   - {fileID: 1351166043526713715}
   - {fileID: -2098225293642311590}
   - {fileID: 8042637480149602932}
-  current: {fileID: 0}
+  Current: {fileID: 0}
 --- !u!114 &887417251614767327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,7 +540,7 @@ MonoBehaviour:
   Entry: 
   AsWin: 
   AsLoose: 
-  level: {fileID: 11400000, guid: 9d8ae156ead73de44a51552b6134a81f, type: 2}
+  Level: {fileID: 11400000, guid: 32e844d71fa064949adc92de664fb43a, type: 2}
 --- !u!114 &2068285291244628283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 230.66675, y: 125.66669}
+  position: {x: 248, y: 24}
   ports:
     keys:
     - Entry

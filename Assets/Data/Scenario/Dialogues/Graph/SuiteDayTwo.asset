@@ -261,7 +261,7 @@ MonoBehaviour:
   - {fileID: 3898432622706798907}
   - {fileID: -8515389217034550491}
   - {fileID: 8517361712911390274}
-  current: {fileID: 0}
+  Current: {fileID: 0}
 --- !u!114 &2203742863612526540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
   Entry: 
   AsWin: 
   AsLoose: 
-  level: {fileID: 11400000, guid: 770a83356d811ed47afed3b03814d981, type: 2}
+  Level: {fileID: 11400000, guid: 770a83356d811ed47afed3b03814d981, type: 2}
 --- !u!114 &3898432622706798907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
   Entry: 
   AsWin: 
   AsLoose: 
-  level: {fileID: 11400000, guid: 770a83356d811ed47afed3b03814d981, type: 2}
+  Level: {fileID: 11400000, guid: 770a83356d811ed47afed3b03814d981, type: 2}
 --- !u!114 &4090319763587044860
 MonoBehaviour:
   m_ObjectHideFlags: 0

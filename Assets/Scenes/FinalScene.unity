@@ -9240,7 +9240,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[3].dayName
-      value: Test
+      value: mardi soir suite
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[4].dayName
+      value: mercredi matin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[5].dayName
+      value: mercredi soir
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[6].dayName
+      value: 'jeudi soir '
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[0].fadeAtStart
@@ -9259,6 +9271,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[4].fadeAtStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[0].durationInMinutes
       value: 0
       objectReference: {fileID: 0}
@@ -9272,7 +9288,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[3].durationInMinutes
-      value: 20
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[5].durationInMinutes
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[6].durationInMinutes
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[2].dialogueOptions.Array.size
@@ -9280,6 +9304,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[3].dialogueOptions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[5].dialogueOptions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[6].dialogueOptions.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
@@ -9292,6 +9324,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[3].doorsLockedIndex.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[5].doorsLockedIndex.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
@@ -9309,6 +9345,14 @@ PrefabInstance:
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: 'days.Array.data[3].doorsLockedIndex.Array.data[0]'
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: 'days.Array.data[5].doorsLockedIndex.Array.data[0]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: 'days.Array.data[6].doorsLockedIndex.Array.data[0]'
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[0].dialogueOptions.Array.data[0].dialogue
@@ -9329,15 +9373,43 @@ PrefabInstance:
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[3].dialogueOptions.Array.data[0].dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 30b498b7a76286244acea33c096823fa, type: 2}
+      objectReference: {fileID: 11400000, guid: 7e4a3ee150c55db47a560a6ea8dd9d88, type: 2}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[4].dialogueOptions.Array.data[0].dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 42545040d9639134a938e0fe37f7b3fc, type: 2}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[5].dialogueOptions.Array.data[0].dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 72d89aeeb4633064e87affa3a8d0c1c1, type: 2}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[5].dialogueOptions.Array.data[1].dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 717c16905f4df274caa74fc547feb6af, type: 2}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[6].dialogueOptions.Array.data[0].dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: d8db9eef1c26b7a4aa53bf19d8ab4d08, type: 2}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[5].dialogueOptions.Array.data[1].isFallback
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[2].dialogueOptions.Array.data[1].conditions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[5].dialogueOptions.Array.data[1].conditions.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: 'days.Array.data[2].dialogueOptions.Array.data[1].conditions.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 7fd99181e6f83434ebc14834d1cc6c33, type: 2}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: 'days.Array.data[5].dialogueOptions.Array.data[1].conditions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a36138725ec872e41825a49ffc93c8ba, type: 2}
     - target: {fileID: 7919260814470035631, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: speakerUI
       value: 

@@ -382,7 +382,7 @@ MonoBehaviour:
   - {fileID: -3864812457393503167}
   - {fileID: -6893148227362408880}
   - {fileID: 7997472711074834915}
-  current: {fileID: 0}
+  Current: {fileID: 0}
 --- !u!114 &821012262298359759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,7 +870,7 @@ MonoBehaviour:
   Entry: 
   AsWin: 
   AsLoose: 
-  level: {fileID: 11400000, guid: 32e844d71fa064949adc92de664fb43a, type: 2}
+  Level: {fileID: 11400000, guid: d60fea2e09bca7549a832bd6e927f279, type: 2}
 --- !u!114 &8820664618492859271
 MonoBehaviour:
   m_ObjectHideFlags: 0

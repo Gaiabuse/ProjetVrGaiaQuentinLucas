@@ -11,6 +11,16 @@ namespace Data.Conditions
         [SerializeField] private bool isForWin;
         public override bool IsComplete(PlayerManager manager)
         {
+            if (manager == null)
+            {
+                Debug.LogError("PlayerManager est NULL");
+                return false;
+            }
+            if (levelData == null)
+            {
+                Debug.LogError("levelData est NULL (pas assigné dans l'asset FightCondition)");
+                return false;
+            }
             return  manager.CheckLevelIsWin(levelData,isForWin);
         }
     }

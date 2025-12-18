@@ -1,196 +1,163 @@
 using System;
-using UnityEngine;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
-using System.IO;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
+using UnityEngine;
 
 public class StatManager : MonoBehaviour
 {
-   private static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
-      private SheetsService service;
-      
-      public string spreadsheetId = "1jDJKW1bMuYCcQfJ5Ozomasuv2psPPmtFEKVgBrD-3zk";  // ID Google Sheets
-      public string sheetName = "Feuille_1";
+    private static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
+    private SheetsService service;
 
-      public static StatManager Instance;
+    [Header("Google Sheets")]
+    public string spreadsheetId = "1jDJKW1bMuYCcQfJ5Ozomasuv2psPPmtFEKVgBrD-3zk";
+    public string sheetName = "Feuille_1";
 
-      private void Awake()
-      {
-          if (Instance != null)
-          {
-              Destroy(this);
-              return;
-          }
+    public static StatManager Instance;
 
-          DontDestroyOnLoad(this);
-          Instance = this;
-      }
+    private Task _initTask;
 
-      private async void Start()
-      {
-          await InitService();
-      }
-      
-      private async Task InitService()
-      {
-          TextAsset jsonFile = Resources.Load<TextAsset>("service-account");
-          GoogleCredential credential;
-  
-          using (var stream = new MemoryStream(jsonFile.bytes))
-          {
-              credential = GoogleCredential.FromStream(stream).CreateScoped(Scopes);
-          }
-  
-          service = new SheetsService(new BaseClientService.Initializer()
-          {
-              HttpClientInitializer = credential,
-              ApplicationName = "UnityGoogleSheets",
-          });
-  
-          Debug.Log("Google Sheets prêt !");
-      }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-      public async Task UpdateCell(string cell, object newValue)
-      {
-          var valueRange = new ValueRange
-          {
-              Values = new List<IList<object>>
-              {
-                  new List<object> { newValue }
-              }
-          };
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        
+        _initTask = InitService();
+    }
 
-          string range = $"{sheetName}!{cell}";
+    private async Task EnsureReady()
+    {
+        if (_initTask == null) _initTask = InitService();
+        await _initTask;
 
-          var updateRequest = service.Spreadsheets.Values.Update(
-              valueRange,
-              spreadsheetId,
-              range
-          );
+        if (service == null)
+            throw new InvalidOperationException("Google Sheets service is null (InitService a échoué).");
+    }
 
-          updateRequest.ValueInputOption =
-              SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
+    private async Task InitService()
+    {
+        TextAsset jsonFile = Resources.Load<TextAsset>("service-account");
+        if (jsonFile == null)
+        {
+            Debug.LogError("service-account introuvable. Mets le fichier dans Assets/Resources/service-account.json");
+            return;
+        }
 
-          await updateRequest.ExecuteAsync();
+        GoogleCredential credential;
+        using (var stream = new MemoryStream(jsonFile.bytes))
+        {
+            credential = GoogleCredential.FromStream(stream).CreateScoped(Scopes);
+        }
 
-          Debug.Log($"Cellule {cell} mise à jour !");
-      }
-      
-      public async Task<int> ReadIntCell(string cell)
-      {
-          string range = $"{sheetName}!{cell}";
+        service = new SheetsService(new BaseClientService.Initializer
+        {
+            HttpClientInitializer = credential,
+            ApplicationName = "UnityGoogleSheets",
+        });
 
-          var request = service.Spreadsheets.Values.Get(spreadsheetId, range);
-          var response = await request.ExecuteAsync();
+        Debug.Log("Google Sheets prêt !");
+        await Task.CompletedTask;
+    }
 
-          if (response.Values == null || response.Values.Count == 0)
-          {
-              Debug.LogWarning($"Cellule {cell} vide, valeur = 0");
-              return 0;
-          }
+    public async Task UpdateCell(string cell, object newValue)
+    {
+        await EnsureReady();
 
-          string rawValue = response.Values[0][0].ToString();
+        var valueRange = new ValueRange
+        {
+            Values = new List<IList<object>> { new List<object> { newValue } }
+        };
 
-          if (int.TryParse(rawValue, out int result))
-              return result;
+        string range = $"{sheetName}!{cell}";
 
-          Debug.LogWarning($"Impossible de parser {rawValue}, valeur = 0");
-          return 0;
-      }
-      
-      public async Task IncrementCell(string cell, int increment = 1)
-      {
-          int currentValue = await ReadIntCell(cell);
-          int newValue = currentValue + increment;
+        var updateRequest = service.Spreadsheets.Values.Update(valueRange, spreadsheetId, range);
+        updateRequest.ValueInputOption =
+            SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
 
-          await UpdateCell(cell, newValue);
+        await updateRequest.ExecuteAsync();
+        Debug.Log($"Cellule {cell} mise à jour !");
+    }
 
-          Debug.Log($"Cellule {cell} : {currentValue} → {newValue}");
-      }
-      private async Task<int> AddLevelToEndOfColumn(string column, string levelName)
-      {
-          string range = $"{sheetName}!{column}:{column}";
+    public async Task<int> ReadIntCell(string cell)
+    {
+        await EnsureReady();
 
-          var request = service.Spreadsheets.Values.Get(spreadsheetId, range);
-          var response = await request.ExecuteAsync();
+        string range = $"{sheetName}!{cell}";
+        var request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+        var response = await request.ExecuteAsync();
 
-          int nextRow = 1;
+        if (response.Values == null || response.Values.Count == 0)
+            return 0;
 
-          if (response.Values != null)
-              nextRow = response.Values.Count + 1; // prochaine ligne libre
+        string rawValue = response.Values[0][0]?.ToString() ?? "0";
+        return int.TryParse(rawValue, out int result) ? result : 0;
+    }
 
-          string cell = $"{column}{nextRow}";
+    public async Task IncrementCell(string cell, int increment = 1)
+    {
+        await EnsureReady();
 
-          await UpdateCell(cell, levelName);
+        int currentValue = await ReadIntCell(cell);
+        int newValue = currentValue + increment;
+        await UpdateCell(cell, newValue);
+    }
 
-          Debug.Log($"Level {levelName} ajouté en {cell}");
+    private async Task<int> AddLevelToEndOfColumn(string column, string levelName)
+    {
+        await EnsureReady();
 
-          return nextRow; 
-      }
+        string range = $"{sheetName}!{column}:{column}";
+        var request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+        var response = await request.ExecuteAsync();
 
-      public async Task IncrementLevelWin(string column, string level, bool isWin)
-      {
-          int row = await GetLevelRow(column, level);
+        int nextRow = (response.Values != null) ? response.Values.Count + 1 : 1;
+        string cell = $"{column}{nextRow}";
+        await UpdateCell(cell, levelName);
+        return nextRow;
+    }
 
-          if (row == -1)
-          {
-              row = await AddLevelToEndOfColumn(column, level);
-              
-              await UpdateCell($"B{row}", 0);
-              await UpdateCell($"C{row}", 0);
-          }
+    public async Task IncrementLevelWin(string column, string level, bool isWin)
+    {
+        await EnsureReady();
 
-          string statCell = isWin ? $"B{row}" : $"C{row}";
-          await IncrementCell(statCell);
-      }
+        int row = await GetLevelRow(column, level);
+        if (row == -1)
+        {
+            row = await AddLevelToEndOfColumn(column, level);
+            await UpdateCell($"B{row}", 0);
+            await UpdateCell($"C{row}", 0);
+        }
 
-      private async Task<int> GetLevelRow(string column, string levelName)
-      {
-          string range = $"{sheetName}!{column}:{column}";
-          var request = service.Spreadsheets.Values.Get(spreadsheetId, range);
-          var response = await request.ExecuteAsync();
+        string statCell = isWin ? $"B{row}" : $"C{row}";
+        await IncrementCell(statCell);
+    }
 
-          if (response.Values == null)
-              return -1;
+    private async Task<int> GetLevelRow(string column, string levelName)
+    {
+        await EnsureReady();
 
-          for (int i = 0; i < response.Values.Count; i++)
-          {
-              if (response.Values[i].Count == 0) continue;
+        string range = $"{sheetName}!{column}:{column}";
+        var request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+        var response = await request.ExecuteAsync();
 
-              if (response.Values[i][0].ToString()
-                  .Equals(levelName, StringComparison.OrdinalIgnoreCase))
-                  return i + 1;
-          }
+        if (response.Values == null) return -1;
 
-          return -1;
-      }
-
-      private async Task<bool> LevelExistsInColumn(string column, string levelName)
-      {
-          string range = $"{sheetName}!{column}:{column}";
-
-          var request = service.Spreadsheets.Values.Get(spreadsheetId, range);
-          var response = await request.ExecuteAsync();
-
-          if (response.Values == null || response.Values.Count == 0)
-              return false;
-
-          foreach (var row in response.Values)
-          {
-              if (row.Count == 0) continue;
-
-              string cellValue = row[0].ToString();
-
-              if (cellValue.Equals(levelName, StringComparison.OrdinalIgnoreCase))
-                  return true;
-          }
-
-          return false;
-      }
-      
+        for (int i = 0; i < response.Values.Count; i++)
+        {
+            if (response.Values[i].Count == 0) continue;
+            if (response.Values[i][0].ToString().Equals(levelName, StringComparison.OrdinalIgnoreCase))
+                return i + 1;
+        }
+        return -1;
+    }
 }

@@ -8,10 +8,13 @@ public class NoteScript : MonoBehaviour
     [SerializeField] private float damages = 2f;
     [SerializeField] private float hitSpeed = 1f;
     [SerializeField] private int maxHit = 5;
+    [SerializeField] private float timeForPerfect = 0.2f;
+    [SerializeField] private float perfectMultiplier = 2f;
 
     [SerializeField] private float inputActivation = 0.5f;
     
     private bool _canHit = true;
+    private float spawnTime;
     protected bool _inTrigger = false;
     
     protected InputDevice _leftHand;
@@ -22,6 +25,7 @@ public class NoteScript : MonoBehaviour
         StartCoroutine(WaitForDamages());
         _leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         _rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+        spawnTime = Time.time;
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -46,7 +50,15 @@ public class NoteScript : MonoBehaviour
             bool leftPressed  = _leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
             if (rightPressed || leftPressed) 
             {
-                FightManager.INSTANCE.AddAnxiety(- damages);
+                if (Time.time - spawnTime < timeForPerfect)
+                {
+                    FightManager.INSTANCE.AddAnxiety(- damages * perfectMultiplier);
+                    Debug.Log("Perfect");
+                }
+                else
+                {
+                    FightManager.INSTANCE.AddAnxiety(- damages);
+                }
                 if (rightPressed)
                 {
                     _rightHand.SendHapticImpulse(0, 0.5f, 0.1f);

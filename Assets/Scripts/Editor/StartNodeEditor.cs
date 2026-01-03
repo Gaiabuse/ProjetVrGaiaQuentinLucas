@@ -16,11 +16,14 @@ namespace Editor
 			NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("Exit"));
 		
 			NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("SetPosition"));
-		
+			
 			if (node.SetPosition)
 			{
 				NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("StartDialoguePosition"));
 			}
+
+			NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("Characters"));
+			
 			serializedObject.ApplyModifiedProperties();
 		}
 	}

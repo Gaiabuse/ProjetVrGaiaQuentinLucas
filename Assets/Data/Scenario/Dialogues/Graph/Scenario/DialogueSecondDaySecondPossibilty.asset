@@ -1,0 +1,737 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6120666473443306553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: Assembly-CSharp::EndNode
+  graph: {fileID: 11400000}
+  position: {x: 936, y: 520}
+  ports:
+    keys:
+    - Entry
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -6120666473443306553}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 5909302123693826983}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+--- !u!114 &-5753868258849531326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 72, y: 56}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -5753868258849531326}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 1
+        node: {fileID: 6822697032485595931}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: -5753868258849531326}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: -5753868258849531326}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 6126399267849386394}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: 
+  DialogueLine: Oui, c'etait bien.
+  AnimationTrigger: 
+  Voices: []
+--- !u!114 &-1564224275831707701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 312, y: -200}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -1564224275831707701}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -392063099871728984}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: -1564224275831707701}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: -1564224275831707701}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -1159003361768454191}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: Maman
+  DialogueLine: "A tr\xE8s bien je suis contente pour toi. C'est important que tu
+    te fasses des copains."
+  AnimationTrigger: 
+  Voices: []
+--- !u!114 &-1159003361768454191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 584, y: -168}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -1159003361768454191}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -1564224275831707701}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: -1159003361768454191}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: -1159003361768454191}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 2520828014575359326}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: 
+  DialogueLine: Oui maman
+  AnimationTrigger: 
+  Voices: []
+--- !u!114 &-874640447639274815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: Assembly-CSharp::EndNode
+  graph: {fileID: 11400000}
+  position: {x: 680, y: 120}
+  ports:
+    keys:
+    - Entry
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -874640447639274815}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 6126399267849386394}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+--- !u!114 &-543214874091551530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 405.5659, y: 423.76468}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -543214874091551530}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 6915022766515873389}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: -543214874091551530}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: -543214874091551530}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 5909302123693826983}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: Maman
+  DialogueLine: "Oh mon ch\xE9ri, ne t'inqui\xE8te pas, \xE7a va aller."
+  AnimationTrigger: 
+  Voices: []
+--- !u!114 &-392063099871728984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 24, y: -200}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -392063099871728984}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 6822697032485595931}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: -392063099871728984}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: -392063099871728984}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -1564224275831707701}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: 
+  DialogueLine: "C'\xE9tait super, je me suis fais pleins d'amis trop cool ! |On
+    a jouer au ballon et j'ai gagner, c'etait trop bien !"
+  AnimationTrigger: 
+  Voices: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba587dcc4dfeeb946900bcd69593c30b, type: 3}
+  m_Name: DialogueSecondDaySecondPossibilty
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueGraph
+  nodes:
+  - {fileID: 8119512945047746816}
+  - {fileID: 6822697032485595931}
+  - {fileID: -392063099871728984}
+  - {fileID: -5753868258849531326}
+  - {fileID: 6126399267849386394}
+  - {fileID: -1564224275831707701}
+  - {fileID: -874640447639274815}
+  - {fileID: 6915022766515873389}
+  - {fileID: -543214874091551530}
+  - {fileID: 5909302123693826983}
+  - {fileID: -6120666473443306553}
+  - {fileID: -1159003361768454191}
+  - {fileID: 2520828014575359326}
+  Current: {fileID: 0}
+--- !u!114 &2520828014575359326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.EndNode
+  graph: {fileID: 11400000}
+  position: {x: 888, y: -152}
+  ports:
+    keys:
+    - Entry
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 2520828014575359326}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -1159003361768454191}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+--- !u!114 &5909302123693826983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 664, y: 440}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 5909302123693826983}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -543214874091551530}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: 5909302123693826983}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: 5909302123693826983}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -6120666473443306553}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: 
+  DialogueLine: Merci Maman...
+  AnimationTrigger: 
+  Voices: []
+--- !u!114 &6126399267849386394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 376, y: 88}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 6126399267849386394}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -5753868258849531326}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: 6126399267849386394}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: 6126399267849386394}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -874640447639274815}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: Maman
+  DialogueLine: "Tant mieux mon poussin. Jean arrive , je suis en train de faire
+    \xE0 manger."
+  AnimationTrigger: 
+  Voices: []
+--- !u!114 &6822697032485595931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: -232, y: -72}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    - Choices 1
+    - Choices 2
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 6822697032485595931}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Exit
+        node: {fileID: 8119512945047746816}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: 6822697032485595931}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: 6822697032485595931}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -392063099871728984}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: Choices 1
+      _node: {fileID: 6822697032485595931}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -5753868258849531326}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: Choices 2
+      _node: {fileID: 6822697032485595931}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 6915022766515873389}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - "Exag\xE9rer"
+  - 'Positiver '
+  - "honn\xEAtet\xE9"
+  SpeakerName: Maman
+  DialogueLine: "Coucou mon ch\xE9rie, ta rentr\xE9e c'est bien pass\xE9?tu t'es
+    fais des copains?"
+  AnimationTrigger: 
+  Voices: []
+--- !u!114 &6915022766515873389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 63.891296, y: 357.37003}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 6915022766515873389}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 2
+        node: {fileID: 6822697032485595931}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: 6915022766515873389}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: 6915022766515873389}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -543214874091551530}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: 
+  DialogueLine: Je me suis pas encore fais d'amis maman...
+  AnimationTrigger: 
+  Voices:
+  - {fileID: 0}
+--- !u!114 &8119512945047746816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696e8499ca4ed4741872ee08d530101e, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: Assembly-CSharp::StartNode
+  graph: {fileID: 11400000}
+  position: {x: -488, y: -72}
+  ports:
+    keys:
+    - Exit
+    values:
+    - _fieldName: Exit
+      _node: {fileID: 8119512945047746816}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 6822697032485595931}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Exit: 
+  SetPosition: 1
+  Characters:
+  - CharacterName: Maman
+    IsPresent: 1
+    Position: {x: -3.2, y: 0, z: 19.26}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - CharacterName: Jean
+    IsPresent: 0
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0.9961947, z: 0, w: -0.08715577}
+  StartDialoguePosition: {x: -0.07, y: 0, z: 6.95}

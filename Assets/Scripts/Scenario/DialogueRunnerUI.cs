@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,7 @@ namespace Scenario
 {
     public class DialogueRunnerUI: MonoBehaviour
     {
+        [SerializeField] private DialogueRunner runner;
         [SerializeField] private GameObject uiGameObject;
         [SerializeField] private TMP_Text speakerUI;
         [SerializeField] private TMP_Text dialogueUI;
@@ -34,14 +36,17 @@ namespace Scenario
             speakerUI.text = name;
         }
 
-        public IEnumerator SetDialogue(string[] dialogueSplit)
+        public IEnumerator SetDialogue(string[] dialogueSplit,AudioClip[] voices, CharacterAnimator currentSpeaker)
         {
-            foreach (var dialogueLine in dialogueSplit)
+            for (int i = 0; i < dialogueSplit.Length; i++)
             {
-                dialogueUI.text = dialogueLine;
-                Debug.Log(dialogueLine);
+                runner.StopVoices();
+                dialogueUI.text = dialogueSplit[i];
+                Debug.Log(dialogueSplit[i]);
+                StartCoroutine(runner.PlayVoices(voices[i],currentSpeaker)); 
                 yield return new WaitUntil(_action.IsPressed);
             }
+            
         }
 
         public List<ChoiceButton> InstantiateChoices(int choicesCount)

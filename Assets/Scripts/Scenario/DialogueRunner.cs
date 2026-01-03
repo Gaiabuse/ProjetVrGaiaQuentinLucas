@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using Exploration;
 using Fight;
 using Nodes;
@@ -11,8 +12,10 @@ namespace Scenario
     public class DialogueRunner : MonoBehaviour
     {
         [SerializeField] private DialogueRunnerUI dialogueRunnerUI;
-        [SerializeField] private Animator animatorManager;
+        
         [SerializeField] private Vector3 positionForFight;
+        [SerializeField] private Transform audioListener;
+        [SerializeField] private List<CharacterAnimator> characters;
         private DialogueGraph _graph;
         private Vector3 _positionStartFight;
         private Coroutine _dialogueRunner;
@@ -22,12 +25,12 @@ namespace Scenario
         private bool _fightEnded;
         private bool _switchNode;
         private Coroutine _dayTimer = null;
+        private bool _isTalking;
         private void OnEnable()
         {
-            // b ? c'po clair, hésite pas à donner un nom un poil + explicite
-            FightManager.FightEnded += b =>
+            FightManager.FightEnded += isWin =>
             {
-                _asWin = b;
+                _asWin = isWin;
                 _fightEnded = true;
             };
             GameManager.ReturnToMainMenu += StopDayTimer;
@@ -73,11 +76,32 @@ namespace Scenario
             dialogueRunnerUI.SetUIGameObject(false);
             PlayerManager.INSTANCE.SetCanMove(true);
         }
-
+        private CharacterAnimator GetCharacter(string name)
+        {
+            return characters.Find(c => c.CharacterName == name);
+        }
         private void SetPosition(StartNode node)
         {
             if(node.SetPosition)
                 PlayerManager.INSTANCE.TeleportPlayer(node.StartDialoguePosition);
+        }
+
+        private void SetCharacterPosition(StartNode node)
+        {
+            foreach (var characterSettings in node.Characters)
+            {
+                CharacterAnimator character = GetCharacter(characterSettings.CharacterName);
+        
+                if (character != null)
+                {
+                    character.SetActiveCharacter(characterSettings.IsPresent);
+                    if (characterSettings.IsPresent)
+                    {
+                        character.SetCharacterPosition(characterSettings.Position);
+                        character.SetCharacterRotation(characterSettings.Rotation);
+                    }
+                }
+            }
         }
         private IEnumerator Runner()
         {
@@ -88,7 +112,6 @@ namespace Scenario
             string[] dataParts = data.Split('/');// dataParts[0] = type of the node
             // if is DialogueNode : dataParts[1] = speaker name, dataParts[2] = dialogue
             ChooseAction(dataParts,currentNode, out waitEndOfAction);
-
             if (waitEndOfAction)
             {
                 yield return new WaitUntil(() => _switchNode);
@@ -101,6 +124,7 @@ namespace Scenario
             {
                 case "Start":
                     SetPosition(currentNode as StartNode);
+                    SetCharacterPosition(currentNode as StartNode);
                     NextNode("Exit");
                     waitEndOfAction = false;
                     break;
@@ -111,6 +135,13 @@ namespace Scenario
                 case "Fight":
                     _fightCoroutine = StartCoroutine(FightNode(currentNode as FightNode));
                     waitEndOfAction = true;
+                    break;
+                case "Sound" :
+                    if (currentNode is SoundNode soundNode)
+                    {
+                        StartCoroutine(SoundNode(soundNode.SoundEvent));
+                        waitEndOfAction = true;
+                    }
                     break;
                 case "End":
                     EndDialogue();
@@ -123,20 +154,56 @@ namespace Scenario
     
         private void DialogueNode(string[] dataParts, DialogueNode currentNode)
         {
+            CharacterAnimator currentSpeaker = GetCharacter(currentNode.SpeakerName);
+            if (!string.IsNullOrEmpty(currentNode.AnimationTrigger)) {
+                currentSpeaker?.TriggerAnimation(currentNode.AnimationTrigger);
+            }
             PlayerManager.INSTANCE.AddDialogueNode(currentNode);
             dialogueRunnerUI.SetSpeaker($"- {dataParts[1]} -");
             string[] dialogueSplit = DialogueSplit(dataParts[2]); 
-            StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode ));
+            StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode.Voices,currentSpeaker,currentNode));
         }
         private string[] DialogueSplit(string dialogue)
         {
             return  dialogue.Split('|');
         }
-        private IEnumerator InstantiateDialogues(string[] dialogueSplit, DialogueNode dialogueNode)
+        private IEnumerator InstantiateDialogues(string[] dialogueSplit, AudioClip[] voices,
+            CharacterAnimator currentSpeaker, DialogueNode dialogueNode)
         {
-            Coroutine dialogueCoroutine = StartCoroutine(dialogueRunnerUI.SetDialogue(dialogueSplit));
+            Coroutine dialogueCoroutine = StartCoroutine(dialogueRunnerUI.SetDialogue(dialogueSplit,voices,currentSpeaker));
             yield return dialogueCoroutine;
             _choicesCoroutine = StartCoroutine(InstantiateChoices(dialogueNode));
+        }
+
+        private IEnumerator SoundNode(AudioClip sound)
+        {
+            if (sound == null) yield break;
+    
+            SoundManager.Instance.PlaySfx(sound, audioListener);
+            
+            yield return new WaitForSeconds(sound.length);
+    
+            NextNode("Exit");
+        }
+        
+        public IEnumerator PlayVoices(AudioClip voice, CharacterAnimator currentSpeaker)
+        {
+            if (voice != null)
+            {
+                if (currentSpeaker != null) currentSpeaker.PlayTalk();
+                
+                float duration = SoundManager.Instance.PlayVoice(voice, audioListener);
+                _isTalking = true;
+                
+                yield return new WaitForSeconds(duration);
+                if (currentSpeaker != null) currentSpeaker.PlayIdle();
+                _isTalking = false;
+            }
+        }
+        public void StopVoices()
+        {
+            SoundManager.Instance.StopVoice();
+            _isTalking = false;
         }
     
         private IEnumerator InstantiateChoices(DialogueNode node)
@@ -155,7 +222,6 @@ namespace Scenario
                     choices[i].Init(node.Choices[i], () =>
                     {
                         NextNode("Choices " + i1);
-                        animatorManager.SetTrigger("Choices"+i1);
                     },i);
                 }
             }

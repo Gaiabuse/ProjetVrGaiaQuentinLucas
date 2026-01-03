@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5753354074505932756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696e8499ca4ed4741872ee08d530101e, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: Assembly-CSharp::StartNode
+  graph: {fileID: 11400000}
+  position: {x: -589, y: -179.5}
+  ports:
+    keys:
+    - Exit
+    values:
+    - _fieldName: Exit
+      _node: {fileID: -5753354074505932756}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -3448771779782136672}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Exit: 
+  SetPosition: 1
+  Characters: []
+  StartDialoguePosition: {x: -3.97, y: 0, z: 16.16}
+--- !u!114 &-3448771779782136672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: -296, y: -216}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -3448771779782136672}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Exit
+        node: {fileID: -5753354074505932756}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: -3448771779782136672}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: -3448771779782136672}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 2942689416934897250}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: Maman
+  DialogueLine: "Mon ch\xE9ri, Jean arrive bient\xF4t.| Reste bien dans ta chambre,
+    et couche toi, tu as cours demain."
+  AnimationTrigger: 
+  Voices:
+  - Guid:
+      Data1: 1282235960
+      Data2: 1275188335
+      Data3: 138246331
+      Data4: -593924476
+    Path: event:/MomTalkingBehindTheDoor1
+  - Guid:
+      Data1: 1214005388
+      Data2: 1142929882
+      Data3: 1754637194
+      Data4: -815366495
+    Path: event:/MomTalkingBehindTheDoor1 2
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba587dcc4dfeeb946900bcd69593c30b, type: 3}
+  m_Name: FirstDialogueDayOne
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueGraph
+  nodes:
+  - {fileID: -5753354074505932756}
+  - {fileID: -3448771779782136672}
+  - {fileID: 2942689416934897250}
+  Current: {fileID: 0}
+--- !u!114 &2942689416934897250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: Assembly-CSharp::EndNode
+  graph: {fileID: 11400000}
+  position: {x: -14, y: -141}
+  ports:
+    keys:
+    - Entry
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 2942689416934897250}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -3448771779782136672}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 

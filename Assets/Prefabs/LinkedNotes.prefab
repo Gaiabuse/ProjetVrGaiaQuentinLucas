@@ -281,7 +281,10 @@ MonoBehaviour:
   damages: 2
   hitSpeed: 1
   maxHit: 5
+  timeForPerfect: 1
+  perfectMultiplier: 2
   inputActivation: 0.5
+  perfectEffectPrefab: {fileID: 9050084491756376003, guid: 5100ab86c75a45340a9d5788f3d95158, type: 3}
   nextNoteMaxDistance: 6
   counterDamages: -2
   meshRenderer: {fileID: 9094182284337160102}

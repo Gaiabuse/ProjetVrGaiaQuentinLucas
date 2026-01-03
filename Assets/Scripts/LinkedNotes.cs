@@ -136,7 +136,17 @@ public class LinkedNotes : NoteScript
             bool leftPressed  = _leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
             if (rightPressed || leftPressed)
             {
-                FightManager.INSTANCE.AddAnxiety(counterDamages);
+                if (Time.time - spawnTime < timeForPerfect)
+                {
+                    FightManager.INSTANCE.AddAnxiety(- counterDamages * perfectMultiplier);
+                    GameObject perfectGO = Instantiate(perfectEffectPrefab);
+                    perfectGO.transform.position = transform.position;
+                    Debug.Log("Perfect");
+                }
+                else
+                {
+                    FightManager.INSTANCE.AddAnxiety(- counterDamages);
+                }
                 if (rightPressed)
                 {
                     _rightHand.SendHapticImpulse(0, 0.5f, maxLineTime);

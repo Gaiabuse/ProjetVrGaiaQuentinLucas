@@ -8,13 +8,14 @@ public class NoteScript : MonoBehaviour
     [SerializeField] private float damages = 2f;
     [SerializeField] private float hitSpeed = 1f;
     [SerializeField] private int maxHit = 5;
-    [SerializeField] private float timeForPerfect = 0.2f;
-    [SerializeField] private float perfectMultiplier = 2f;
+    [SerializeField] protected float timeForPerfect = 0.2f;
+    [SerializeField] protected float perfectMultiplier = 2f;
 
     [SerializeField] private float inputActivation = 0.5f;
+    [SerializeField] protected GameObject perfectEffectPrefab;
     
     private bool _canHit = true;
-    private float spawnTime;
+    protected float spawnTime;
     protected bool _inTrigger = false;
     
     protected InputDevice _leftHand;
@@ -53,6 +54,8 @@ public class NoteScript : MonoBehaviour
                 if (Time.time - spawnTime < timeForPerfect)
                 {
                     FightManager.INSTANCE.AddAnxiety(- damages * perfectMultiplier);
+                    GameObject perfectGO = Instantiate(perfectEffectPrefab);
+                    perfectGO.transform.position = transform.position;
                     Debug.Log("Perfect");
                 }
                 else

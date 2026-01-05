@@ -1315,6 +1315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fight
       objectReference: {fileID: 0}
+    - target: {fileID: 6233276062127502107, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6939340760031476834, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: zAxisPosition
       value: -995.4
@@ -1322,6 +1326,10 @@ PrefabInstance:
     - target: {fileID: 7341338975348447683, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415125979925549519, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      propertyPath: maxSliderValue
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7726265223202386027, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: endMusicCutTime

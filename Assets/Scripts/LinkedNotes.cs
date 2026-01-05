@@ -168,7 +168,6 @@ public class LinkedNotes : NoteScript
         }
     }
     
-    
 
     IEnumerator WaitForDestroy()
     {
@@ -178,6 +177,5 @@ public class LinkedNotes : NoteScript
         yield return new WaitForSeconds(maxLineTime);
         Destroy(gameObject);
     }
-    
 
 }

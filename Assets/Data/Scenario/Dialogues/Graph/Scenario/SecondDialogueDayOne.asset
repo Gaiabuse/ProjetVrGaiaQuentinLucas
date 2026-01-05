@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: End
   m_EditorClassIdentifier: Assembly-CSharp::EndNode
   graph: {fileID: 11400000}
-  position: {x: 324, y: -36.333313}
+  position: {x: 552, y: -152}
   ports:
     keys:
     - Entry
@@ -24,13 +24,73 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: AsWin
-        node: {fileID: 1434747187573564840}
+        node: {fileID: -5062134663231012526}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   Entry: 
+--- !u!114 &-5062134663231012526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cb2401a803c174b88437bb77a6cfe2, type: 3}
+  m_Name: Fight
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.FightNode
+  graph: {fileID: 11400000}
+  position: {x: 264, y: -40}
+  ports:
+    keys:
+    - Entry
+    - AsWin
+    - AsLoose
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -5062134663231012526}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 8828467195050227275}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: AsWin
+      _node: {fileID: -5062134663231012526}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -5915664639965208000}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: AsLoose
+      _node: {fileID: -5062134663231012526}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 7882292235631226122}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  AsWin: 
+  AsLoose: 
+  Level: {fileID: 11400000, guid: 0cd9551a717a43c408ef3dad0b48c9a9, type: 2}
 --- !u!114 &-3533706375430120369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +128,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: 1434747187573564840}
+        node: {fileID: 8828467195050227275}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -76,13 +136,7 @@ MonoBehaviour:
       _dynamic: 0
   Entry: 
   Exit: 
-  SoundEvent:
-    Guid:
-      Data1: -1285080215
-      Data2: 1282065730
-      Data3: -1975896956
-      Data4: 2073178483
-    Path: event:/SlamDoor
+  SoundEvent: {fileID: 8300000, guid: 55d7702857f320d49a9db46999e52d24, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,12 +151,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueGraph
   nodes:
   - {fileID: 723918043564617938}
-  - {fileID: 1434747187573564840}
   - {fileID: -5915664639965208000}
   - {fileID: 7882292235631226122}
   - {fileID: 712107205739993571}
   - {fileID: -3533706375430120369}
-  Current: {fileID: 1434747187573564840}
+  - {fileID: 8828467195050227275}
+  - {fileID: -5062134663231012526}
+  Current: {fileID: 0}
 --- !u!114 &712107205739993571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +171,7 @@ MonoBehaviour:
   m_Name: End
   m_EditorClassIdentifier: Assembly-CSharp::EndNode
   graph: {fileID: 11400000}
-  position: {x: 632, y: 152}
+  position: {x: 856, y: 40}
   ports:
     keys:
     - Entry
@@ -166,67 +221,16 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 0
+  Characters:
+  - CharacterName: Maman
+    IsPresent: 0
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - CharacterName: Jean
+    IsPresent: 0
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
   StartDialoguePosition: {x: 0, y: 0, z: 0}
---- !u!114 &1434747187573564840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78cb2401a803c174b88437bb77a6cfe2, type: 3}
-  m_Name: Fight
-  m_EditorClassIdentifier: Assembly-CSharp::FightNode
-  graph: {fileID: 11400000}
-  position: {x: 24, y: -40}
-  ports:
-    keys:
-    - Entry
-    - AsWin
-    - AsLoose
-    values:
-    - _fieldName: Entry
-      _node: {fileID: 1434747187573564840}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Exit
-        node: {fileID: -3533706375430120369}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: AsWin
-      _node: {fileID: 1434747187573564840}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Entry
-        node: {fileID: -5915664639965208000}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: AsLoose
-      _node: {fileID: 1434747187573564840}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Entry
-        node: {fileID: 7882292235631226122}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  Entry: 
-  AsWin: 
-  AsLoose: 
-  Level: {fileID: 11400000, guid: 0cd9551a717a43c408ef3dad0b48c9a9, type: 2}
 --- !u!114 &7882292235631226122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +244,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 376, y: 136}
+  position: {x: 600, y: 24}
   ports:
     keys:
     - Entry
@@ -253,7 +257,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: AsLoose
-        node: {fileID: 1434747187573564840}
+        node: {fileID: -5062134663231012526}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -285,4 +289,66 @@ MonoBehaviour:
   - 
   SpeakerName: 
   DialogueLine: '*pleure*'
+  AnimationTrigger: 
   Voices: []
+--- !u!114 &8828467195050227275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a41f2a37dde5a9499606bf4d2a24d8e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.DialogueNode
+  graph: {fileID: 11400000}
+  position: {x: 8, y: 56}
+  ports:
+    keys:
+    - Entry
+    - Choices
+    - Choices 0
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 8828467195050227275}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Exit
+        node: {fileID: -3533706375430120369}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices
+      _node: {fileID: 8828467195050227275}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Choices 0
+      _node: {fileID: 8828467195050227275}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -5062134663231012526}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Entry: 
+  Choices:
+  - 
+  SpeakerName: Jean
+  DialogueLine: "C'est encore pas pr\xEAt!"
+  AnimationTrigger: 
+  Voices:
+  - {fileID: 8300000, guid: aa01267380d28a349a3fdbd3cf23ebf5, type: 3}

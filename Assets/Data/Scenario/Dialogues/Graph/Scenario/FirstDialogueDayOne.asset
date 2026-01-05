@@ -95,18 +95,8 @@ MonoBehaviour:
     et couche toi, tu as cours demain."
   AnimationTrigger: 
   Voices:
-  - Guid:
-      Data1: 1282235960
-      Data2: 1275188335
-      Data3: 138246331
-      Data4: -593924476
-    Path: event:/MomTalkingBehindTheDoor1
-  - Guid:
-      Data1: 1214005388
-      Data2: 1142929882
-      Data3: 1754637194
-      Data4: -815366495
-    Path: event:/MomTalkingBehindTheDoor1 2
+  - {fileID: 8300000, guid: 8c84264a661880a4b8f1901b2c02f853, type: 3}
+  - {fileID: 8300000, guid: 5802160a52c24b947b19239eb2fcc2d2, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

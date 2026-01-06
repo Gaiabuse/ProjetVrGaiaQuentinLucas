@@ -33,13 +33,15 @@ namespace Exploration
             // évite au maxxxxiiiiiiimmmmuuuuum les checks dans l'update que tu peux faire de manière evenementielle ( quand inHook change, par exemple )
             if (_inHook && panelDescription.activeInHierarchy)//SecondCheck
             {
+                Debug.Log("ça desactive dans le hook");
                 panelDescription.SetActive(false);
             }
         }
         public void TakeObject(SelectEnterEventArgs args)
         {
-            if (objectData == null || !_startFonction) return;
             
+            if (objectData == null || !_startFonction) return;
+            Debug.Log("takeObject");
             AddObject();
             ActiveDescription();
         }

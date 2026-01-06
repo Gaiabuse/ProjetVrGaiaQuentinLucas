@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1c84b441e6f344d9ca8a0f093c3ec9, type: 3}
   m_Name: PhotoDeFamille
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
-  successID: PHOTO_FAMILLE
-  descriptionSuccess: vous avez obtenu la photo de famille
-  descriptionObjet: photo de famille
+  ObjectName: Photo de famille
+  DescriptionObject: Photo de famille

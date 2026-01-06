@@ -16,6 +16,7 @@ namespace Scenario
         [SerializeField] private Vector3 positionForFight;
         [SerializeField] private Transform audioListener;
         [SerializeField] private EndMenu endMenu;
+        [SerializeField] private TutoManager tutoManager;
         [SerializeField] private List<CharacterAnimator> characters;
         private DialogueGraph _graph;
         private Coroutine _dialogueRunner;
@@ -48,11 +49,7 @@ namespace Scenario
             };
             GameManager.ReturnToMainMenu -= StopDayTimer;
         }
-
-        private void Update()
-        {
-            Debug.Log("FightManager : " + FightManager.INSTANCE);
-        }
+        
         private void StopDayTimer()
         {
             if (_dayTimer != null)
@@ -85,7 +82,7 @@ namespace Scenario
         }
         private CharacterAnimator GetCharacter(string name)
         {
-            Debug.Log(characters.Find(c => c.CharacterName == name));
+          
             return characters.Find(c => c.CharacterName == name);
         }
         private void SetPosition(StartNode node)
@@ -271,21 +268,19 @@ namespace Scenario
 
         private void SetFightNode(FightNode node)
         {
-            if (node == null)
-            {
-                Debug.LogError("SetFightNode appelé avec node = NULL");
-                return;
-            }
-            if (FightManager.INSTANCE == null)
-            {
-                Debug.LogError("SetFightNode appelé avec Instance fight manager = NULL");
-                return;
-            }
             _fightEnded = false;
             _positionBehindFight = PlayerManager.INSTANCE.GetPlayerPosition();
             PlayerManager.INSTANCE.TeleportPlayer(positionForFight);
             dialogueRunnerUI.SetUIGameObject(false);
-            if (node != null) FightManager.INSTANCE.StartFight(node.Level);
+            if (node != null)
+            {
+                if (node.isTuto)
+                {
+                    tutoManager.StartTuto(node.Level);
+                    return;
+                }
+                FightManager.INSTANCE.StartFight(node.Level);
+            }
         }
 
         private void EndFightNode()

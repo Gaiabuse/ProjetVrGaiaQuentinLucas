@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Fight;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -28,9 +29,9 @@ public class LinkedNotes : NoteScript
     protected override void Awake()
     {
         base.Awake();
-        _maxMeasure = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(0);
-        _maxBeat = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(1);
-        _maxDivision = FightManager.INSTANCE.GetLevel().sheetMusic.GetLength(2);
+        _maxMeasure = FightManager.INSTANCE.GetLevel().SheetMusic.GetLength(0);
+        _maxBeat = FightManager.INSTANCE.GetLevel().SheetMusic.GetLength(1);
+        _maxDivision = FightManager.INSTANCE.GetLevel().SheetMusic.GetLength(2);
     }
 
     public void ChangeSheetMusicPosition(Vector3Int newPosition)
@@ -118,7 +119,7 @@ public class LinkedNotes : NoteScript
     void LinkNote()
     {
         int divisionsToNextNote = CountDivisionsToNextNote(_sheetMusicPosition.x,_sheetMusicPosition.y,_sheetMusicPosition.z);
-        float timePerDivision = 60f / FightManager.INSTANCE.GetLevel().bpm / FightManager.INSTANCE.GetLevel().beat;
+        float timePerDivision = 60f / FightManager.INSTANCE.GetLevel().Bpm / FightManager.INSTANCE.GetLevel().Beat;
         float duration = timePerDivision * divisionsToNextNote;
         link.Move(_nextNotePos, duration);
     }

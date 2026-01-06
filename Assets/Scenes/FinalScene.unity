@@ -341,6 +341,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!82 &201817528 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6575889680324201454, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+  m_PrefabInstance: {fileID: 8561722466580451616}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &245188379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4463,6 +4468,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e0f6cb455b03fc4a809cfe2d2089791, type: 3}
       insertIndex: -1
       addedObject: {fileID: 445628489}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e0f6cb455b03fc4a809cfe2d2089791, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 445628491}
   m_SourcePrefab: {fileID: 100100000, guid: 2e0f6cb455b03fc4a809cfe2d2089791, type: 3}
 --- !u!1 &445628488 stripped
 GameObject:
@@ -4491,6 +4499,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &445628491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445628488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ae3fde929542b89609786b9170067e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.CharacterAnimator
+  CharacterName: Maman
+  animator: {fileID: 445628489}
+  OnAnimationEnd: 0
 --- !u!1 &455739034 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3560812573408622977, guid: 1d8f95c71f829ef4098f7c782ac6fedd, type: 3}
@@ -5916,21 +5939,9 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ObjectZoom, Assembly-CSharp
-        m_MethodName: GrabObject
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 769435748}
-        m_TargetAssemblyTypeName: SimpleXRObjetScript, Assembly-CSharp
-        m_MethodName: ActiveDescription
+        m_TargetAssemblyTypeName: Exploration.Object, Assembly-CSharp
+        m_MethodName: TakeObject
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5943,21 +5954,9 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ObjectZoom, Assembly-CSharp
-        m_MethodName: UngrabObject
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 769435748}
-        m_TargetAssemblyTypeName: SimpleXRObjetScript, Assembly-CSharp
-        m_MethodName: DesactiveDescriptionApresGrab
+        m_TargetAssemblyTypeName: Exploration.Object, Assembly-CSharp
+        m_MethodName: DisableDescriptionAfterGrab
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10323,6 +10322,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4340c50e8c03db4988ea1244fcd4bb9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1559391970}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4340c50e8c03db4988ea1244fcd4bb9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1559391972}
   m_SourcePrefab: {fileID: 100100000, guid: b4340c50e8c03db4988ea1244fcd4bb9, type: 3}
 --- !u!1 &1559391969 stripped
 GameObject:
@@ -10351,6 +10353,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1559391972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559391969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ae3fde929542b89609786b9170067e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.CharacterAnimator
+  CharacterName: Jean
+  animator: {fileID: 1559391970}
+  OnAnimationEnd: 0
 --- !u!1001 &1573956558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14251,17 +14268,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5355877006445201912, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: endMenu
+      value: 
+      objectReference: {fileID: 1709226050849146091}
+    - target: {fileID: 5355877006445201912, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: audioListener
       value: 
       objectReference: {fileID: 441087507}
     - target: {fileID: 5355877006445201912, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: 'characters.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 445628491}
     - target: {fileID: 5355877006445201912, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: 'characters.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1559391972}
     - target: {fileID: 6163812511872481822, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: mainMenuGameObject
       value: 
@@ -14288,15 +14309,15 @@ PrefabInstance:
       objectReference: {fileID: 1819270308}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[0].dayName
-      value: "mardi soir d\xE9but"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
-      propertyPath: days.Array.data[1].dayName
       value: "Lundi soir d\xE9but"
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
-      propertyPath: days.Array.data[2].dayName
+      propertyPath: days.Array.data[1].dayName
       value: Lundi soir suite
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[2].dayName
+      value: "mardi soir d\xE9but"
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[7].dayName
@@ -14308,11 +14329,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[1].fadeAtStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[2].fadeAtStart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[7].fadeAtStart
@@ -14324,11 +14345,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[0].durationInMinutes
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[2].durationInMinutes
-      value: 0
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[7].durationInMinutes
@@ -14340,11 +14361,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[0].dialogueOptions.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[2].dialogueOptions.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[7].dialogueOptions.Array.size
@@ -14356,15 +14377,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[0].doorsLockedIndex.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
-      propertyPath: days.Array.data[1].doorsLockedIndex.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
-      propertyPath: days.Array.data[2].doorsLockedIndex.Array.size
+      propertyPath: days.Array.data[1].doorsLockedIndex.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: days.Array.data[2].doorsLockedIndex.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[8].doorsLockedIndex.Array.size
@@ -14381,7 +14402,7 @@ PrefabInstance:
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[0].dialogueOptions.Array.data[0].dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 98d6cc38130b99047a2a486c0543399c, type: 2}
+      objectReference: {fileID: 11400000, guid: 7d53bee1bc0f39f4f82c35e2f8883c83, type: 2}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[0].dialogueOptions.Array.data[1].dialogue
       value: 
@@ -14389,11 +14410,11 @@ PrefabInstance:
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[1].dialogueOptions.Array.data[0].dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 7d53bee1bc0f39f4f82c35e2f8883c83, type: 2}
+      objectReference: {fileID: 11400000, guid: bf24e63420d0368488b8f954f15d9791, type: 2}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[2].dialogueOptions.Array.data[0].dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: bf24e63420d0368488b8f954f15d9791, type: 2}
+      objectReference: {fileID: 11400000, guid: 98d6cc38130b99047a2a486c0543399c, type: 2}
     - target: {fileID: 7448911193196776128, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: days.Array.data[7].dialogueOptions.Array.data[0].dialogue
       value: 
@@ -14668,6 +14689,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fight
       objectReference: {fileID: 0}
+    - target: {fileID: 742727179803403741, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      propertyPath: AudioSourceMusic
+      value: 
+      objectReference: {fileID: 201817528}
     - target: {fileID: 843063376733560626, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

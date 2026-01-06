@@ -183,40 +183,11 @@ MonoBehaviour:
   nodes:
   - {fileID: 723918043564617938}
   - {fileID: -5915664639965208000}
-  - {fileID: 712107205739993571}
   - {fileID: -3533706375430120369}
   - {fileID: 8828467195050227275}
   - {fileID: -5062134663231012526}
   - {fileID: -2693115855977629666}
-  Current: {fileID: -5915664639965208000}
---- !u!114 &712107205739993571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
-  m_Name: End
-  m_EditorClassIdentifier: Assembly-CSharp::EndNode
-  graph: {fileID: 11400000}
-  position: {x: 856, y: 40}
-  ports:
-    keys:
-    - Entry
-    values:
-    - _fieldName: Entry
-      _node: {fileID: 712107205739993571}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  Entry: 
+  Current: {fileID: -5062134663231012526}
 --- !u!114 &723918043564617938
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Data;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;

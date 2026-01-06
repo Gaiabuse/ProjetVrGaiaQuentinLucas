@@ -15,4 +15,4 @@ MonoBehaviour:
   Illustration: {fileID: 21300000, guid: 859e06a803c6af74f802a5c55c2ab3d5, type: 3}
   Text: "Ce pic violet montre le d\xE9but d'une chaine de notes li\xE9es. Il n'apparais
     que pour la premi\xE8re note de la chaine."
-  TimeBeforeNextWindow: 3
+  TimeBeforeNextWindow: 1.7

@@ -1,6 +1,6 @@
 
 using System;
-using com.gaïa.utils;
+//using com.gaïa.utils;
 using Exploration;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        transform.ResetTransform();
+        //transform.ResetTransform();
     }
     
     public void SetState(GameState newState)

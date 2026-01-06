@@ -57,7 +57,13 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: Maman
-  DialogueLine: "Mon tr\xE9sor, tu \xE9tais juste trop jeune"
+  DialogueLine: "Non mais Jean, tu sais c'est pas facile pour lui, il vient de perdre
+    son travail.| Il ne vas pas tr\xE8s bien mais \xE7a va pas ce reproduire, ne
+    t'inqui\xE8te pas "
+  AnimationTrigger: 
+  Voices:
+  - {fileID: 8300000, guid: 85c6bc30cfa1b68428853c6da10626e7, type: 3}
+  - {fileID: 8300000, guid: 376a6ab96123e4d4aba7d929d6057bff, type: 3}
 --- !u!114 &-8466597123043841017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,7 +77,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 1992, y: 488}
+  position: {x: 1992, y: 568}
   ports:
     keys:
     - Entry
@@ -116,6 +122,8 @@ MonoBehaviour:
   - 
   SpeakerName: 
   DialogueLine: 'J''aurais pas du lui en parler... '
+  AnimationTrigger: 
+  Voices: []
 --- !u!114 &-6893148227362408880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +213,8 @@ MonoBehaviour:
   - 
   SpeakerName: 
   DialogueLine: 'oui maman? '
+  AnimationTrigger: 
+  Voices: []
 --- !u!114 &-3864812457393503167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +304,8 @@ MonoBehaviour:
   - 
   SpeakerName: 
   DialogueLine: Oui mais moi je l'aime pas Jean!
+  AnimationTrigger: 
+  Voices: []
 --- !u!114 &-494047322401493960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +319,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 1992, y: 248}
+  position: {x: 1992, y: 200}
   ports:
     keys:
     - Entry
@@ -352,6 +364,8 @@ MonoBehaviour:
   - 
   SpeakerName: 
   DialogueLine: Bon, aller je vais essayer de me faire un ami!
+  AnimationTrigger: 
+  Voices: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +455,8 @@ MonoBehaviour:
   - 
   SpeakerName: 
   DialogueLine: "Mais papa... lui il n'a jamais fais \xE7a."
+  AnimationTrigger: 
+  Voices: []
 --- !u!114 &3437320773226101230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,8 +528,11 @@ MonoBehaviour:
   - "amu\xEFr "
   - "r\xE9voquer"
   SpeakerName: Maman
-  DialogueLine: "\xE7a arrive dans toute les familles donc n'en parle pas d'accord
-    ."
+  DialogueLine: "\xE7a se passe dans toute les familles donc n'en parles pas garde
+    \xE7a pour toi."
+  AnimationTrigger: 
+  Voices:
+  - {fileID: 8300000, guid: 17df256aaf7002340b37ce0785b8dad4, type: 3}
 --- !u!114 &3465091446825610606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,8 +590,11 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: Maman
-  DialogueLine: "Je n'y peut rien \xE0 \xE7a, dans tout les cas n'en parles pas.
-    A ce soir mon ch\xE9ri."
+  DialogueLine: "Je sais que tu ne l'aimes pas mais je n'y peut rien \xE0 \xE7a,
+    Bon allez va \xE0 l'\xE9cole."
+  AnimationTrigger: 
+  Voices:
+  - {fileID: 8300000, guid: ef2218c98351ab248a5c7d71eb502d28, type: 3}
 --- !u!114 &4604160806123765075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,6 +653,8 @@ MonoBehaviour:
   - 
   SpeakerName: 
   DialogueLine: A ce soir maman...
+  AnimationTrigger: 
+  Voices: []
 --- !u!114 &4927817177816660578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,8 +712,10 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: Maman
-  DialogueLine: "c'est bien mon tr\xE9sor, allez va \xE0 l'\xE9cole, bonne journ\xE9e
-    je t'aime."
+  DialogueLine: "Ok mon ch\xE9ri, allez va \xE0 l'\xE9cole, je t'aime."
+  AnimationTrigger: 
+  Voices:
+  - {fileID: 8300000, guid: b3631373119335b46bc5a83e74de589f, type: 3}
 --- !u!114 &7559566346729182895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,6 +774,8 @@ MonoBehaviour:
   - 
   SpeakerName: 
   DialogueLine: A ce soir maman
+  AnimationTrigger: 
+  Voices: []
 --- !u!114 &7997472711074834915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,6 +839,7 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 1
+  Characters: []
   StartDialoguePosition: {x: -1.52, y: 0, z: 10.41}
 --- !u!114 &8726914734240865549
 MonoBehaviour:
@@ -929,5 +958,8 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: Maman
-  DialogueLine: "Bonne chance pour l'\xE9cole aujourd'hui mon ange . tu sais mon
-    ch\xE9ri ce qui s'est pass\xE9 hier..."
+  DialogueLine: "Au revoir mon ch\xE9ri, passe une bonne journ\xE9e, et puis tu sais
+    mon ch\xE9ri pour ce qui s'est pass\xE9 hier..."
+  AnimationTrigger: 
+  Voices:
+  - {fileID: 8300000, guid: f025efed60e5fca4895a59538bd7ac7b, type: 3}

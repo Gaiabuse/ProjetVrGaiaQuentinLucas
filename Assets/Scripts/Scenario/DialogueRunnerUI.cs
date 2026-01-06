@@ -42,8 +42,11 @@ namespace Scenario
             {
                 runner.StopVoices();
                 dialogueUI.text = dialogueSplit[i];
-                Debug.Log(dialogueSplit[i]);
-                StartCoroutine(runner.PlayVoices(voices[i],currentSpeaker)); 
+                Debug.Log(currentSpeaker);
+                if (currentSpeaker != null)
+                {
+                    StartCoroutine(runner.PlayVoices(voices[i],currentSpeaker)); 
+                }
                 yield return new WaitUntil(_action.IsPressed);
             }
             

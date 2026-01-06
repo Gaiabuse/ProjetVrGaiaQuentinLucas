@@ -26,7 +26,6 @@ namespace Scenario
         private float _durationOfDay;
 
         
-        private readonly PlayerManager _player = PlayerManager.INSTANCE;
         private void Awake()
         {
             if (INSTANCE != null)
@@ -116,7 +115,7 @@ namespace Scenario
                 {
                     if (cond == null) continue;
 
-                    if (cond.IsComplete(_player)) continue;
+                    if (cond.IsComplete(PlayerManager.INSTANCE)) continue;
                     conditionsComplete = false;
                     break;
                 }

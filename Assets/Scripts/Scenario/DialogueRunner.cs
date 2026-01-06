@@ -78,6 +78,7 @@ namespace Scenario
         }
         private CharacterAnimator GetCharacter(string name)
         {
+            Debug.Log(characters.Find(c => c.CharacterName == name));
             return characters.Find(c => c.CharacterName == name);
         }
         private void SetPosition(StartNode node)
@@ -94,6 +95,7 @@ namespace Scenario
         
                 if (character != null)
                 {
+                    Debug.Log(character);
                     character.SetActiveCharacter(characterSettings.IsPresent);
                     if (characterSettings.IsPresent)
                     {
@@ -120,6 +122,7 @@ namespace Scenario
 
         private void ChooseAction(string[] dataParts, Node currentNode,out bool waitEndOfAction)
         {
+            Debug.Log(dataParts[0]);
             switch (dataParts[0])
             {
                 case "Start":
@@ -143,6 +146,10 @@ namespace Scenario
                         waitEndOfAction = true;
                     }
                     break;
+                case "Animation":
+                    StartCoroutine(AnimationNode(currentNode as AnimationNode));
+                    waitEndOfAction = true;
+                    break;
                 case "End":
                     EndDialogue();
                     waitEndOfAction = false;
@@ -154,14 +161,31 @@ namespace Scenario
     
         private void DialogueNode(string[] dataParts, DialogueNode currentNode)
         {
-            CharacterAnimator currentSpeaker = GetCharacter(currentNode.SpeakerName);
-            if (!string.IsNullOrEmpty(currentNode.AnimationTrigger)) {
+            CharacterAnimator currentSpeaker = null;
+            if (!string.IsNullOrEmpty(currentNode.SpeakerName))
+            {
+                 currentSpeaker = GetCharacter(currentNode.SpeakerName);
+            }
+            if (currentSpeaker != null && !string.IsNullOrEmpty(currentNode.AnimationTrigger)) {
                 currentSpeaker?.TriggerAnimation(currentNode.AnimationTrigger);
             }
             PlayerManager.INSTANCE.AddDialogueNode(currentNode);
             dialogueRunnerUI.SetSpeaker($"- {dataParts[1]} -");
             string[] dialogueSplit = DialogueSplit(dataParts[2]); 
             StartCoroutine(InstantiateDialogues(dialogueSplit,currentNode.Voices,currentSpeaker,currentNode));
+        }
+
+        private IEnumerator AnimationNode(AnimationNode currentNode)
+        {
+            CharacterAnimator currentSpeaker = GetCharacter(currentNode.CharacterName);
+            if (currentSpeaker != null)
+            {
+                currentSpeaker.OnAnimationEnd = false;
+                currentSpeaker?.TriggerAnimation(currentNode.AnimationTrigger);
+                yield return new WaitUntil (()=> currentSpeaker.OnAnimationEnd = true);
+                NextNode("Exit");
+            }
+           
         }
         private string[] DialogueSplit(string dialogue)
         {

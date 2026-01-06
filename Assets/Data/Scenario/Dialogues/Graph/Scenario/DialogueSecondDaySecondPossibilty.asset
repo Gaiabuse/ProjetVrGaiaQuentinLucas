@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6120666473443306553
+--- !u!114 &-6974178569766134357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,28 +9,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
-  m_Name: End
-  m_EditorClassIdentifier: Assembly-CSharp::EndNode
+  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
   graph: {fileID: 11400000}
-  position: {x: 936, y: 520}
+  position: {x: 1496, y: -120}
   ports:
     keys:
     - Entry
+    - Exit
     values:
     - _fieldName: Entry
-      _node: {fileID: -6120666473443306553}
+      _node: {fileID: -6974178569766134357}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: Choices 0
-        node: {fileID: 5909302123693826983}
+      - fieldName: Exit
+        node: {fileID: 965459324616948154}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+    - _fieldName: Exit
+      _node: {fileID: -6974178569766134357}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 2520828014575359326}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
   Entry: 
+  Exit: 
+  CharacterName: Maman
+  AnimationTrigger: isCooking
 --- !u!114 &-5753868258849531326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,7 +60,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 72, y: 56}
+  position: {x: 40, y: 88}
   ports:
     keys:
     - Entry
@@ -91,6 +107,84 @@ MonoBehaviour:
   DialogueLine: Oui, c'etait bien.
   AnimationTrigger: 
   Voices: []
+--- !u!114 &-4939310511400809078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36792cf86a1daa4a9bfe6436243ec74, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.EndNode
+  graph: {fileID: 11400000}
+  position: {x: 1488.151, y: 570.81415}
+  ports:
+    keys:
+    - Entry
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -4939310511400809078}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Exit
+        node: {fileID: 8931798625505465714}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+--- !u!114 &-2250862495342320771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
+  graph: {fileID: 11400000}
+  position: {x: 152.4, y: 563.72}
+  ports:
+    keys:
+    - Entry
+    - Exit
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -2250862495342320771}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 6915022766515873389}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Exit
+      _node: {fileID: -2250862495342320771}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -543214874091551530}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  Exit: 
+  CharacterName: Maman
+  AnimationTrigger: turnAround
 --- !u!114 &-1564224275831707701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +198,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 312, y: -200}
+  position: {x: 712, y: -248}
   ports:
     keys:
     - Entry
@@ -116,8 +210,8 @@ MonoBehaviour:
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: Choices 0
-        node: {fileID: -392063099871728984}
+      - fieldName: Exit
+        node: {fileID: 4063852093843971361}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -151,7 +245,8 @@ MonoBehaviour:
   DialogueLine: "A tr\xE8s bien je suis contente pour toi. C'est important que tu
     te fasses des copains."
   AnimationTrigger: 
-  Voices: []
+  Voices:
+  - {fileID: 8300000, guid: 515eaefe27bab3142b0c1342ae590261, type: 3}
 --- !u!114 &-1159003361768454191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +260,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::Nodes.DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 584, y: -168}
+  position: {x: 984, y: -216}
   ports:
     keys:
     - Entry
@@ -199,7 +294,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: 2520828014575359326}
+        node: {fileID: 965459324616948154}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -268,8 +363,8 @@ MonoBehaviour:
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: Choices 0
-        node: {fileID: 6915022766515873389}
+      - fieldName: Exit
+        node: {fileID: -2250862495342320771}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -302,7 +397,8 @@ MonoBehaviour:
   SpeakerName: Maman
   DialogueLine: "Oh mon ch\xE9ri, ne t'inqui\xE8te pas, \xE7a va aller."
   AnimationTrigger: 
-  Voices: []
+  Voices:
+  - {fileID: 8300000, guid: 58bd7fcfc230a2648be16b6562931d87, type: 3}
 --- !u!114 &-392063099871728984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +446,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: -1564224275831707701}
+        node: {fileID: 4063852093843971361}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -362,7 +458,7 @@ MonoBehaviour:
   SpeakerName: 
   DialogueLine: "C'\xE9tait super, je me suis fais pleins d'amis trop cool ! |On
     a jouer au ballon et j'ai gagner, c'etait trop bien !"
-  AnimationTrigger: 
+  AnimationTrigger: turnAround
   Voices: []
 --- !u!114 &11400000
 MonoBehaviour:
@@ -387,10 +483,110 @@ MonoBehaviour:
   - {fileID: 6915022766515873389}
   - {fileID: -543214874091551530}
   - {fileID: 5909302123693826983}
-  - {fileID: -6120666473443306553}
   - {fileID: -1159003361768454191}
   - {fileID: 2520828014575359326}
-  Current: {fileID: 0}
+  - {fileID: -2250862495342320771}
+  - {fileID: 477438821048954911}
+  - {fileID: 4063852093843971361}
+  - {fileID: 965459324616948154}
+  - {fileID: 8931798625505465714}
+  - {fileID: -4939310511400809078}
+  - {fileID: -6974178569766134357}
+  Current: {fileID: -1159003361768454191}
+--- !u!114 &477438821048954911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
+  graph: {fileID: 11400000}
+  position: {x: 920, y: 536}
+  ports:
+    keys:
+    - Entry
+    - Exit
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 477438821048954911}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: 5909302123693826983}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Exit
+      _node: {fileID: 477438821048954911}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 8931798625505465714}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  Exit: 
+  CharacterName: Maman
+  AnimationTrigger: turnAroundEnd
+--- !u!114 &965459324616948154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
+  graph: {fileID: 11400000}
+  position: {x: 1224, y: -152}
+  ports:
+    keys:
+    - Entry
+    - Exit
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 965459324616948154}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -1159003361768454191}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Exit
+      _node: {fileID: 965459324616948154}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -6974178569766134357}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  Exit: 
+  CharacterName: Maman
+  AnimationTrigger: turnAroundEnd
 --- !u!114 &2520828014575359326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +600,7 @@ MonoBehaviour:
   m_Name: End
   m_EditorClassIdentifier: Assembly-CSharp::Nodes.EndNode
   graph: {fileID: 11400000}
-  position: {x: 888, y: -152}
+  position: {x: 1720, y: -216}
   ports:
     keys:
     - Entry
@@ -414,14 +610,61 @@ MonoBehaviour:
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: Choices 0
-        node: {fileID: -1159003361768454191}
+      - fieldName: Exit
+        node: {fileID: -6974178569766134357}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   Entry: 
+--- !u!114 &4063852093843971361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
+  graph: {fileID: 11400000}
+  position: {x: 296, y: -72}
+  ports:
+    keys:
+    - Entry
+    - Exit
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 4063852093843971361}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -392063099871728984}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Exit
+      _node: {fileID: 4063852093843971361}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -1564224275831707701}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  Exit: 
+  CharacterName: Maman
+  AnimationTrigger: turnAround
 --- !u!114 &5909302123693826983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +712,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: -6120666473443306553}
+        node: {fileID: 477438821048954911}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -480,7 +723,7 @@ MonoBehaviour:
   - 
   SpeakerName: 
   DialogueLine: Merci Maman...
-  AnimationTrigger: 
+  AnimationTrigger: turnAroundEnd
   Voices: []
 --- !u!114 &6126399267849386394
 MonoBehaviour:
@@ -495,7 +738,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 376, y: 88}
+  position: {x: 360, y: 120}
   ports:
     keys:
     - Entry
@@ -542,7 +785,8 @@ MonoBehaviour:
   DialogueLine: "Tant mieux mon poussin. Jean arrive , je suis en train de faire
     \xE0 manger."
   AnimationTrigger: 
-  Voices: []
+  Voices:
+  - {fileID: 8300000, guid: da66298e2cd679a498a6be821b557240, type: 3}
 --- !u!114 &6822697032485595931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,7 +875,8 @@ MonoBehaviour:
   DialogueLine: "Coucou mon ch\xE9rie, ta rentr\xE9e c'est bien pass\xE9?tu t'es
     fais des copains?"
   AnimationTrigger: 
-  Voices: []
+  Voices:
+  - {fileID: 8300000, guid: 67289ad0bca77804881337a7af73e8c9, type: 3}
 --- !u!114 &6915022766515873389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,7 +890,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 63.891296, y: 357.37003}
+  position: {x: -104, y: 392}
   ports:
     keys:
     - Entry
@@ -679,7 +924,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: -543214874091551530}
+        node: {fileID: -2250862495342320771}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -691,8 +936,7 @@ MonoBehaviour:
   SpeakerName: 
   DialogueLine: Je me suis pas encore fais d'amis maman...
   AnimationTrigger: 
-  Voices:
-  - {fileID: 0}
+  Voices: []
 --- !u!114 &8119512945047746816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,10 +972,57 @@ MonoBehaviour:
   Characters:
   - CharacterName: Maman
     IsPresent: 1
-    Position: {x: -3.2, y: 0, z: 19.26}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    Position: {x: -2.72, y: 0.1, z: 18.22}
+    Rotation: {x: 0, y: 0.9961947, z: 0, w: -0.08715577}
   - CharacterName: Jean
     IsPresent: 0
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0.9961947, z: 0, w: -0.08715577}
   StartDialoguePosition: {x: -0.07, y: 0, z: 6.95}
+--- !u!114 &8931798625505465714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
+  graph: {fileID: 11400000}
+  position: {x: 1189.0336, y: 557.02997}
+  ports:
+    keys:
+    - Entry
+    - Exit
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 8931798625505465714}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Exit
+        node: {fileID: 477438821048954911}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Exit
+      _node: {fileID: 8931798625505465714}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -4939310511400809078}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  Exit: 
+  CharacterName: Maman
+  AnimationTrigger: isCooking

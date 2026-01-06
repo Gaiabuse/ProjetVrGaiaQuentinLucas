@@ -47,7 +47,7 @@ MonoBehaviour:
   - {fileID: 6372626032994369622}
   - {fileID: 8019658777860379255}
   - {fileID: -2622194075156339404}
-  current: {fileID: 0}
+  Current: {fileID: 0}
 --- !u!114 &6372626032994369622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +80,7 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 1
+  Characters: []
   StartDialoguePosition: {x: -1.38, y: 0, z: 8.76}
 --- !u!114 &8019658777860379255
 MonoBehaviour:
@@ -138,5 +139,9 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: Maman
-  DialogueLine: "Ta journ\xE9e c'est bien pass\xE9 mon tr\xE9sor ?Jean n'est pas
-    la ce soir, fais ce que tu veux "
+  DialogueLine: "Ah tu es rentr\xE9 mon tr\xE9sor, est ce que  ta journ\xE9e c'est
+    bien pass\xE9? |Bon en tout cas Jean n'est pas la ce soir, fais ce que tu veux?"
+  AnimationTrigger: 
+  Voices:
+  - {fileID: 8300000, guid: 889a54a0d50717141bc281dd59fe151b, type: 3}
+  - {fileID: 8300000, guid: 3b96c320af5612d4f938f144c39bd98d, type: 3}

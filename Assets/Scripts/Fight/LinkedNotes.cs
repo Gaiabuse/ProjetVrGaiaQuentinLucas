@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.InputSystem;
+using CommonUsages = UnityEngine.XR.CommonUsages;
 
 namespace Fight
 {
-    public class LinkedNotes : Note
+    public class LinkedNotes : NoteScript
     {
         [SerializeField] private int nextNoteMaxDistance = 6;
         [SerializeField] private float counterDamages = -2f;
@@ -12,6 +13,7 @@ namespace Fight
         [SerializeField] private GameObject particles;
         [SerializeField] private float maxLineTime = 1.5f;
         [SerializeField] private Link link;
+        [SerializeField] private Collider collider;
     
         private Vector3 _nextNotePos;
         private Vector3Int _sheetMusicPosition;
@@ -19,6 +21,7 @@ namespace Fight
         private int _maxMeasure;
         private int _maxBeat;
         private int _maxDivision;
+        private bool _canHavePoints = true;
 
         private const int _linkedNoteIndex = 2;
 
@@ -51,7 +54,6 @@ namespace Fight
             }
         }
 
-        // j'ai l'impression que cette fonction fait tout sauf checker la next note ( honnetement j'ai pas compris ce qu'il s'y passe )
         void CheckNextNote(int measure , int beat , int division)
         {
             int remainingDistance = nextNoteMaxDistance;
@@ -126,27 +128,41 @@ namespace Fight
             if (FightManager.INSTANCE.IsInLine())
             {
                 base.OnTriggerEnter(other);
+                StartCoroutine(PlayerInTrigger());
             }
         }
 
-        protected override IEnumerator PlayerInTrigger()
+        private IEnumerator PlayerInTrigger()
         {
-            while (InTrigger)
+            while (_inTrigger)
             {
-                bool rightPressed = RightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
-                bool leftPressed  = LeftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
+                bool rightPressed = _rightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
+                bool leftPressed  = _leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
                 if (rightPressed || leftPressed)
                 {
-                    FightManager.INSTANCE.AddAnxiety(counterDamages);
-                    if (rightPressed)
+                    if (_canHavePoints)
                     {
-                        RightHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                        if (Time.time - spawnTime < timeForPerfect)
+                        {
+                            FightManager.INSTANCE.AddAnxiety(counterDamages * perfectMultiplier);
+                            GameObject perfectGO = Instantiate(perfectEffectPrefab);
+                            perfectGO.transform.position = transform.position;
+                            Debug.Log("Perfect");
+                        }
+                        else
+                        {
+                            FightManager.INSTANCE.AddAnxiety(counterDamages);
+                        }
+                        if (rightPressed)
+                        {
+                            _rightHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                        }
+                        else
+                        {
+                            _leftHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                        }
+                        StartCoroutine(WaitForDestroy());
                     }
-                    else
-                    {
-                        LeftHand.SendHapticImpulse(0, 0.5f, maxLineTime);
-                    }
-                    StartCoroutine(WaitForDestroy());
                 }
                 else if (!_isFirstLinked)
                 {
@@ -159,17 +175,25 @@ namespace Fight
             }
         }
     
-    
 
         IEnumerator WaitForDestroy()
         {
             FightManager.INSTANCE.AddAnxiety(counterDamages);
             Destroy(meshRenderer);
             Destroy(particles);
+            _canHavePoints = false;
             yield return new WaitForSeconds(maxLineTime);
             Destroy(gameObject);
         }
-    
 
+        protected override void OnRightPressed(InputAction.CallbackContext ctx)
+        {
+            return;
+        }
+
+        protected override void OnLeftPressed(InputAction.CallbackContext ctx)
+        {
+            return;
+        }
     }
 }

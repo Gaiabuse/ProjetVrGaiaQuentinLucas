@@ -6,6 +6,7 @@ namespace Data
     [CreateAssetMenu(fileName = "LevelData", menuName = "Scriptable Objects/LevelData")]
     public class LevelData : ScriptableObject, ISerializationCallbackReceiver
     {
+        public string levelName;
         public AudioClip AudioClip;
         public AudioClip NoteSound;
         // ok j'crois que je commence à comprendre apres relecture, x c'est genre measure, y c'est bpm, et z division? 

@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &452179273502313453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5026189724425343859}
+  - component: {fileID: 2256861795141640956}
+  - component: {fileID: 2879969765549143672}
+  m_Layer: 5
+  m_Name: fillerImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5026189724425343859
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452179273502313453}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6759540359265384023}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -179.87274, y: -0.04888916}
+  m_SizeDelta: {x: -371.9251, y: -32.024803}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2256861795141640956
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452179273502313453}
+  m_CullTransparentMesh: 1
+--- !u!114 &2879969765549143672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452179273502313453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7a984bee95d15c04c9f4f450ce62606e, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 0
+  m_FillClockwise: 1
+  m_FillOrigin: 2
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2407782724586577675
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,23 +256,39 @@ MonoBehaviour:
   - m_UseReference: 0
     m_Action:
       m_Name: Element 0
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 0ba65539-8cc3-4470-b2c6-5f3a222a6a68
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 7b9fc66d-30f9-4510-82a5-bbe700109cea
       m_Processors: 
-      m_Interactions: 
+      m_Interactions: Hold(duration=1.5,pressPoint=0.5)
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 33ed0acd-5248-41b6-beac-31ea8aefde90
-        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/secondarybutton
+        m_Id: 578c92d7-1a68-4146-9f98-38221d1efbb4
+        m_Path: <QuestTouchPlusController>{RightHand}/secondaryButton
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Element 0
         m_Flags: 0
       - m_Name: 
-        m_Id: d130c2d9-c2cd-42a4-a022-9c3ad6ba6cb6
+        m_Id: da7c22dc-8de4-48a2-b02e-36d08aa15cbb
         m_Path: <OculusTouchController>{RightHand}/secondaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 0
+        m_Flags: 0
+      - m_Name: 
+        m_Id: de1a79f7-bed1-4646-abee-e5442ae68859
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{LeftHand}/secondarybutton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 0
+        m_Flags: 0
+      - m_Name: 
+        m_Id: a45aba41-2b7a-488d-8311-164f829dfd34
+        m_Path: <OculusTouchController>{LeftHand}/secondaryButton
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -208,23 +299,39 @@ MonoBehaviour:
   - m_UseReference: 0
     m_Action:
       m_Name: Element 1
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: bd471ea4-9b94-49e7-9711-94c1f4cc1ad7
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 756599f3-f0f2-4605-88d6-b9cc4b3040c7
       m_Processors: 
-      m_Interactions: 
+      m_Interactions: Hold(duration=1.5,pressPoint=0.5)
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: ce5dfebe-24eb-407d-8c20-f426a1f38e1d
-        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/primarybutton
+        m_Id: 1f433aab-ab99-4c3d-bbc6-877b82773c1e
+        m_Path: <OculusTouchController>{RightHand}/primaryButton
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Element 1
         m_Flags: 0
       - m_Name: 
-        m_Id: a49cb89f-9421-4a35-b1aa-4c5c80873475
-        m_Path: <OculusTouchController>{RightHand}/primaryButton
+        m_Id: 824c0936-83b8-47f9-9c22-c6d865008ea0
+        m_Path: <QuestTouchPlusController>{RightHand}/primaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 9fb0771f-7de8-483d-aa5d-9ac487e6834e
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{LeftHand}/primarybutton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 4a165d80-379a-44d0-b996-4264351b0e1b
+        m_Path: <OculusTouchController>{LeftHand}/primaryButton
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -235,23 +342,39 @@ MonoBehaviour:
   - m_UseReference: 0
     m_Action:
       m_Name: Element 2
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: ea8ceae9-66e9-44f3-a087-8dbc341590e6
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 91230501-4862-447e-9c8e-0a25ac3d3ce9
       m_Processors: 
-      m_Interactions: 
+      m_Interactions: Hold(duration=1.5,pressPoint=0.5)
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: a007a21d-9982-4a98-ad78-1e7ad8d06c6a
-        m_Path: <OculusTouchController>{RightHand}/trigger
+        m_Id: 7b9a7973-7459-447c-b18f-ac49d59526ed
+        m_Path: <QuestTouchPlusController>{RightHand}/{TriggerButton}
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Element 2
         m_Flags: 0
       - m_Name: 
-        m_Id: 11a08371-7fd3-4872-a951-c546689d3edf
-        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{RightHand}/trigger
+        m_Id: 99e3209f-1df2-4800-95dd-ca5d4f6dcbfa
+        m_Path: <OculusTouchController>{RightHand}/{TriggerButton}
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 2
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 71b8d68d-7eb0-4d5e-8b75-dadf2653e3f6
+        m_Path: <QuestTouchPlusController>{LeftHand}/{TriggerButton}
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 2
+        m_Flags: 0
+      - m_Name: 
+        m_Id: acfeff82-94a0-4270-b84b-858642f7dcc8
+        m_Path: <OculusTouchController>{LeftHand}/{TriggerButton}
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -263,7 +386,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 35f8af7fafc05784285a6e1db6d1c891, type: 3}
   - {fileID: 21300000, guid: 628cbf1393ecb9a47ba2ef843de2cf94, type: 3}
   - {fileID: 21300000, guid: 28aa1131042d0124db714b34a8d9ae45, type: 3}
-  visualOfInput: {fileID: 0}
+  visualOfInput: {fileID: 646145863019999936}
+  fill: {fileID: 2879969765549143672}
+  maxHoldTime: 1.5
 --- !u!1 &3531681015140398473
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +422,7 @@ RectTransform:
   m_Children:
   - {fileID: 877691788771574632}
   - {fileID: 7521109124111644006}
+  - {fileID: 5026189724425343859}
   m_Father: {fileID: 8261150454725350021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -367,7 +493,7 @@ GameObject:
   - component: {fileID: 4248016349666026859}
   - component: {fileID: 880142769878625602}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: NameOfCHoices
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

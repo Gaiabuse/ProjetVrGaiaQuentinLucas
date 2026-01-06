@@ -14,7 +14,7 @@ namespace Exploration
     public class Object : MonoBehaviour
     {
         // j'titille, mais si tu mets l'accent, ca devient du francais, et c'est en anglais autour
-        [Header("Référence Data")]
+        [Header("Réference Data")]
         [SerializeField]private ObjectData objectData;
     
         [Header("Références UI")]
@@ -33,13 +33,15 @@ namespace Exploration
             // évite au maxxxxiiiiiiimmmmuuuuum les checks dans l'update que tu peux faire de manière evenementielle ( quand inHook change, par exemple )
             if (_inHook && panelDescription.activeInHierarchy)//SecondCheck
             {
+                Debug.Log("ça desactive dans le hook");
                 panelDescription.SetActive(false);
             }
         }
         public void TakeObject(SelectEnterEventArgs args)
         {
-            if (objectData == null || !_startFonction) return;
             
+            if (objectData == null || !_startFonction) return;
+            Debug.Log("takeObject");
             AddObject();
             ActiveDescription();
         }

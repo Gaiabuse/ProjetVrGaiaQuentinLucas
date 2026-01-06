@@ -1,5 +1,6 @@
 
 using System;
+using com.gaïa.utils;
 using Exploration;
 using UnityEngine;
 
@@ -13,8 +14,10 @@ public class GameManager : MonoBehaviour
 
     public static Action ReturnToMainMenu;
 
-    public enum GameState { Start, Playing, Paused}
+    public enum GameState { Start, Playing, Paused,End}
     private GameState _state = GameState.Start;
+    
+    public bool ChoiceSelected = false;
     private void Awake()
     {
         if (INSTANCE == null)
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        transform.ResetTransform();
     }
     
     public void SetState(GameState newState)
@@ -39,8 +43,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-       
-        
+        ChoiceSelected = false;
         PlayerManager.INSTANCE.SetCanMove(false);
     }
 

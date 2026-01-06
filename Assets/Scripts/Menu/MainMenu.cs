@@ -37,10 +37,11 @@ namespace Menu
             // perso j'encourage grandement à faire un petit TimeManager, qui gère ca de maniere sécurisée ( logs, etc )
         }
 
-        private void ReturnToMainMenu()
+        public void ReturnToMainMenu()
         {
             mainMenuGameObject.SetActive(true);
             PlayerManager.INSTANCE.TeleportPlayer(positionMainMenu);
+            GameManager.INSTANCE.SetState(GameManager.GameState.Start);
         }
     }
 }

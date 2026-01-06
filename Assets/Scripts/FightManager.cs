@@ -49,10 +49,8 @@ public class FightManager : MonoBehaviour
     
     public void StartFight(LevelData newLevel)
     {
-        
         StartCoroutine(WaitForStartMusic());
         level = newLevel;
-        
         _spawnPositions = level.spawnPositions;
         _sheetMusic = level.sheetMusic;
         metronome.ChangeValues(level.audioClip, level.bpm, level.beat, level.division);

@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 719c22907312ef648bf363a769858587, type: 3}
-  m_Name: FuiteTuto
+  m_Name: FinTuto
   m_EditorClassIdentifier: Assembly-CSharp::TutoData
-  Illustration: {fileID: 21300000, guid: 652d8a3269d52954381c1800cb134c2c, type: 3}
-  Text: "Il y a un trou dans la vitre, touchez la note et cliquez sur la gachette
-    avec n'importe quelle main pour la colmater avant que l'anxi\xE9t\xE9 monte."
-  TimeBeforeNextWindow: 10
+  Illustration: {fileID: 0}
+  Text: A vous de jouer.
+  TimeBeforeNextWindow: 15

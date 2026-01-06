@@ -4,6 +4,6 @@ using UnityEngine;
 public class TutoData : ScriptableObject
 {
     public Sprite Illustration;
-    public string Text;
+    [field:TextArea] public string Text;
     public float TimeBeforeNextWindow;
 }

@@ -9,6 +9,7 @@ namespace Nodes
         [Output] public string AsWin;
         [Output] public string AsLoose;
 
+        public bool isTuto;
         public LevelData Level;
 
         public override string GetString()

@@ -15,6 +15,7 @@ public class TutoManager : MonoBehaviour
     [SerializeField] private TMP_Text text;
     [SerializeField] private Image illustration;
 
+    
     [SerializeField] private float tweenDuration = 0.5f;
     
     [SerializeField] TutoData[] dataArray;

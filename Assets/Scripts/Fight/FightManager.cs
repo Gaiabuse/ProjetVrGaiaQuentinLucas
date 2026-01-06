@@ -39,12 +39,7 @@ namespace Fight
         {
             INSTANCE = this;
         }
-
-        private void Update()
-        {
-            Debug.Log("FightManager2 : " + FightManager.INSTANCE);
-            Debug.Log("FightManager dans fight : " + INSTANCE);
-        }
+        
         #region Start / End
     
         public void StartFight(LevelData newLevel)

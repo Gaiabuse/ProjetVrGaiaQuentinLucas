@@ -90,6 +90,7 @@ MonoBehaviour:
   Entry: 
   AsWin: 
   AsLoose: 
+  isTuto: 1
   Level: {fileID: 11400000, guid: 5dd39e67d2215d64c8338c420bef2487, type: 2}
 --- !u!114 &-3533706375430120369
 MonoBehaviour:

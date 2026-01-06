@@ -1456,7 +1456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7725386375131354371, guid: ce86edf02176ce74582356269598b442, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.665
+      value: 2.03
       objectReference: {fileID: 0}
     - target: {fileID: 7725386375131354371, guid: ce86edf02176ce74582356269598b442, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1476,7 +1476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7725386375131354371, guid: ce86edf02176ce74582356269598b442, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.174
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7725386375131354371, guid: ce86edf02176ce74582356269598b442, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5643,6 +5643,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4510510194533497545, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
   m_PrefabInstance: {fileID: 8561722466580451616}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &708169428 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5787016946084494550, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+  m_PrefabInstance: {fileID: 8561722466580451616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708169426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f96ab7db1cea346bb0a49a37ece46f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutoManager
 --- !u!114 &708169430 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 742727179803403741, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
@@ -14324,6 +14335,10 @@ PrefabInstance:
       propertyPath: endMenu
       value: 
       objectReference: {fileID: 1709226050849146091}
+    - target: {fileID: 5355877006445201912, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
+      propertyPath: tutoManager
+      value: 
+      objectReference: {fileID: 708169428}
     - target: {fileID: 5355877006445201912, guid: 3ac32f580ecd04c4b9c586523363def5, type: 3}
       propertyPath: audioListener
       value: 

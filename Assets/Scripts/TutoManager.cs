@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Data;
 using DG.Tweening;
+using Fight;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;

@@ -17,6 +17,7 @@ namespace Exploration
         private void Awake()
         {
             INSTANCE = this;
+            Debug.Log(INSTANCE);
         }
 
         private void OnEnable()

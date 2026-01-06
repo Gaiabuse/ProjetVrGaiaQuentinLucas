@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DefaultNamespace
 {
@@ -8,6 +9,7 @@ namespace DefaultNamespace
         public string CharacterName;
         [SerializeField] private Animator animator;
 
+        public bool OnAnimationEnd;
         public void PlayTalk() => animator.SetBool("isTalking", true);
         public void PlayIdle() => animator.SetBool("isTalking", false);
         
@@ -17,5 +19,8 @@ namespace DefaultNamespace
         public void SetCharacterRotation(Quaternion rotation) => transform.rotation = rotation;
         
         public void SetActiveCharacter(bool active)=> gameObject.SetActive(active);
+        
+        public void AnimationIsEnd() => OnAnimationEnd = true;
+        public Animator GetAnimator() => animator;
     }
 }

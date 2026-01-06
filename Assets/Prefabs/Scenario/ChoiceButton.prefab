@@ -278,6 +278,22 @@ MonoBehaviour:
         m_Groups: 
         m_Action: Element 0
         m_Flags: 0
+      - m_Name: 
+        m_Id: de1a79f7-bed1-4646-abee-e5442ae68859
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{LeftHand}/secondarybutton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 0
+        m_Flags: 0
+      - m_Name: 
+        m_Id: a45aba41-2b7a-488d-8311-164f829dfd34
+        m_Path: <OculusTouchController>{LeftHand}/secondaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 0
+        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   - m_UseReference: 0
@@ -305,6 +321,22 @@ MonoBehaviour:
         m_Groups: 
         m_Action: Element 1
         m_Flags: 0
+      - m_Name: 
+        m_Id: 9fb0771f-7de8-483d-aa5d-9ac487e6834e
+        m_Path: <XRInputV1::Oculus::MetaQuestTouchPlusControllerOpenXR>{LeftHand}/primarybutton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 4a165d80-379a-44d0-b996-4264351b0e1b
+        m_Path: <OculusTouchController>{LeftHand}/primaryButton
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 1
+        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   - m_UseReference: 0
@@ -327,6 +359,22 @@ MonoBehaviour:
       - m_Name: 
         m_Id: 99e3209f-1df2-4800-95dd-ca5d4f6dcbfa
         m_Path: <OculusTouchController>{RightHand}/{TriggerButton}
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 2
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 71b8d68d-7eb0-4d5e-8b75-dadf2653e3f6
+        m_Path: <QuestTouchPlusController>{LeftHand}/{TriggerButton}
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Element 2
+        m_Flags: 0
+      - m_Name: 
+        m_Id: acfeff82-94a0-4270-b84b-858642f7dcc8
+        m_Path: <OculusTouchController>{LeftHand}/{TriggerButton}
         m_Interactions: 
         m_Processors: 
         m_Groups: 

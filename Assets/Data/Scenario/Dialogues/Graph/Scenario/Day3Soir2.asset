@@ -47,7 +47,7 @@ MonoBehaviour:
   - {fileID: 6372626032994369622}
   - {fileID: 8019658777860379255}
   - {fileID: -2622194075156339404}
-  current: {fileID: 0}
+  Current: {fileID: 0}
 --- !u!114 &6372626032994369622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +80,7 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 1
+  Characters: []
   StartDialoguePosition: {x: -1.38, y: 0, z: 8.76}
 --- !u!114 &8019658777860379255
 MonoBehaviour:
@@ -138,5 +139,8 @@ MonoBehaviour:
   Choices:
   - 
   SpeakerName: Maman
-  DialogueLine: "D\xE9sol\xE9e pour ce matin mon tr\xE9sor, je n'aurais pas du te
-    dire \xE7a. Mais Jean n'est pas la ce soir donc fais ce que tu veux "
+  DialogueLine: "Ah tu es la mon tr\xE9sor, est ce que tu as pass\xE9 une bonne journ\xE9e.|Bon
+    en tout cas par rapport \xE0 ce que je t'es dis ce matin, je suis vraiment d\xE9sol\xE9e.
+    |Bon, en tout cas il n'est pas la ce soir, profites en fais ce que tu veux."
+  AnimationTrigger: 
+  Voices: []

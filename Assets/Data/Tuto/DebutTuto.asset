@@ -15,4 +15,4 @@ MonoBehaviour:
   Illustration: {fileID: 21300000, guid: fa3e21121d111684ba60b82d0f1b70d7, type: 3}
   Text: "Bienvenue dans le tutoriel, suivez les \xE9tapes et appyez sur n'importe
     quel bouton pour ferrmer les fen\xEAtres."
-  TimeBeforeNextWindow: 6
+  TimeBeforeNextWindow: 13

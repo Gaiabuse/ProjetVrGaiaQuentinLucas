@@ -49,6 +49,10 @@ namespace Scenario
             GameManager.ReturnToMainMenu -= StopDayTimer;
         }
 
+        private void Update()
+        {
+            Debug.Log("FightManager : " + FightManager.INSTANCE);
+        }
         private void StopDayTimer()
         {
             if (_dayTimer != null)

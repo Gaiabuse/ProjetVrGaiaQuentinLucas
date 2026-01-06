@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 9094182284337160102}
   - component: {fileID: 6929735643814126566}
   - component: {fileID: 1923245081965428201}
-  - component: {fileID: -6707148613692271732}
+  - component: {fileID: 818369452396691517}
   m_Layer: 0
   m_Name: LinkedNotes
   m_TagString: Untagged
@@ -266,7 +266,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &-6707148613692271732
+--- !u!114 &818369452396691517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,13 +275,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6836044605418195367}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3542d8fb0c96edf4fa1ac61c2eb15468, type: 3}
+  m_Script: {fileID: 11500000, guid: a34e359b1baac3b4c871b648b6214ece, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LinkedNotes
-  damages: 3
+  m_EditorClassIdentifier: Assembly-CSharp::Fight.LinkedNotes
+  damages: 2
   hitSpeed: 1
   maxHit: 5
-  timeForPerfect: 1
+  timeForPerfect: 0.2
   perfectMultiplier: 2
   inputActivation: 0.5
   perfectEffectPrefab: {fileID: 9050084491756376003, guid: 5100ab86c75a45340a9d5788f3d95158, type: 3}

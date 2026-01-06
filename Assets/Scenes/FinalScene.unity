@@ -5638,6 +5638,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!1 &708169426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4510510194533497545, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+  m_PrefabInstance: {fileID: 8561722466580451616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &708169430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 742727179803403741, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+  m_PrefabInstance: {fileID: 8561722466580451616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708169426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670bb2c8594be12468e71c34845a4e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FightManager
+--- !u!114 &708169431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708169426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad43f7fdb3e6544d9bb8b9f54d25f96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fight.FightManager
+  maxAnxiety: 75
+  metronome: {fileID: 708169430}
+  notesPrefabs:
+  - {fileID: 6836044605418195367, guid: 4cc568539f4b2564f8e67f6683486ce7, type: 3}
+  - {fileID: 6836044605418195367, guid: 826eb5d87d0a8f7408ea2baa88d8217d, type: 3}
+  previewNotesPrefabs:
+  - {fileID: 6836044605418195367, guid: d855e2be5ef8e2344acb111826d003e7, type: 3}
+  - {fileID: 6836044605418195367, guid: bbf861ac70dc4354f9b5512d44d3658b, type: 3}
+  level: {fileID: 0}
+  spawnPosDivider: 500
+  zAxisPosition: -995.4
+  zAxisPreviewOffset: 10
+  slider: {fileID: 1553794149}
+  maxLinkedTime: 6
 --- !u!1 &734016737
 GameObject:
   m_ObjectHideFlags: 0
@@ -8367,6 +8409,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 27.951672, y: 242.88762, z: 552.76447}
   m_Center: {x: -0.00026893616, y: 116.4522, z: 0.0002746582}
+--- !u!114 &1553794149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2834914321356923912, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+  m_PrefabInstance: {fileID: 8561722466580451616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &1559391968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14741,10 +14794,14 @@ PrefabInstance:
       propertyPath: level
       value: 
       objectReference: {fileID: 11400000, guid: 0cd9551a717a43c408ef3dad0b48c9a9, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6939340760031476834, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4510510194533497545, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 708169431}
   m_SourcePrefab: {fileID: 100100000, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
 --- !u!1001 &9121464139106112912
 PrefabInstance:

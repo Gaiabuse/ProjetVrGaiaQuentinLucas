@@ -41,9 +41,9 @@ namespace Scenario
 
         private void OnDisable()
         {
-            FightManager.FightEnded -= b =>
+            FightManager.FightEnded -= isWin =>
             {
-                _asWin = b;
+                _asWin = isWin;
                 _fightEnded = true;
             };
             GameManager.ReturnToMainMenu -= StopDayTimer;
@@ -125,7 +125,6 @@ namespace Scenario
 
         private void ChooseAction(string[] dataParts, Node currentNode,out bool waitEndOfAction)
         {
-            Debug.Log(dataParts[0]);
             switch (dataParts[0])
             {
                 case "Start":
@@ -268,6 +267,16 @@ namespace Scenario
 
         private void SetFightNode(FightNode node)
         {
+            if (node == null)
+            {
+                Debug.LogError("SetFightNode appelé avec node = NULL");
+                return;
+            }
+            if (FightManager.INSTANCE == null)
+            {
+                Debug.LogError("SetFightNode appelé avec Instance fight manager = NULL");
+                return;
+            }
             _fightEnded = false;
             _positionBehindFight = PlayerManager.INSTANCE.GetPlayerPosition();
             PlayerManager.INSTANCE.TeleportPlayer(positionForFight);

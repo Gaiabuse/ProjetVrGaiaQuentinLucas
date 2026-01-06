@@ -42,7 +42,6 @@ namespace Scenario
             {
                 runner.StopVoices();
                 dialogueUI.text = dialogueSplit[i];
-                Debug.Log(currentSpeaker);
                 if (currentSpeaker != null)
                 {
                     StartCoroutine(runner.PlayVoices(voices[i],currentSpeaker)); 

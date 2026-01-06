@@ -37,15 +37,7 @@ namespace Fight
     
         private void Awake()
         {
-            if (INSTANCE == null)
-            {
-                INSTANCE = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            INSTANCE = this;
         }
 
         #region Start / End

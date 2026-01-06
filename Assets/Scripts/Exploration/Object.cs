@@ -14,7 +14,7 @@ namespace Exploration
     public class Object : MonoBehaviour
     {
         // j'titille, mais si tu mets l'accent, ca devient du francais, et c'est en anglais autour
-        [Header("Référence Data")]
+        [Header("Réference Data")]
         [SerializeField]private ObjectData objectData;
     
         [Header("Références UI")]

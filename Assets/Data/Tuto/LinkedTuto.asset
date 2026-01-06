@@ -15,4 +15,4 @@ MonoBehaviour:
   Illustration: {fileID: 21300000, guid: e15a3494cddab054f82b2f0962e7b196, type: 3}
   Text: "Maintenez la gachette en suivant l'objet qui se d\xE9place. Attention si
     vous relachez vous ne pourrez plus cliquer sur les autres fissures de la chaine."
-  TimeBeforeNextWindow: 10
+  TimeBeforeNextWindow: 8

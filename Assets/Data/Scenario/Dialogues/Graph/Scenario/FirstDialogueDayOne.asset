@@ -32,7 +32,15 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 1
-  Characters: []
+  Characters:
+  - CharacterName: Maman
+    IsPresent: 0
+    Position: {x: -3.93, y: 0.0890007, z: 17.96}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  - CharacterName: Jean
+    IsPresent: 0
+    Position: {x: -3.93, y: 0.0890007, z: 17.96}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   StartDialoguePosition: {x: -3.97, y: 0, z: 16.16}
 --- !u!114 &-3448771779782136672
 MonoBehaviour:

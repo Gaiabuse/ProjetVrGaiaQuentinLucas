@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57565e56a107436d8e934b6df34c3607, type: 3}
+  m_Name: JeanAngry
+  m_EditorClassIdentifier: Assembly-CSharp::Data.Conditions.DialogueSeenCondition
+  dialogueNode: {fileID: 6190289300117724789, guid: cbad17e2922cb0741a9bfb7e55456c37, type: 2}

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public static Action ReturnToMainMenu;
 
-    public enum GameState { Start, Playing, Paused}
+    public enum GameState { Start, Playing, Paused,End}
     private GameState _state = GameState.Start;
     
     public bool ChoiceSelected = false;

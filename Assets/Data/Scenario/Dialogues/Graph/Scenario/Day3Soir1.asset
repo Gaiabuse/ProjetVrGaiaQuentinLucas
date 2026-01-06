@@ -80,8 +80,16 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 1
-  Characters: []
-  StartDialoguePosition: {x: -1.38, y: 0, z: 8.76}
+  Characters:
+  - CharacterName: Maman
+    IsPresent: 1
+    Position: {x: -3.93, y: 0.0890007, z: 17.96}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  - CharacterName: Jean
+    IsPresent: 0
+    Position: {x: -3.93, y: 0.0890007, z: 17.96}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  StartDialoguePosition: {x: -0.15, y: 0, z: 7.23}
 --- !u!114 &8019658777860379255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +149,7 @@ MonoBehaviour:
   SpeakerName: Maman
   DialogueLine: "Ah tu es rentr\xE9 mon tr\xE9sor, est ce que  ta journ\xE9e c'est
     bien pass\xE9? |Bon en tout cas Jean n'est pas la ce soir, fais ce que tu veux?"
-  AnimationTrigger: 
+  AnimationTrigger: isCooking
   Voices:
   - {fileID: 8300000, guid: 889a54a0d50717141bc281dd59fe151b, type: 3}
   - {fileID: 8300000, guid: 3b96c320af5612d4f938f144c39bd98d, type: 3}

@@ -592,7 +592,7 @@ MonoBehaviour:
   SpeakerName: Maman
   DialogueLine: "Je sais que tu ne l'aimes pas mais je n'y peut rien \xE0 \xE7a,
     Bon allez va \xE0 l'\xE9cole."
-  AnimationTrigger: 
+  AnimationTrigger: talkingUp
   Voices:
   - {fileID: 8300000, guid: ef2218c98351ab248a5c7d71eb502d28, type: 3}
 --- !u!114 &4604160806123765075
@@ -839,8 +839,16 @@ MonoBehaviour:
       _dynamic: 0
   Exit: 
   SetPosition: 1
-  Characters: []
-  StartDialoguePosition: {x: -1.52, y: 0, z: 10.41}
+  Characters:
+  - CharacterName: Maman
+    IsPresent: 1
+    Position: {x: -3.93, y: 0.0890007, z: 17.96}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  - CharacterName: Jean
+    IsPresent: 0
+    Position: {x: -3.93, y: 0.0890007, z: 17.96}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  StartDialoguePosition: {x: -0.22, y: 0, z: 7.93}
 --- !u!114 &8726914734240865549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +922,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: -353.3333, y: -43}
+  position: {x: -392, y: -40}
   ports:
     keys:
     - Entry
@@ -960,6 +968,6 @@ MonoBehaviour:
   SpeakerName: Maman
   DialogueLine: "Au revoir mon ch\xE9ri, passe une bonne journ\xE9e, et puis tu sais
     mon ch\xE9ri pour ce qui s'est pass\xE9 hier..."
-  AnimationTrigger: 
+  AnimationTrigger: idleEnter
   Voices:
   - {fileID: 8300000, guid: f025efed60e5fca4895a59538bd7ac7b, type: 3}

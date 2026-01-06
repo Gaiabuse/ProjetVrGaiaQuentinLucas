@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: -56, y: -40}
+  position: {x: -24, y: -40}
   ports:
     keys:
     - Entry
@@ -26,7 +26,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Exit
-        node: {fileID: 7283511030517147259}
+        node: {fileID: 1855325778158751586}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: 5577971054589845671}
+        node: {fileID: -7052491789526766713}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -61,6 +61,100 @@ MonoBehaviour:
   AnimationTrigger: 
   Voices:
   - {fileID: 8300000, guid: fad8969bdea8d4b4aa6d51a68078a584, type: 3}
+--- !u!114 &-7052491789526766713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
+  graph: {fileID: 11400000}
+  position: {x: 184, y: -40}
+  ports:
+    keys:
+    - Entry
+    - Exit
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -7052491789526766713}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Choices 0
+        node: {fileID: -8122913191839826569}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Exit
+      _node: {fileID: -7052491789526766713}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 5577971054589845671}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  Exit: 
+  CharacterName: Jean
+  AnimationTrigger: goForHit
+--- !u!114 &-3355594114437970003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
+  graph: {fileID: 11400000}
+  position: {x: -344, y: -248}
+  ports:
+    keys:
+    - Entry
+    - Exit
+    values:
+    - _fieldName: Entry
+      _node: {fileID: -3355594114437970003}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Exit
+        node: {fileID: 8597407962108920393}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Exit
+      _node: {fileID: -3355594114437970003}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: 7283511030517147259}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  Exit: 
+  CharacterName: Maman
+  AnimationTrigger: noDoor
 --- !u!114 &-3017749661844732275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,8 +211,8 @@ MonoBehaviour:
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: Exit
-        node: {fileID: 5617683403672931446}
+      - fieldName: Choices 0
+        node: {fileID: 5577971054589845671}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -174,7 +268,9 @@ MonoBehaviour:
   - {fileID: 4533578569179916564}
   - {fileID: 38513324426942137}
   - {fileID: 7283511030517147259}
-  - {fileID: 5617683403672931446}
+  - {fileID: -7052491789526766713}
+  - {fileID: 1855325778158751586}
+  - {fileID: -3355594114437970003}
   Current: {fileID: 0}
 --- !u!114 &38513324426942137
 MonoBehaviour:
@@ -207,6 +303,53 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Entry: 
+--- !u!114 &1855325778158751586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
+  graph: {fileID: 11400000}
+  position: {x: -232, y: 104}
+  ports:
+    keys:
+    - Entry
+    - Exit
+    values:
+    - _fieldName: Entry
+      _node: {fileID: 1855325778158751586}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Exit
+        node: {fileID: 7283511030517147259}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Exit
+      _node: {fileID: 1855325778158751586}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Entry
+        node: {fileID: -8122913191839826569}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Entry: 
+  Exit: 
+  CharacterName: Maman
+  AnimationTrigger: cry
 --- !u!114 &2405587597254181026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +483,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   graph: {fileID: 11400000}
-  position: {x: 200, y: -72}
+  position: {x: 424, y: -56}
   ports:
     keys:
     - Entry
@@ -352,8 +495,8 @@ MonoBehaviour:
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: Choices 0
-        node: {fileID: -8122913191839826569}
+      - fieldName: Exit
+        node: {fileID: -7052491789526766713}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -374,7 +517,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: 5617683403672931446}
+        node: {fileID: -2794431968843652757}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -388,53 +531,6 @@ MonoBehaviour:
   AnimationTrigger: 
   Voices:
   - {fileID: 8300000, guid: 3610533501aaf504d8e9ece4ad981c12, type: 3}
---- !u!114 &5617683403672931446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75eaaaa750a4ac04fbaaebb4cd680e1d, type: 3}
-  m_Name: Animation
-  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
-  graph: {fileID: 11400000}
-  position: {x: 440.02692, y: -18.88462}
-  ports:
-    keys:
-    - Entry
-    - Exit
-    values:
-    - _fieldName: Entry
-      _node: {fileID: 5617683403672931446}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Choices 0
-        node: {fileID: 5577971054589845671}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Exit
-      _node: {fileID: 5617683403672931446}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Entry
-        node: {fileID: -2794431968843652757}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  Entry: 
-  Exit: 
-  CharacterName: Jean
-  AnimationTrigger: GoToHit
 --- !u!114 &7283511030517147259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +544,7 @@ MonoBehaviour:
   m_Name: Animation
   m_EditorClassIdentifier: Assembly-CSharp::Nodes.AnimationNode
   graph: {fileID: 11400000}
-  position: {x: -328, y: -104}
+  position: {x: -264, y: -104}
   ports:
     keys:
     - Entry
@@ -460,7 +556,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Exit
-        node: {fileID: 8597407962108920393}
+        node: {fileID: -3355594114437970003}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -472,7 +568,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: -8122913191839826569}
+        node: {fileID: 1855325778158751586}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -481,7 +577,7 @@ MonoBehaviour:
   Entry: 
   Exit: 
   CharacterName: Jean
-  AnimationTrigger: Enter
+  AnimationTrigger: enter
 --- !u!114 &8597407962108920393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +602,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: Entry
-        node: {fileID: 7283511030517147259}
+        node: {fileID: -3355594114437970003}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -517,10 +613,10 @@ MonoBehaviour:
   Characters:
   - CharacterName: Maman
     IsPresent: 1
-    Position: {x: -3.2, y: 0, z: 19.26}
-    Rotation: {x: 0, y: 0.9961947, z: 0, w: -0.08715577}
+    Position: {x: -3.93, y: 0.0890007, z: 17.96}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   - CharacterName: Jean
     IsPresent: 1
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-  StartDialoguePosition: {x: 0.22, y: 0, z: 13.03}
+    Position: {x: -3.93, y: 0.0890007, z: 17.96}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  StartDialoguePosition: {x: 1.81, y: 0, z: 9.19}

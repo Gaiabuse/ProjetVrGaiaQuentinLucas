@@ -15,9 +15,9 @@ namespace Scenario
         
         [SerializeField] private Vector3 positionForFight;
         [SerializeField] private Transform audioListener;
+        [SerializeField] private EndMenu endMenu;
         [SerializeField] private List<CharacterAnimator> characters;
         private DialogueGraph _graph;
-        private Vector3 _positionStartFight;
         private Coroutine _dialogueRunner;
         private Coroutine _choicesCoroutine;
         private Coroutine _fightCoroutine;
@@ -26,6 +26,9 @@ namespace Scenario
         private bool _switchNode;
         private Coroutine _dayTimer = null;
         private bool _isTalking;
+        private Vector3 _positionBehindFight;
+        
+        
         private void OnEnable()
         {
             FightManager.FightEnded += isWin =>
@@ -154,6 +157,11 @@ namespace Scenario
                     EndDialogue();
                     waitEndOfAction = false;
                     break;
+                case "Finish":
+                    KillAllCoroutines();
+                    StartCoroutine(endMenu.GoToEndMenu());
+                    waitEndOfAction = false;
+                    break;
             }
 
             waitEndOfAction = false;
@@ -261,7 +269,7 @@ namespace Scenario
         private void SetFightNode(FightNode node)
         {
             _fightEnded = false;
-            _positionStartFight = PlayerManager.INSTANCE.GetPlayerPosition();
+            _positionBehindFight = PlayerManager.INSTANCE.GetPlayerPosition();
             PlayerManager.INSTANCE.TeleportPlayer(positionForFight);
             dialogueRunnerUI.SetUIGameObject(false);
             if (node != null) FightManager.INSTANCE.StartFight(node.Level);
@@ -269,7 +277,7 @@ namespace Scenario
 
         private void EndFightNode()
         {
-            PlayerManager.INSTANCE.TeleportPlayer(positionForFight);
+            PlayerManager.INSTANCE.TeleportPlayer(_positionBehindFight);
             dialogueRunnerUI.SetUIGameObject(true);
             NextNode(_asWin ? "AsWin" : "AsLoose");
         }

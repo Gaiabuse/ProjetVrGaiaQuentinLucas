@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR;
+using CommonUsages = UnityEngine.XR.CommonUsages;
+using InputDevice = UnityEngine.XR.InputDevice;
 
 public class NoteScript : MonoBehaviour
 {
@@ -14,6 +17,8 @@ public class NoteScript : MonoBehaviour
     [SerializeField] private float inputActivation = 0.5f;
     [SerializeField] protected GameObject perfectEffectPrefab;
     
+    protected FightInputsActions inputs;
+    
     private bool _canHit = true;
     protected float spawnTime;
     protected bool _inTrigger = false;
@@ -24,6 +29,10 @@ public class NoteScript : MonoBehaviour
     protected virtual void Awake()
     {
         StartCoroutine(WaitForDamages());
+        inputs = new FightInputsActions();
+        inputs.Enable();
+        inputs.Click.LeftTrigger.performed += OnLeftPressed;
+        inputs.Click.RightTrigger.performed += OnRightPressed;
         _leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         _rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         spawnTime = Time.time;
@@ -34,48 +43,57 @@ public class NoteScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _inTrigger = true;
-            StartCoroutine(PlayerInTrigger());
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _inTrigger = false;
+        if (other.CompareTag("Player"))
+        {
+            _inTrigger = false;
+        }    
+    }
+    
+
+    protected virtual void OnLeftPressed(InputAction.CallbackContext ctx)
+    {
+        if (!_inTrigger)return;
+        
+        if (Time.time - spawnTime < timeForPerfect)
+        {
+            FightManager.INSTANCE.AddAnxiety(- damages * perfectMultiplier);
+            GameObject perfectGO = Instantiate(perfectEffectPrefab);
+            perfectGO.transform.position = transform.position;
+        }
+        else
+        {
+            FightManager.INSTANCE.AddAnxiety(- damages);
+        }
+        
+        _leftHand.SendHapticImpulse(0, 0.5f, 0.1f);
+        
+        Destroy(gameObject);
     }
 
-    protected virtual IEnumerator PlayerInTrigger()
+    protected virtual void OnRightPressed(InputAction.CallbackContext ctx)
     {
-        while (_inTrigger)
+        if (!_inTrigger)return;
+        
+        if (Time.time - spawnTime < timeForPerfect)
         {
-            bool rightPressed = _rightHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueRight) && triggerValueRight > 0.1f;
-            bool leftPressed  = _leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
-            if (rightPressed || leftPressed) 
-            {
-                if (Time.time - spawnTime < timeForPerfect)
-                {
-                    FightManager.INSTANCE.AddAnxiety(- damages * perfectMultiplier);
-                    GameObject perfectGO = Instantiate(perfectEffectPrefab);
-                    perfectGO.transform.position = transform.position;
-                    Debug.Log("Perfect");
-                }
-                else
-                {
-                    FightManager.INSTANCE.AddAnxiety(- damages);
-                }
-                if (rightPressed)
-                {
-                    _rightHand.SendHapticImpulse(0, 0.5f, 0.1f);
-                }
-                else
-                {
-                    _leftHand.SendHapticImpulse(0, 0.5f, 0.1f);
-                }
-                Destroy(gameObject);
-            }
-            
-            yield return null;
+            FightManager.INSTANCE.AddAnxiety(- damages * perfectMultiplier);
+            GameObject perfectGO = Instantiate(perfectEffectPrefab);
+            perfectGO.transform.position = transform.position;
         }
+        else
+        {
+            FightManager.INSTANCE.AddAnxiety(- damages);
+        }
+        
+        _rightHand.SendHapticImpulse(0, 0.5f, 0.1f);
+        Destroy(gameObject);
     }
+    
 
     IEnumerator WaitForDamages()
     {
@@ -90,8 +108,10 @@ public class NoteScript : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
+        inputs.Click.LeftTrigger.performed -= OnLeftPressed;
+        inputs.Click.RightTrigger.performed -= OnRightPressed;
         StopAllCoroutines();
     }
 }

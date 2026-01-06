@@ -1938,6 +1938,8 @@ GameObject:
   - component: {fileID: 3310998687039371549}
   - component: {fileID: 742727179803403741}
   - component: {fileID: 6939340760031476834}
+  - component: {fileID: 5787016946084494550}
+  - component: {fileID: 123656652317650120}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2007,6 +2009,64 @@ MonoBehaviour:
   zAxisPreviewOffset: 10
   slider: {fileID: 2834914321356923912}
   maxLinkedTime: 6
+--- !u!114 &5787016946084494550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4510510194533497545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f96ab7db1cea346bb0a49a37ece46f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutoManager
+  window: {fileID: 2868228676762402705}
+  text: {fileID: 1174515333157752632}
+  illustration: {fileID: 5436213319930112239}
+  tutoLevelData: {fileID: 0}
+  tweenDuration: 0.5
+  dataArray:
+  - {fileID: 11400000, guid: c7cd6431043e28f49ae5675902451fdc, type: 2}
+  - {fileID: 11400000, guid: 169b3f0df8ac077488ec85db4be81021, type: 2}
+--- !u!114 &123656652317650120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4510510194533497545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 5e80ed4231cbd8a4cbc80fd10d6efe45, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 602e7d5b-a5bc-4825-b708-e1ebb90726f9
+    m_ActionName: Click/RightTrigger
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f027bc12-8800-408c-86de-6b7c96f75bec
+    m_ActionName: Click/LeftTrigger
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Click
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &5670803672969376419
 GameObject:
   m_ObjectHideFlags: 0

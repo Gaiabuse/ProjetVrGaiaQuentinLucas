@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
-using UnityEngine.XR;
+using CommonUsages = UnityEngine.XR.CommonUsages;
 
 public class LinkedNotes : NoteScript
 {
@@ -12,6 +13,7 @@ public class LinkedNotes : NoteScript
     [SerializeField] private GameObject particles;
     [SerializeField] private float maxLineTime = 1.5f;
     [SerializeField] private Link link;
+    [SerializeField] private Collider collider;
     
     private Vector3 _nextNotePos;
     private Vector3Int _sheetMusicPosition;
@@ -19,6 +21,7 @@ public class LinkedNotes : NoteScript
     private int _maxMeasure;
     private int _maxBeat;
     private int _maxDivision;
+    private bool _canHavePoints = true;
 
     private const int _linkedNoteIndex = 2;
 
@@ -125,10 +128,11 @@ public class LinkedNotes : NoteScript
         if (FightManager.INSTANCE.IsInLine())
         {
             base.OnTriggerEnter(other);
+            StartCoroutine(PlayerInTrigger());
         }
     }
 
-    protected override IEnumerator PlayerInTrigger()
+    private IEnumerator PlayerInTrigger()
     {
         while (_inTrigger)
         {
@@ -136,26 +140,29 @@ public class LinkedNotes : NoteScript
             bool leftPressed  = _leftHand.TryGetFeatureValue(CommonUsages.trigger, out float triggerValueLeft) && triggerValueLeft > 0.1f;
             if (rightPressed || leftPressed)
             {
-                if (Time.time - spawnTime < timeForPerfect)
+                if (_canHavePoints)
                 {
-                    FightManager.INSTANCE.AddAnxiety(- counterDamages * perfectMultiplier);
-                    GameObject perfectGO = Instantiate(perfectEffectPrefab);
-                    perfectGO.transform.position = transform.position;
-                    Debug.Log("Perfect");
+                    if (Time.time - spawnTime < timeForPerfect)
+                    {
+                        FightManager.INSTANCE.AddAnxiety(counterDamages * perfectMultiplier);
+                        GameObject perfectGO = Instantiate(perfectEffectPrefab);
+                        perfectGO.transform.position = transform.position;
+                        Debug.Log("Perfect");
+                    }
+                    else
+                    {
+                        FightManager.INSTANCE.AddAnxiety(counterDamages);
+                    }
+                    if (rightPressed)
+                    {
+                        _rightHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                    }
+                    else
+                    {
+                        _leftHand.SendHapticImpulse(0, 0.5f, maxLineTime);
+                    }
+                    StartCoroutine(WaitForDestroy());
                 }
-                else
-                {
-                    FightManager.INSTANCE.AddAnxiety(- counterDamages);
-                }
-                if (rightPressed)
-                {
-                    _rightHand.SendHapticImpulse(0, 0.5f, maxLineTime);
-                }
-                else
-                {
-                    _leftHand.SendHapticImpulse(0, 0.5f, maxLineTime);
-                }
-                StartCoroutine(WaitForDestroy());
             }
             else if (!_isFirstLinked)
             {
@@ -174,8 +181,18 @@ public class LinkedNotes : NoteScript
         FightManager.INSTANCE.AddAnxiety(counterDamages);
         Destroy(meshRenderer);
         Destroy(particles);
+        _canHavePoints = false;
         yield return new WaitForSeconds(maxLineTime);
         Destroy(gameObject);
     }
 
+    protected override void OnRightPressed(InputAction.CallbackContext ctx)
+    {
+        return;
+    }
+
+    protected override void OnLeftPressed(InputAction.CallbackContext ctx)
+    {
+        return;
+    }
 }

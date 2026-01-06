@@ -61,14 +61,14 @@ public class FightManager : MonoBehaviour
 
     IEnumerator WaitForStartMusic()
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSeconds(3f);
         metronome.audioSource.Play();
     }
 
     public void EndFight(bool win)
     {
         _anxiety = 0f;
-        PlayerConditionManager.instance.AddLevelData(level,win);
+//        PlayerConditionManager.instance.AddLevelData(level,win);
         metronome.EndFight();
         FightEnded.Invoke(win);
     }
@@ -187,5 +187,15 @@ public class FightManager : MonoBehaviour
     {
         _inLine = newState;
     }
-    
+
+    public void PlayPauseGame(bool play)
+    {
+        if (play)
+        {
+            metronome.audioSource.UnPause();
+            return;
+        }
+
+        metronome.audioSource.Pause();
+    }
 }

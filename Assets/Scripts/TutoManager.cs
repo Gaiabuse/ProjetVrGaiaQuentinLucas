@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class TutoManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class TutoManager : MonoBehaviour
     [SerializeField] private GameObject window;
     [SerializeField] private TMP_Text text;
     [SerializeField] private Image illustration;
+
+    [SerializeField] private LevelData tutoLevelData;
 
     [SerializeField] private float tweenDuration = 0.5f;
     
@@ -19,9 +22,12 @@ public class TutoManager : MonoBehaviour
     private Vector3 _baseWindowSize;
     private bool _isInWindow = false;
 
+
+
     public void StartTuto()
     {
         _actualIndex = 0;
+        FightManager.INSTANCE.StartFight(tutoLevelData);
         ShowNextWindow();
     }
     
@@ -37,9 +43,10 @@ public class TutoManager : MonoBehaviour
     void ShowNextWindow()
     {
         PausePlayGame(false);
+        FightManager.INSTANCE.PlayPauseGame(false);
         window.SetActive(true);
         _isInWindow = true;
-        window.transform.DOScale(_baseWindowSize,tweenDuration).SetEase(Ease.Linear);
+        window.transform.DOScale(_baseWindowSize,tweenDuration).SetEase(Ease.Linear).SetUpdate(true);
         text.text = dataArray[_actualIndex].Text;
         illustration.sprite = dataArray[_actualIndex].Illustration;
         _actualIndex++;
@@ -60,6 +67,8 @@ public class TutoManager : MonoBehaviour
     void ContinueTuto()
     {
         PausePlayGame(true);
+        FightManager.INSTANCE.PlayPauseGame(true);
+        _isInWindow = false;
         window.transform.DOScale(Vector3.zero, tweenDuration).SetEase(Ease.Linear)
             .OnComplete(() =>
             {
@@ -67,17 +76,14 @@ public class TutoManager : MonoBehaviour
             });
         if (IsEnd())
         {
-            FightManager.INSTANCE.EndFight(true);
             return;
         }
-
-        _isInWindow = false;
         StartCoroutine(NextTutoWindow(dataArray[_actualIndex - 1].TimeBeforeNextWindow));
     }
     
     private void Update()
     {
-        if (true && _isInWindow)// mettre le bouton xr
+        if (Input.GetKeyDown(KeyCode.JoystickButton0) && _isInWindow)
         {
             ContinueTuto();
         }

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutoData
   Illustration: {fileID: 21300000, guid: 9d181d23deed9af4ca684864e0d8bafb, type: 3}
   Text: "Ces pics vont venir percer la vitre. Ils indiquent o\xF9 il faudra cliquer."
-  TimeBeforeNextWindow: 3
+  TimeBeforeNextWindow: 6

@@ -1,11 +1,24 @@
 {
   "dependencies": {
+    "com.gaia.utils": {
+      "version": "file:C:/Users/combg/TestPackage1/testPackage1/Assets/com.gaïa.utils",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.github.siccity.xnode": {
       "version": "https://github.com/Siccity/xNode.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
       "hash": "d6effd70f5574369e3415c423ef3e621ea309564"
+    },
+    "com.jcavaillac.data": {
+      "version": "https://github.com/Tuozi-10/DataRecorder.git?path=/Data/Assets/com.jcavaillac.data/Package",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1045eac29448b33e15321a693d0ed8a5ee6163ac"
     },
     "com.unity.2d.animation": {
       "version": "12.0.2",

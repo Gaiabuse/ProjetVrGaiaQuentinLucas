@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "com.gaia.utils": "file:C:/Users/combg/TestPackage1/testPackage1/Assets/com.gaïa.utils",
     "com.github.siccity.xnode": "https://github.com/Siccity/xNode.git",
+    "com.jcavaillac.data": "https://github.com/Tuozi-10/DataRecorder.git?path=/Data/Assets/com.jcavaillac.data/Package",
     "com.unity.collab-proxy": "2.9.3",
     "com.unity.feature.2d": "2.0.1",
     "com.unity.feature.development": "1.0.2",

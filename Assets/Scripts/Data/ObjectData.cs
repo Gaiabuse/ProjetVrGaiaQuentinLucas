@@ -1,7 +1,14 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "ObjectData", menuName = "Scriptable Objects/ObjectData")]
-public class ObjectData : ScriptableObject
+
+namespace Data
 {
-    public string Name;
+    [CreateAssetMenu(fileName = "ObjectData", menuName = "ObjectData")]
+    public class ObjectData : ScriptableObject
+    {
+        [TextArea]
+        public string ObjectName;
+        public string DescriptionObject;
+    }
 }

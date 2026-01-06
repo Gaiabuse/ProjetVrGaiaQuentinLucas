@@ -236,10 +236,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1508777926}
         m_TargetAssemblyTypeName: TutoManager, Assembly-CSharp
         m_MethodName: StartTuto
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 0cd9551a717a43c408ef3dad0b48c9a9, type: 2}
+          m_ObjectArgumentAssemblyTypeName: LevelData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1151,11 +1151,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269750602}
   m_CullTransparentMesh: 1
---- !u!198 &1287042091 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7982048001956566618, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
-  m_PrefabInstance: {fileID: 1003324133281319382}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1339676338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,18 +1468,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: b9349305cb2774446a7ba8c90abdc778, type: 2}
           m_ObjectArgumentAssemblyTypeName: LevelData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1287042091}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

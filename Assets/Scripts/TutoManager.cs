@@ -4,6 +4,7 @@ using Data;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
@@ -13,8 +14,6 @@ public class TutoManager : MonoBehaviour
     [SerializeField] private TMP_Text text;
     [SerializeField] private Image illustration;
 
-    [SerializeField] private LevelData tutoLevelData;
-
     [SerializeField] private float tweenDuration = 0.5f;
     
     [SerializeField] TutoData[] dataArray;
@@ -22,10 +21,11 @@ public class TutoManager : MonoBehaviour
     private int _actualIndex = 0;
     private Vector3 _baseWindowSize;
     private bool _isInWindow = false;
+    protected FightInputsActions inputs;
 
 
 
-    public void StartTuto()
+    public void StartTuto(LevelData tutoLevelData)
     {
         _actualIndex = 0;
         FightManager.INSTANCE.StartFight(tutoLevelData);
@@ -34,6 +34,10 @@ public class TutoManager : MonoBehaviour
     
     private void Awake()
     {
+        inputs = new FightInputsActions();
+        inputs.Enable();
+        
+        inputs.Click.ClickButton.performed += OnClickButton;
         _baseWindowSize = window.transform.localScale;
     }
     void PausePlayGame(bool play)
@@ -70,7 +74,9 @@ public class TutoManager : MonoBehaviour
         PausePlayGame(true);
         FightManager.INSTANCE.PlayPauseGame(true);
         _isInWindow = false;
-        window.transform.DOScale(Vector3.zero, tweenDuration).SetEase(Ease.Linear)
+        window.transform.DOScale(Vector3.zero, tweenDuration)
+            .SetEase(Ease.Linear)
+            .SetUpdate(true)
             .OnComplete(() =>
             {
                 window.SetActive(false);
@@ -82,12 +88,15 @@ public class TutoManager : MonoBehaviour
         StartCoroutine(NextTutoWindow(dataArray[_actualIndex - 1].TimeBeforeNextWindow));
     }
     
-    private void Update()
+    public void OnClickButton(InputAction.CallbackContext ctx)
     {
-        if (Input.GetKeyDown(KeyCode.JoystickButton0) && _isInWindow)
-        {
-            ContinueTuto();
-        }
+        if (!_isInWindow) return;
+
+        ContinueTuto();
     }
 
+    private void OnDestroy()
+    {
+        inputs.Click.ClickButton.performed -= OnClickButton;
+    }
 }

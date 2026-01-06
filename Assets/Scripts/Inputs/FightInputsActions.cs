@@ -109,6 +109,15 @@ public partial class @FightInputsActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ClickButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd664507-e9d5-40e2-894a-9a74ea5f61fc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -133,6 +142,50 @@ public partial class @FightInputsActions: IInputActionCollection2, IDisposable
                     ""action"": ""LeftTrigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90079fe5-b35c-4bf3-87f1-2c0f15c2f1b0"",
+                    ""path"": ""<XRController>{LeftHand}/{PrimaryButton}"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClickButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""828c040b-a441-4143-b03f-14808c619ac8"",
+                    ""path"": ""<XRController>{LeftHand}/{SecondaryButton}"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClickButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb0645df-9ef3-4c97-8775-c568bc25ae61"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClickButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70c643a0-9b65-444a-bf7b-3df3a29e649c"",
+                    ""path"": ""<XRController>{RightHand}/{SecondaryButton}"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClickButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +196,7 @@ public partial class @FightInputsActions: IInputActionCollection2, IDisposable
         m_Click = asset.FindActionMap("Click", throwIfNotFound: true);
         m_Click_RightTrigger = m_Click.FindAction("RightTrigger", throwIfNotFound: true);
         m_Click_LeftTrigger = m_Click.FindAction("LeftTrigger", throwIfNotFound: true);
+        m_Click_ClickButton = m_Click.FindAction("ClickButton", throwIfNotFound: true);
     }
 
     ~@FightInputsActions()
@@ -225,6 +279,7 @@ public partial class @FightInputsActions: IInputActionCollection2, IDisposable
     private List<IClickActions> m_ClickActionsCallbackInterfaces = new List<IClickActions>();
     private readonly InputAction m_Click_RightTrigger;
     private readonly InputAction m_Click_LeftTrigger;
+    private readonly InputAction m_Click_ClickButton;
     /// <summary>
     /// Provides access to input actions defined in input action map "Click".
     /// </summary>
@@ -244,6 +299,10 @@ public partial class @FightInputsActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Click/LeftTrigger".
         /// </summary>
         public InputAction @LeftTrigger => m_Wrapper.m_Click_LeftTrigger;
+        /// <summary>
+        /// Provides access to the underlying input action "Click/ClickButton".
+        /// </summary>
+        public InputAction @ClickButton => m_Wrapper.m_Click_ClickButton;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -276,6 +335,9 @@ public partial class @FightInputsActions: IInputActionCollection2, IDisposable
             @LeftTrigger.started += instance.OnLeftTrigger;
             @LeftTrigger.performed += instance.OnLeftTrigger;
             @LeftTrigger.canceled += instance.OnLeftTrigger;
+            @ClickButton.started += instance.OnClickButton;
+            @ClickButton.performed += instance.OnClickButton;
+            @ClickButton.canceled += instance.OnClickButton;
         }
 
         /// <summary>
@@ -293,6 +355,9 @@ public partial class @FightInputsActions: IInputActionCollection2, IDisposable
             @LeftTrigger.started -= instance.OnLeftTrigger;
             @LeftTrigger.performed -= instance.OnLeftTrigger;
             @LeftTrigger.canceled -= instance.OnLeftTrigger;
+            @ClickButton.started -= instance.OnClickButton;
+            @ClickButton.performed -= instance.OnClickButton;
+            @ClickButton.canceled -= instance.OnClickButton;
         }
 
         /// <summary>
@@ -347,5 +412,12 @@ public partial class @FightInputsActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLeftTrigger(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ClickButton" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClickButton(InputAction.CallbackContext context);
     }
 }

@@ -238,8 +238,8 @@ MonoBehaviour:
         m_MethodName: StartTuto
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 0cd9551a717a43c408ef3dad0b48c9a9, type: 2}
-          m_ObjectArgumentAssemblyTypeName: LevelData, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: 5dd39e67d2215d64c8338c420bef2487, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Data.LevelData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -808,6 +808,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 947268757}
   m_SourcePrefab: {fileID: 100100000, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+--- !u!82 &1033357830 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6575889680324201454, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+  m_PrefabInstance: {fileID: 1003324133281319382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1053823886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5030734267259534325, guid: e2698219e3231e94c8765d49b9dd5cff, type: 3}
@@ -1356,17 +1361,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2698219e3231e94c8765d49b9dd5cff, type: 3}
---- !u!114 &1508777924 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6939340760031476834, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
-  m_PrefabInstance: {fileID: 1003324133281319382}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5355742241b58e3428ce292109073f69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FightManager
 --- !u!114 &1508777926 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5787016946084494550, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
@@ -1461,7 +1455,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1508777924}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
         m_MethodName: StartFight
         m_Mode: 2
@@ -1519,6 +1513,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 742727179803403741, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      propertyPath: AudioSourceMusic
+      value: 
+      objectReference: {fileID: 1033357830}
     - target: {fileID: 843063376733560626, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1571,6 +1569,10 @@ PrefabInstance:
       propertyPath: zAxisPosition
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 2868228676762402705, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4071949611283635981, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
       propertyPath: maxSliderValue
       value: 100
@@ -1603,7 +1605,8 @@ PrefabInstance:
       propertyPath: endMusicCutTime
       value: 2.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6939340760031476834, guid: 709cc0cce06c04c40bc6a85c20095434, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
